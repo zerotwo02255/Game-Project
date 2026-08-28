@@ -3,11 +3,11 @@ import { z } from "zod";
 export const gameSchema = z.object({
   title: z.string().min(1, "Title is required"),
 
-  description: z.string().optional(),
+  description: z.string().nullable().optional(),
 
-  release_date: z.string().optional(),
+  release_date: z.string().nullable().optional(),
 
-  cover_url: z.string().optional(),
+  cover_url: z.string().nullable().optional(),
 
   status: z.enum([
     "bucket_list",
@@ -29,5 +29,5 @@ export const gameSchema = z.object({
     .min(0)
     .max(100),
 
-  notes: z.string().optional(),
+  notes: z.string().nullable().optional(),
 });
