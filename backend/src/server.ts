@@ -3,6 +3,7 @@ import cors from "cors";
 import pool from "./db/pool.js";
 import gameRoutes from "./routes/gameRoutes.js";
 import { errorHandler } from "./middleware/errorHandler.js";
+import { searchRawgGames } from "./services/rawgService";
 
 const app = express();
 const PORT = 5000;
@@ -36,6 +37,29 @@ app.get("/api/test-db", async (_req, res) => {
 
 app.use("/api/games", gameRoutes);
 app.use(errorHandler);
+
+app.get("/api/rawg/search", async (req, res) => {
+  try {
+    const query = String(req.query.query || "").trim();
+
+    if (!query) {
+      return res.status(400).json({
+        message: "Search query is required",
+      });
+    }
+
+    const games = await searchRawgGames(query);
+
+    res.json(games);
+  } catch (error) {
+    console.error("RAWG search error:", error);
+
+    res.status(500).json({
+      message: "Failed to search games",
+    });
+  }
+});
+
 
 app.listen(PORT, () => {
   console.log(`Backend running on http://localhost:${PORT}`);

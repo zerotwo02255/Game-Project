@@ -9,6 +9,7 @@ import AddGameForm from "./components/AddGameForm";
 import GameCard from "./components/GameCard";
 import Dashboard from "./components/Dashboard";
 import "./App.css";
+import GameSearch from "./components/GameSearch";
 
 type Filter =
   | "dashboard"
@@ -16,7 +17,8 @@ type Filter =
   | "bucket_list"
   | "playing"
   | "completed"
-  | "dropped";
+  | "dropped"
+  | "upcoming";
 
 function App() {
   const [games, setGames] = useState<Game[]>([]);
@@ -25,6 +27,12 @@ function App() {
 
   const [activeFilter, setActiveFilter] =
     useState<Filter>("dashboard");
+
+  const [search, setSearch] = useState("");
+
+  const [sortBy, setSortBy] = useState<
+    "newest" | "oldest" | "rating" | "progress"
+  >("newest");
 
   const loadGames = async () => {
     try {
@@ -51,17 +59,74 @@ function App() {
       alert("Failed to delete game");
     }
   };
+     const filteredGames = games
+  .filter((game) => {
+    const matchesUpcoming =
+      activeFilter === "upcoming"
+        ? game.release_date !== null &&
+          new Date(game.release_date) > new Date()
+        : true;
 
-  const filteredGames =
-    activeFilter === "all"
-      ? games
-      : games.filter(
-          (game) => game.status === activeFilter
-        );
+    const matchesStatus =
+      activeFilter === "all" ||
+      activeFilter === "dashboard" ||
+      activeFilter === "upcoming" ||
+      game.status === activeFilter;
 
+    const matchesSearch = game.title
+      .toLowerCase()
+      .includes(search.toLowerCase());
+
+    return (
+      matchesUpcoming &&
+      matchesStatus &&
+      matchesSearch
+    );
+  })
+  .sort((a, b) => {
+    // Upcoming games should be sorted by release date
+    if (activeFilter === "upcoming") {
+      return (
+        new Date(a.release_date!).getTime() -
+        new Date(b.release_date!).getTime()
+      );
+    }
+
+    if (sortBy === "rating") {
+      return (
+        Number(b.rating ?? 0) -
+        Number(a.rating ?? 0)
+      );
+    }
+
+    if (sortBy === "progress") {
+      return b.progress - a.progress;
+    }
+
+                if (sortBy === "oldest") {
+                return (
+                 new Date(a.created_at).getTime() -
+              new Date(b.created_at).getTime()
+             );
+            }
+
+           return (
+            new Date(b.created_at).getTime() -
+            new Date(a.created_at).getTime()
+         );
+  });
+ 
   const getCount = (filter: Filter) => {
     if (filter === "dashboard" || filter === "all") {
       return games.length;
+    }
+
+    if (filter === "upcoming") {
+      return games.filter(
+        (game) =>
+          game.release_date !== null &&
+          new Date(game.release_date) > new Date()
+      ).length;
     }
 
     return games.filter(
@@ -212,6 +277,26 @@ function App() {
             </span>
           </button>
 
+
+          {/* Upcoming */}
+
+          <button
+            className={
+              activeFilter === "upcoming"
+                ? "nav-item active"
+                : "nav-item"
+            }
+            onClick={() =>
+              setActiveFilter("upcoming")
+            }
+          >
+            <span>📅</span>
+            <span>Upcoming</span>
+            <span className="nav-count">
+              {getCount("upcoming")}
+            </span>
+          </button>
+
         </nav>
 
 
@@ -235,9 +320,7 @@ function App() {
 
       <main className="main-content">
 
-        {/* =========================
-            HEADER
-        ========================= */}
+        {/* Header */}
 
         <header className="top-header">
 
@@ -269,14 +352,15 @@ function App() {
 
         {activeFilter !== "dashboard" && (
           <>
-            {/* Add Game */}
+
+                <GameSearch
+                onGameAdded={loadGames}
+             />
 
             <AddGameForm
               onGameAdded={loadGames}
             />
 
-
-            {/* Games Section */}
 
             <section className="games-section">
 
@@ -288,12 +372,14 @@ function App() {
                     {activeFilter === "all"
                       ? "My Games"
                       : activeFilter === "bucket_list"
-                      ? "Bucket List"
-                      : activeFilter === "playing"
-                      ? "Playing"
-                      : activeFilter === "completed"
-                      ? "Completed"
-                      : "Dropped"}
+                        ? "Bucket List"
+                        : activeFilter === "playing"
+                          ? "Playing"
+                          : activeFilter === "completed"
+                            ? "Completed"
+                            : activeFilter === "dropped"
+                              ? "Dropped"
+                              : "Upcoming"}
                   </h2>
 
                   <p>
@@ -305,10 +391,58 @@ function App() {
 
                 </div>
 
+
+                {/* Search */}
+
+                <input
+                  className="game-search"
+                  type="text"
+                  placeholder="🔎 Search games..."
+                  value={search}
+                  onChange={(event) =>
+                    setSearch(event.target.value)
+                  }
+                />
+
+
+                {/* Sort */}
+
+                <select
+                  className="game-sort"
+                  value={sortBy}
+                  onChange={(event) =>
+                    setSortBy(
+                      event.target.value as
+                        | "newest"
+                        | "oldest"
+                        | "rating"
+                        | "progress"
+                    )
+                  }
+                >
+                  <option value="newest">
+                    Newest
+                  </option>
+
+                  <option value="oldest">
+                    Oldest
+                  </option>
+
+                  <option value="rating">
+                    Highest Rating
+                  </option>
+
+                  <option value="progress">
+                    Highest Progress
+                  </option>
+                </select>
+
               </div>
 
 
-              {/* Empty state */}
+              {/* =========================
+                  EMPTY STATE
+              ========================= */}
 
               {filteredGames.length === 0 ? (
 
@@ -316,7 +450,9 @@ function App() {
 
                   <div>🎮</div>
 
-                  <h3>No games here</h3>
+                  <h3>
+                    No games here
+                  </h3>
 
                   <p>
                     Add a game to start building
