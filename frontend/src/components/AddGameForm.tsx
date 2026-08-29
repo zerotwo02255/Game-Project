@@ -48,8 +48,8 @@ function AddGameForm({ onGameAdded }: AddGameFormProps) {
   };
 
   return (
-    <form onSubmit={handleSubmit}>
-      <h2>Add Game</h2>
+  <form className="add-game-form" onSubmit={handleSubmit}>
+    <h2>Add Game</h2>
 
       <input
         type="text"
