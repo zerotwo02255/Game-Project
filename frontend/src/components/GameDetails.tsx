@@ -1,7 +1,7 @@
 import { useState } from "react";
 import type { Game } from "../api/gameApi";
 import EditGameForm from "./EditGameForm";
-import GameScreenshots from "./GameScreenshots";
+import GameScreenshots from "./GameScreenshots.tsx";
 
 interface GameDetailsProps {
   game: Game;
