@@ -1,6 +1,7 @@
 import { useState } from "react";
 import type { Game } from "../api/gameApi";
 import EditGameForm from "./EditGameForm";
+import GameScreenshots from "./GameScreenshots";
 
 interface GameDetailsProps {
   game: Game;
@@ -177,7 +178,7 @@ if (isEditing) {
         </div>
 
       </div>
-
+            <GameScreenshots gameId={game.id} /> 
     </section>
   );
 }

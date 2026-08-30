@@ -6,7 +6,7 @@ import {
   uploadScreenshot,
   getGameScreenshots,
   deleteScreenshot,
-} from "../controllers/screenshotController.js";
+} from "../controllers/screenshotController";
 
 const router = express.Router();
 
