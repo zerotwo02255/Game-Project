@@ -7,6 +7,8 @@ import {
   searchRawgGames,
   getRawgGameById,
 } from "./services/rawgService.js";
+import path from "path";
+import screenshotRoutes from "./routes/screenshotRoutes.js";
 
 const app = express();
 const PORT = 5000;
@@ -14,6 +16,12 @@ const PORT = 5000;
 
 app.use(cors());
 app.use(express.json());
+app.use(
+  "/uploads",
+  express.static(path.resolve("uploads")),
+);
+
+
 
 app.get("/", (_req, res) => {
   res.json({
@@ -39,6 +47,7 @@ app.get("/api/test-db", async (_req, res) => {
 });
 
 app.use("/api/games", gameRoutes);
+app.use("/api/screenshots", screenshotRoutes);
 app.use(errorHandler);
 
 app.get("/api/rawg/search", async (req, res) => {
