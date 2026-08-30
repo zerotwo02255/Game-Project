@@ -1,15 +1,12 @@
 import { useEffect, useState } from "react";
-import {
-  getGames,
-  deleteGame,
-  type Game,
-} from "./api/gameApi";
+import { getGames, deleteGame, type Game } from "./api/gameApi";
 
 import AddGameForm from "./components/AddGameForm";
 import GameCard from "./components/GameCard";
 import Dashboard from "./components/Dashboard";
 import "./App.css";
 import GameSearch from "./components/GameSearch";
+import GameDetails from "./components/GameDetails";
 
 type Filter =
   | "dashboard"
@@ -25,26 +22,37 @@ function App() {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState("");
 
-  const [activeFilter, setActiveFilter] =
-    useState<Filter>("dashboard");
+  const [activeFilter, setActiveFilter] = useState<Filter>("dashboard");
 
   const [search, setSearch] = useState("");
+  const [selectedGame, setSelectedGame] = useState<Game | null>(null);
 
   const [sortBy, setSortBy] = useState<
     "newest" | "oldest" | "rating" | "progress"
   >("newest");
 
-  const loadGames = async () => {
-    try {
-      const data = await getGames();
-      setGames(data);
-    } catch (error) {
-      console.error(error);
-      setError("Failed to load games");
-    } finally {
-      setLoading(false);
-    }
-  };
+ const loadGames = async () => {
+  try {
+    const data = await getGames();
+
+    setGames(data);
+
+    setSelectedGame((currentSelectedGame) => {
+      if (!currentSelectedGame) {
+        return null;
+      }
+
+      return (
+        data.find((game) => game.id === currentSelectedGame.id) ?? null
+      );
+    });
+  } catch (error) {
+    console.error(error);
+    setError("Failed to load games");
+  } finally {
+    setLoading(false);
+  }
+};
 
   useEffect(() => {
     loadGames();
@@ -59,63 +67,54 @@ function App() {
       alert("Failed to delete game");
     }
   };
-     const filteredGames = games
-  .filter((game) => {
-    const matchesUpcoming =
-      activeFilter === "upcoming"
-        ? game.release_date !== null &&
-          new Date(game.release_date) > new Date()
-        : true;
+  const filteredGames = games
+    .filter((game) => {
+      const matchesUpcoming =
+        activeFilter === "upcoming"
+          ? game.release_date !== null &&
+            new Date(game.release_date) > new Date()
+          : true;
 
-    const matchesStatus =
-      activeFilter === "all" ||
-      activeFilter === "dashboard" ||
-      activeFilter === "upcoming" ||
-      game.status === activeFilter;
+      const matchesStatus =
+        activeFilter === "all" ||
+        activeFilter === "dashboard" ||
+        activeFilter === "upcoming" ||
+        game.status === activeFilter;
 
-    const matchesSearch = game.title
-      .toLowerCase()
-      .includes(search.toLowerCase());
+      const matchesSearch = game.title
+        .toLowerCase()
+        .includes(search.toLowerCase());
 
-    return (
-      matchesUpcoming &&
-      matchesStatus &&
-      matchesSearch
-    );
-  })
-  .sort((a, b) => {
-    // Upcoming games should be sorted by release date
-    if (activeFilter === "upcoming") {
+      return matchesUpcoming && matchesStatus && matchesSearch;
+    })
+    .sort((a, b) => {
+      // Upcoming games should be sorted by release date
+      if (activeFilter === "upcoming") {
+        return (
+          new Date(a.release_date!).getTime() -
+          new Date(b.release_date!).getTime()
+        );
+      }
+
+      if (sortBy === "rating") {
+        return Number(b.rating ?? 0) - Number(a.rating ?? 0);
+      }
+
+      if (sortBy === "progress") {
+        return b.progress - a.progress;
+      }
+
+      if (sortBy === "oldest") {
+        return (
+          new Date(a.created_at).getTime() - new Date(b.created_at).getTime()
+        );
+      }
+
       return (
-        new Date(a.release_date!).getTime() -
-        new Date(b.release_date!).getTime()
+        new Date(b.created_at).getTime() - new Date(a.created_at).getTime()
       );
-    }
+    });
 
-    if (sortBy === "rating") {
-      return (
-        Number(b.rating ?? 0) -
-        Number(a.rating ?? 0)
-      );
-    }
-
-    if (sortBy === "progress") {
-      return b.progress - a.progress;
-    }
-
-                if (sortBy === "oldest") {
-                return (
-                 new Date(a.created_at).getTime() -
-              new Date(b.created_at).getTime()
-             );
-            }
-
-           return (
-            new Date(b.created_at).getTime() -
-            new Date(a.created_at).getTime()
-         );
-  });
- 
   const getCount = (filter: Filter) => {
     if (filter === "dashboard" || filter === "all") {
       return games.length;
@@ -125,13 +124,11 @@ function App() {
       return games.filter(
         (game) =>
           game.release_date !== null &&
-          new Date(game.release_date) > new Date()
+          new Date(game.release_date) > new Date(),
       ).length;
     }
 
-    return games.filter(
-      (game) => game.status === filter
-    ).length;
+    return games.filter((game) => game.status === filter).length;
   };
 
   if (loading) {
@@ -144,207 +141,137 @@ function App() {
 
   return (
     <div className="app-layout">
-
       {/* =========================
           SIDEBAR
       ========================= */}
 
       <aside className="sidebar">
-
         <div className="sidebar-logo">
           <span>🎮</span>
           <span>My Journey</span>
         </div>
 
         <nav className="sidebar-nav">
-
           {/* Dashboard */}
 
           <button
             className={
-              activeFilter === "dashboard"
-                ? "nav-item active"
-                : "nav-item"
+              activeFilter === "dashboard" ? "nav-item active" : "nav-item"
             }
-            onClick={() =>
-              setActiveFilter("dashboard")
-            }
+            onClick={() => setActiveFilter("dashboard")}
           >
             <span>🏠</span>
             <span>Dashboard</span>
-            <span className="nav-count">
-              {getCount("dashboard")}
-            </span>
+            <span className="nav-count">{getCount("dashboard")}</span>
           </button>
-
 
           {/* My Games */}
 
           <button
-            className={
-              activeFilter === "all"
-                ? "nav-item active"
-                : "nav-item"
-            }
-            onClick={() =>
-              setActiveFilter("all")
-            }
+            className={activeFilter === "all" ? "nav-item active" : "nav-item"}
+            onClick={() => setActiveFilter("all")}
           >
             <span>🎮</span>
             <span>My Games</span>
-            <span className="nav-count">
-              {getCount("all")}
-            </span>
+            <span className="nav-count">{getCount("all")}</span>
           </button>
-
 
           {/* Bucket List */}
 
           <button
             className={
-              activeFilter === "bucket_list"
-                ? "nav-item active"
-                : "nav-item"
+              activeFilter === "bucket_list" ? "nav-item active" : "nav-item"
             }
-            onClick={() =>
-              setActiveFilter("bucket_list")
-            }
+            onClick={() => setActiveFilter("bucket_list")}
           >
             <span>📋</span>
             <span>Bucket List</span>
-            <span className="nav-count">
-              {getCount("bucket_list")}
-            </span>
+            <span className="nav-count">{getCount("bucket_list")}</span>
           </button>
-
 
           {/* Playing */}
 
           <button
             className={
-              activeFilter === "playing"
-                ? "nav-item active"
-                : "nav-item"
+              activeFilter === "playing" ? "nav-item active" : "nav-item"
             }
-            onClick={() =>
-              setActiveFilter("playing")
-            }
+            onClick={() => setActiveFilter("playing")}
           >
             <span>▶</span>
             <span>Playing</span>
-            <span className="nav-count">
-              {getCount("playing")}
-            </span>
+            <span className="nav-count">{getCount("playing")}</span>
           </button>
-
 
           {/* Completed */}
 
           <button
             className={
-              activeFilter === "completed"
-                ? "nav-item active"
-                : "nav-item"
+              activeFilter === "completed" ? "nav-item active" : "nav-item"
             }
-            onClick={() =>
-              setActiveFilter("completed")
-            }
+            onClick={() => setActiveFilter("completed")}
           >
             <span>✓</span>
             <span>Completed</span>
-            <span className="nav-count">
-              {getCount("completed")}
-            </span>
+            <span className="nav-count">{getCount("completed")}</span>
           </button>
-
 
           {/* Dropped */}
 
           <button
             className={
-              activeFilter === "dropped"
-                ? "nav-item active"
-                : "nav-item"
+              activeFilter === "dropped" ? "nav-item active" : "nav-item"
             }
-            onClick={() =>
-              setActiveFilter("dropped")
-            }
+            onClick={() => setActiveFilter("dropped")}
           >
             <span>✕</span>
             <span>Dropped</span>
-            <span className="nav-count">
-              {getCount("dropped")}
-            </span>
+            <span className="nav-count">{getCount("dropped")}</span>
           </button>
-
 
           {/* Upcoming */}
 
           <button
             className={
-              activeFilter === "upcoming"
-                ? "nav-item active"
-                : "nav-item"
+              activeFilter === "upcoming" ? "nav-item active" : "nav-item"
             }
-            onClick={() =>
-              setActiveFilter("upcoming")
-            }
+            onClick={() => setActiveFilter("upcoming")}
           >
             <span>📅</span>
             <span>Upcoming</span>
-            <span className="nav-count">
-              {getCount("upcoming")}
-            </span>
+            <span className="nav-count">{getCount("upcoming")}</span>
           </button>
-
         </nav>
-
 
         {/* Sidebar bottom */}
 
         <div className="sidebar-bottom">
-
           <div className="sidebar-stat">
             <span>Total Games</span>
             <strong>{games.length}</strong>
           </div>
-
         </div>
-
       </aside>
-
 
       {/* =========================
           MAIN CONTENT
       ========================= */}
 
       <main className="main-content">
-
         {/* Header */}
 
         <header className="top-header">
-
           <div>
-
             <h1>My Game Journey</h1>
 
-            <p>
-              Keep track of your gaming journey.
-            </p>
-
+            <p>Keep track of your gaming journey.</p>
           </div>
-
         </header>
-
 
         {/* =========================
             DASHBOARD
         ========================= */}
 
-        {activeFilter === "dashboard" && (
-          <Dashboard games={games} />
-        )}
-
+        {activeFilter === "dashboard" && <Dashboard games={games} />}
 
         {/* =========================
             GAME PAGES
@@ -352,141 +279,108 @@ function App() {
 
         {activeFilter !== "dashboard" && (
           <>
+            {selectedGame ? (
+              <GameDetails
+                game={selectedGame}
+                onBack={() => setSelectedGame(null)}
+                onGameUpdated={loadGames}
+              />
+            ) : (
+              <>
+                {/* Game Search */}
+                <GameSearch onGameAdded={loadGames} />
 
-                <GameSearch
-                onGameAdded={loadGames}
-             />
+                <AddGameForm onGameAdded={loadGames} />
 
-            <AddGameForm
-              onGameAdded={loadGames}
-            />
+                <section className="games-section">
+                  <div className="section-header">
+                    <div>
+                      <h2>
+                        {activeFilter === "all"
+                          ? "My Games"
+                          : activeFilter === "bucket_list"
+                            ? "Bucket List"
+                            : activeFilter === "playing"
+                              ? "Playing"
+                              : activeFilter === "completed"
+                                ? "Completed"
+                                : activeFilter === "dropped"
+                                  ? "Dropped"
+                                  : "Upcoming"}
+                      </h2>
 
+                      <p>
+                        {filteredGames.length}{" "}
+                        {filteredGames.length === 1 ? "game" : "games"}
+                      </p>
+                    </div>
 
-            <section className="games-section">
+                    {/* Search */}
 
-              <div className="section-header">
+                    <input
+                      className="game-search"
+                      type="text"
+                      placeholder="🔎 Search games..."
+                      value={search}
+                      onChange={(event) => setSearch(event.target.value)}
+                    />
 
-                <div>
+                    {/* Sort */}
 
-                  <h2>
-                    {activeFilter === "all"
-                      ? "My Games"
-                      : activeFilter === "bucket_list"
-                        ? "Bucket List"
-                        : activeFilter === "playing"
-                          ? "Playing"
-                          : activeFilter === "completed"
-                            ? "Completed"
-                            : activeFilter === "dropped"
-                              ? "Dropped"
-                              : "Upcoming"}
-                  </h2>
+                    <select
+                      className="game-sort"
+                      value={sortBy}
+                      onChange={(event) =>
+                        setSortBy(
+                          event.target.value as
+                            | "newest"
+                            | "oldest"
+                            | "rating"
+                            | "progress",
+                        )
+                      }
+                    >
+                      <option value="newest">Newest</option>
 
-                  <p>
-                    {filteredGames.length}{" "}
-                    {filteredGames.length === 1
-                      ? "game"
-                      : "games"}
-                  </p>
+                      <option value="oldest">Oldest</option>
 
-                </div>
+                      <option value="rating">Highest Rating</option>
 
+                      <option value="progress">Highest Progress</option>
+                    </select>
+                  </div>
 
-                {/* Search */}
-
-                <input
-                  className="game-search"
-                  type="text"
-                  placeholder="🔎 Search games..."
-                  value={search}
-                  onChange={(event) =>
-                    setSearch(event.target.value)
-                  }
-                />
-
-
-                {/* Sort */}
-
-                <select
-                  className="game-sort"
-                  value={sortBy}
-                  onChange={(event) =>
-                    setSortBy(
-                      event.target.value as
-                        | "newest"
-                        | "oldest"
-                        | "rating"
-                        | "progress"
-                    )
-                  }
-                >
-                  <option value="newest">
-                    Newest
-                  </option>
-
-                  <option value="oldest">
-                    Oldest
-                  </option>
-
-                  <option value="rating">
-                    Highest Rating
-                  </option>
-
-                  <option value="progress">
-                    Highest Progress
-                  </option>
-                </select>
-
-              </div>
-
-
-              {/* =========================
+                  {/* =========================
                   EMPTY STATE
               ========================= */}
 
-              {filteredGames.length === 0 ? (
+                  {filteredGames.length === 0 ? (
+                    <div className="empty-state">
+                      <div>🎮</div>
 
-                <div className="empty-state">
+                      <h3>No games here</h3>
 
-                  <div>🎮</div>
-
-                  <h3>
-                    No games here
-                  </h3>
-
-                  <p>
-                    Add a game to start building
-                    your collection.
-                  </p>
-
-                </div>
-
-              ) : (
-
-                <div className="game-grid">
-
-                  {filteredGames.map((game) => (
-
-                    <GameCard
-                      key={game.id}
-                      game={game}
-                      onDelete={handleDelete}
-                      onGameUpdated={loadGames}
-                    />
-
-                  ))}
-
-                </div>
-
-              )}
-
-            </section>
-
+                      <p>Add a game to start building your collection.</p>
+                    </div>
+                  ) : (
+                    <div className="game-grid">
+                      {filteredGames.map((game) => (
+                        <GameCard
+                          key={game.id}
+                          game={game}
+                          onDelete={handleDelete}
+                          onGameUpdated={loadGames}
+                          onViewDetails={setSelectedGame}
+                        />
+                      ))}
+                    </div>
+                  )}
+                </section>
+              </>
+            )}
           </>
         )}
-
       </main>
-
     </div>
   );
 }

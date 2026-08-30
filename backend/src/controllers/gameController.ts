@@ -60,6 +60,19 @@ export const createGame = async (req: Request, res: Response) => {
       notes,
     } = validation.data;
 
+    // Check if the game already exists
+    const existingGame = await pool.query(
+      "SELECT * FROM games WHERE LOWER(title) = LOWER($1)",
+      [title],
+    );
+
+    if (existingGame.rows.length > 0) {
+      return res.status(409).json({
+        message: "Game already exists",
+        game: existingGame.rows[0],
+      });
+    }
+
     const result = await pool.query(
       `INSERT INTO games
         (title, description, release_date, cover_url, status, rating, progress, notes)
@@ -86,7 +99,6 @@ export const createGame = async (req: Request, res: Response) => {
     });
   }
 };
-
 export const updateGame = async (req: Request, res: Response) => {
   try {
     const { id } = req.params;

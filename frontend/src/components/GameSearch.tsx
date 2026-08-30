@@ -23,6 +23,11 @@ function GameSearch({ onGameAdded }: GameSearchProps) {
   const [results, setResults] = useState<RawgGame[]>([]);
   const [loading, setLoading] = useState(false);
 
+
+  const [message, setMessage] = useState("");
+  const [messageType, setMessageType] = useState<"success" | "error" | "">("");
+
+
   const searchGames = async () => {
     if (!query.trim()) {
       return;
@@ -52,6 +57,13 @@ function GameSearch({ onGameAdded }: GameSearchProps) {
   return (
     <section className="game-search-section">
       <h2>Find a Game</h2>
+
+      
+                    {message && (
+                  <div className={`game-message ${messageType}`}>
+                  {message}
+              </div>
+             )}
 
       <div className="game-search-bar">
         <input
@@ -93,18 +105,25 @@ function GameSearch({ onGameAdded }: GameSearchProps) {
                 type="button"
                 onClick={async () => {
                   try {
+                    const response = await axios.get(
+                      `http://localhost:5000/api/rawg/games/${game.id}`,
+                    );
+
+                    const fullGame = response.data;
+
                     await createGame({
-                      title: game.name,
-                      description: null,
-                      release_date: game.released,
-                      cover_url: game.background_image,
+                      title: fullGame.name,
+                      description: fullGame.description_raw || null,
+                      release_date: fullGame.released || null,
+                      cover_url: fullGame.background_image || null,
                       status: "bucket_list",
-                      rating: game.rating || null,
+                      rating: fullGame.rating || null,
                       progress: 0,
                       notes: null,
                     });
 
-                    alert(`${game.name} added to your games!`);
+                    setMessage(`${fullGame.name} added to your games!`);
+                    setMessageType("success");
 
                     onGameAdded();
                   } catch (error: any) {
@@ -113,9 +132,11 @@ function GameSearch({ onGameAdded }: GameSearchProps) {
                       error.response?.data || error,
                     );
 
-                    alert(
-                      error.response?.data?.message || "Failed to add game",
+                    setMessage(
+                      error.response?.data?.message ||
+                     "Failed to add game"
                     );
+                   setMessageType("error");
                   }
                 }}
               >

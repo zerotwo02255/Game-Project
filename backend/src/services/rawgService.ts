@@ -24,3 +24,16 @@ export const searchRawgGames = async (
 
   return response.data.results;
 };
+
+export const getRawgGameById = async (id: number) => {
+  const response = await axios.get(
+    `${RAWG_API_URL}/games/${id}`,
+    {
+      params: {
+        key: RAWG_API_KEY,
+      },
+    }
+  );
+
+  return response.data;
+};

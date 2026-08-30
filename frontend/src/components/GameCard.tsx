@@ -6,12 +6,14 @@ interface GameCardProps {
   game: Game;
   onDelete: (id: number) => void;
   onGameUpdated: () => void;
+  onViewDetails: (game: Game) => void;
 }
 
 function GameCard({
   game,
   onDelete,
   onGameUpdated,
+  onViewDetails,
 }: GameCardProps) {
   const [isEditing, setIsEditing] = useState(false);
 
@@ -76,23 +78,22 @@ function GameCard({
         </div>
 
         {game.description && (
-          <p className="game-description">
-            {game.description}
-          </p>
+          <p className="game-description">{game.description}</p>
         )}
 
         <div className="game-actions">
           <button
-            className="edit-button"
-            onClick={() => setIsEditing(true)}
+            className="details-button"
+            onClick={() => onViewDetails(game)}
           >
+            Details
+          </button>
+
+          <button className="edit-button" onClick={() => setIsEditing(true)}>
             Edit
           </button>
 
-          <button
-            className="delete-button"
-            onClick={() => onDelete(game.id)}
-          >
+          <button className="delete-button" onClick={() => onDelete(game.id)}>
             Delete
           </button>
         </div>

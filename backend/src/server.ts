@@ -3,7 +3,10 @@ import cors from "cors";
 import pool from "./db/pool.js";
 import gameRoutes from "./routes/gameRoutes.js";
 import { errorHandler } from "./middleware/errorHandler.js";
-import { searchRawgGames } from "./services/rawgService";
+import {
+  searchRawgGames,
+  getRawgGameById,
+} from "./services/rawgService.js";
 
 const app = express();
 const PORT = 5000;
@@ -56,6 +59,28 @@ app.get("/api/rawg/search", async (req, res) => {
 
     res.status(500).json({
       message: "Failed to search games",
+    });
+  }
+});
+
+app.get("/api/rawg/games/:id", async (req, res) => {
+  try {
+    const id = Number(req.params.id);
+
+    if (!Number.isInteger(id)) {
+      return res.status(400).json({
+        message: "Invalid game ID",
+      });
+    }
+
+    const game = await getRawgGameById(id);
+
+    res.json(game);
+  } catch (error) {
+    console.error("RAWG game details error:", error);
+
+    res.status(500).json({
+      message: "Failed to fetch game details",
     });
   }
 });

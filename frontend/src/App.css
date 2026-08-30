@@ -259,11 +259,30 @@ select {
    GAME GRID
 ========================= */
 
+
 .game-grid {
   display: grid;
-  grid-template-columns: repeat(4, minmax(0, 1fr));
-  gap: 20px;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 28px;
   width: 100%;
+}
+
+.game-card {
+  min-width: 0;
+  overflow: hidden;
+  border: 1px solid #293548;
+  border-radius: 14px;
+  background: #182235;
+  transition:
+    transform 0.2s ease,
+    border-color 0.2s ease,
+    box-shadow 0.2s ease;
+}
+
+.game-card:hover {
+  transform: translateY(-4px);
+  border-color: #6366f1;
+  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.3);
 }
 
 /* =========================
@@ -292,18 +311,17 @@ select {
    GAME COVER
 ========================= */
 
+
 .game-cover-container {
   position: relative;
   width: 100%;
-  overflow: hidden;
 }
 
 .game-cover {
   display: block;
   width: 100%;
-  height: 280px;
+  height: 360px;
   object-fit: cover;
-  transition: transform 0.3s ease;
 }
 
 .game-card:hover .game-cover {
@@ -368,21 +386,21 @@ select {
    GAME INFO
 ========================= */
 
+
 .game-info {
-  padding: 16px;
+  padding: 22px;
+  min-width: 0;
 }
 
 .game-title {
-  margin: 0 0 10px;
-  overflow: hidden;
-  color: #f8fafc;
-  font-size: 19px;
-  font-weight: 700;
+  margin: 0 0 14px;
+  font-size: 22px;
   line-height: 1.3;
-  text-overflow: ellipsis;
-  white-space: nowrap;
-}
 
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
 /* =========================
    RATING
 ========================= */
@@ -461,20 +479,41 @@ select {
    GAME ACTIONS
 ========================= */
 
+/* =========================
+   GAME ACTIONS
+========================= */
+
 .game-actions {
   display: flex;
-  gap: 8px;
+  gap: 10px;
+  width: 100%;
 }
 
 .game-actions button {
   flex: 1;
-  min-height: 38px;
-  padding: 8px 12px;
-  border-radius: 7px;
+  min-width: 0;
+  padding: 10px 6px;
+  border-radius: 9px;
   cursor: pointer;
-  font-size: 13px;
+  font-size: 14px;
   font-weight: 600;
+  white-space: nowrap;
+  text-align: center;
 }
+
+/* Details */
+
+.details-button {
+  border: 1px solid #596579;
+  background: #303b4f;
+  color: #ffffff;
+}
+
+.details-button:hover {
+  background: #3d4a61;
+}
+
+/* Edit */
 
 .edit-button {
   border: 1px solid #3b4659;
@@ -483,11 +522,13 @@ select {
 }
 
 .edit-button:hover {
-  background: #3b465a;
+  background: #3d4a61;
 }
 
+/* Delete */
+
 .delete-button {
-  border: 1px solid #ef4444;
+  border: 1px solid #ef4444 !important;
   background: transparent;
   color: #ef4444;
 }
@@ -498,40 +539,12 @@ select {
 }
 
 /* =========================
-   EMPTY STATE
-========================= */
-
-.empty-state {
-  padding: 70px 20px;
-  border: 1px dashed #344157;
-  border-radius: 14px;
-  background: #151e2e;
-  text-align: center;
-}
-
-.empty-state > div {
-  margin-bottom: 12px;
-  font-size: 45px;
-}
-
-.empty-state h3 {
-  margin: 0 0 8px;
-  font-size: 20px;
-}
-
-.empty-state p {
-  margin: 0;
-  color: #7f8ba1;
-  font-size: 14px;
-}
-
-/* =========================
    TABLET
 ========================= */
 
 @media (max-width: 1200px) {
   .game-grid {
-    grid-template-columns: repeat(3, minmax(0, 1fr));
+    grid-template-columns: repeat(2, minmax(0, 1fr));
   }
 }
 
@@ -1164,4 +1177,468 @@ select {
   .game-search-bar input {
     width: 100%;
   }
+}
+
+.game-message {
+  margin-bottom: 18px;
+  padding: 12px 16px;
+  border-radius: 8px;
+  font-size: 14px;
+  font-weight: 600;
+}
+
+.game-message.success {
+  border: 1px solid #22c55e;
+  background: rgba(34, 197, 94, 0.1);
+  color: #4ade80;
+}
+
+.game-message.error {
+  border: 1px solid #ef4444;
+  background: rgba(239, 68, 68, 0.1);
+  color: #f87171;
+}
+
+/* =========================
+   GAME DETAILS
+========================= */
+
+.game-details {
+  width: 100%;
+}
+
+.back-button {
+  margin-bottom: 24px;
+  padding: 10px 16px;
+  border: 1px solid #374151;
+  border-radius: 8px;
+  background: #1f2937;
+  color: #f9fafb;
+  cursor: pointer;
+}
+
+.back-button:hover {
+  background: #303b4f;
+}
+
+.game-details-card {
+  display: grid;
+  grid-template-columns: 280px 1fr;
+  gap: 32px;
+  padding: 28px;
+  border: 1px solid #2d3748;
+  border-radius: 16px;
+  background: #1a2233;
+}
+
+.game-details-cover {
+  width: 280px;
+}
+
+.game-details-cover img {
+  display: block;
+  width: 280px;
+  height: 400px;
+  object-fit: cover;
+  border-radius: 12px;
+}
+
+.game-details-info {
+  min-width: 0;
+}
+
+.game-details-info h1 {
+  margin: 0 0 16px;
+  font-size: 32px;
+}
+
+.game-details-meta {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 28px;
+  color: #aab4c4;
+}
+
+.details-progress {
+  margin-bottom: 28px;
+}
+
+.details-description h3,
+.details-notes h3 {
+  margin-bottom: 10px;
+}
+
+.details-description p {
+  margin: 0;
+  color: #9ca8b8;
+  font-size: 16px;
+  line-height: 1.7;
+  text-align: left;
+}
+.details-description {
+  margin-top: 28px;
+}
+
+.details-description h3 {
+  margin-bottom: 12px;
+  text-align: left;
+}
+
+/* Mobile */
+
+@media (max-width: 700px) {
+  .game-details-card {
+    grid-template-columns: 1fr;
+  }
+
+  .game-details-cover {
+    width: 220px;
+  }
+
+  .game-details-cover img {
+    width: 220px;
+    height: 310px;
+  }
+}
+
+/* Details */
+
+.details-button {
+  background: #303b4f;
+  color: #ffffff;
+}
+
+.details-button:hover {
+  background: #3d4a61;
+}
+
+/* Edit */
+
+.edit-button {
+  background: #303b4f;
+  color: #ffffff;
+}
+
+.edit-button:hover {
+  background: #3d4a61;
+}
+
+/* Delete */
+
+.delete-button {
+  background: transparent;
+  border-color: #ef4444 !important;
+  color: #ef4444;
+}
+
+.delete-button:hover {
+  background: #ef4444;
+  color: #ffffff;
+}
+/* =========================
+   DETAILS TITLE
+========================= */
+
+.details-title-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 20px;
+}
+
+.details-title-row h1 {
+  margin: 0;
+}
+
+
+/* =========================
+   DETAILS EDIT BUTTON
+========================= */
+
+.details-edit-button {
+  flex-shrink: 0;
+  padding: 10px 16px;
+  border: 1px solid #6366f1;
+  border-radius: 9px;
+  background: #6366f1;
+  color: white;
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.details-edit-button:hover {
+  background: #5558e8;
+}
+
+
+/* =========================
+   DETAILS DESCRIPTION
+========================= */
+
+.details-description {
+  margin-top: 28px;
+}
+
+.details-description h3 {
+  margin-bottom: 12px;
+  text-align: left;
+}
+
+.details-description p {
+  margin: 0;
+  color: #9ca8b8;
+  font-size: 16px;
+  line-height: 1.7;
+  text-align: left;
+}
+
+
+/* =========================
+   DETAILS NOTES
+========================= */
+
+.details-notes {
+  margin-top: 28px;
+}
+
+.details-notes h3 {
+  margin-bottom: 12px;
+}
+
+.details-notes p {
+  margin: 0;
+  color: #9ca8b8;
+  line-height: 1.7;
+}
+/* =========================
+   EDIT GAME FORM
+========================= */
+
+.edit-game-form {
+  width: 100%;
+  max-width: 720px;
+  margin: 30px auto;
+  padding: 32px;
+  background: #182235;
+  border: 1px solid #293548;
+  border-radius: 16px;
+  box-sizing: border-box;
+}
+
+
+/* Header */
+
+.edit-form-header {
+  margin-bottom: 30px;
+  text-align: center;
+}
+
+.edit-form-header > div {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.edit-form-icon {
+  font-size: 36px;
+  margin-bottom: 8px;
+}
+
+.edit-form-header h2 {
+  margin: 0;
+  font-size: 30px;
+  color: #f8fafc;
+}
+
+.edit-form-header p {
+  margin: 8px 0 0;
+  color: #9ca8b8;
+  font-size: 15px;
+}
+
+
+/* Fields */
+
+.form-field {
+  margin-bottom: 22px;
+}
+
+.form-field label,
+.slider-header label {
+  display: block;
+  margin-bottom: 8px;
+  color: #e5e7eb;
+  font-size: 14px;
+  font-weight: 600;
+}
+
+.form-field input,
+.form-field select,
+.form-field textarea {
+  width: 100%;
+  box-sizing: border-box;
+  padding: 13px 15px;
+  border: 1px solid #344155;
+  border-radius: 9px;
+  background: #0f172a;
+  color: #f8fafc;
+  font-family: inherit;
+  font-size: 15px;
+  outline: none;
+}
+
+.form-field input:focus,
+.form-field select:focus,
+.form-field textarea:focus {
+  border-color: #6366f1;
+  box-shadow: 0 0 0 2px rgba(99, 102, 241, 0.15);
+}
+
+.form-field textarea {
+  resize: vertical;
+  min-height: 120px;
+}
+
+
+/* =========================
+   SLIDERS
+========================= */
+
+.slider-field {
+  margin-bottom: 28px;
+}
+
+.slider-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 12px;
+}
+
+.slider-header label {
+  margin: 0;
+}
+
+.slider-header strong {
+  color: #a5b4fc;
+  font-size: 16px;
+}
+
+
+/* Range slider */
+
+.game-slider {
+  width: 100%;
+  height: 7px;
+  appearance: none;
+  -webkit-appearance: none;
+  border-radius: 10px;
+  background: #303c51;
+  outline: none;
+  cursor: pointer;
+}
+
+
+/* Slider thumb */
+
+.game-slider::-webkit-slider-thumb {
+  appearance: none;
+  -webkit-appearance: none;
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  background: #6366f1;
+  border: 3px solid #ffffff;
+  cursor: pointer;
+}
+
+.game-slider::-moz-range-thumb {
+  width: 17px;
+  height: 17px;
+  border-radius: 50%;
+  background: #6366f1;
+  border: 3px solid #ffffff;
+  cursor: pointer;
+}
+
+
+/* Slider labels */
+
+.slider-labels {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 7px;
+  color: #718096;
+  font-size: 12px;
+}
+
+
+/* =========================
+   FORM BUTTONS
+========================= */
+
+.edit-form-actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 12px;
+  margin-top: 30px;
+  padding-top: 24px;
+  border-top: 1px solid #293548;
+}
+
+.edit-form-actions button {
+  padding: 12px 20px;
+  border-radius: 9px;
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.cancel-button {
+  border: 1px solid #3b4659;
+  background: #303b4f;
+  color: #ffffff;
+}
+
+.cancel-button:hover {
+  background: #3d4a61;
+}
+
+.save-button {
+  border: 1px solid #6366f1;
+  background: #6366f1;
+  color: #ffffff;
+}
+
+.save-button:hover {
+  background: #5558e8;
+}
+
+.edit-form-actions button:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+/* =========================
+   EDIT FORM WRAPPER
+========================= */
+
+.edit-form-wrapper {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+}
+
+.edit-game-form {
+  width: 100%;
+  max-width: 720px;
+  margin: 30px auto;
+  padding: 32px;
+  background: #182235;
+  border: 1px solid #293548;
+  border-radius: 16px;
 }
