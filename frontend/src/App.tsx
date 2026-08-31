@@ -1,15 +1,15 @@
 import { useEffect, useState } from "react";
 import { getGames, deleteGame, type Game } from "./api/gameApi";
 
-import AddGameForm from "./components/AddGameForm";
 import GameCard from "./components/GameCard";
 import Dashboard from "./components/Dashboard";
 import "./App.css";
-import GameSearch from "./components/GameSearch";
 import GameDetails from "./components/GameDetails";
+import SearchPage from "./components/SearchPage";
 
 type Filter =
   | "dashboard"
+  | "search"
   | "all"
   | "bucket_list"
   | "playing"
@@ -23,36 +23,32 @@ function App() {
   const [error, setError] = useState("");
 
   const [activeFilter, setActiveFilter] = useState<Filter>("dashboard");
-
-  const [search, setSearch] = useState("");
   const [selectedGame, setSelectedGame] = useState<Game | null>(null);
 
   const [sortBy, setSortBy] = useState<
     "newest" | "oldest" | "rating" | "progress"
   >("newest");
 
- const loadGames = async () => {
-  try {
-    const data = await getGames();
+  const loadGames = async () => {
+    try {
+      const data = await getGames();
 
-    setGames(data);
+      setGames(data);
 
-    setSelectedGame((currentSelectedGame) => {
-      if (!currentSelectedGame) {
-        return null;
-      }
+      setSelectedGame((currentSelectedGame) => {
+        if (!currentSelectedGame) {
+          return null;
+        }
 
-      return (
-        data.find((game) => game.id === currentSelectedGame.id) ?? null
-      );
-    });
-  } catch (error) {
-    console.error(error);
-    setError("Failed to load games");
-  } finally {
-    setLoading(false);
-  }
-};
+        return data.find((game) => game.id === currentSelectedGame.id) ?? null;
+      });
+    } catch (error) {
+      console.error(error);
+      setError("Failed to load games");
+    } finally {
+      setLoading(false);
+    }
+  };
 
   useEffect(() => {
     loadGames();
@@ -78,14 +74,11 @@ function App() {
       const matchesStatus =
         activeFilter === "all" ||
         activeFilter === "dashboard" ||
+        activeFilter === "search" ||
         activeFilter === "upcoming" ||
         game.status === activeFilter;
 
-      const matchesSearch = game.title
-        .toLowerCase()
-        .includes(search.toLowerCase());
-
-      return matchesUpcoming && matchesStatus && matchesSearch;
+      return matchesUpcoming && matchesStatus 
     })
     .sort((a, b) => {
       // Upcoming games should be sorted by release date
@@ -163,6 +156,16 @@ function App() {
             <span>🏠</span>
             <span>Dashboard</span>
             <span className="nav-count">{getCount("dashboard")}</span>
+          </button>
+
+          <button
+            className={
+              activeFilter === "search" ? "nav-item active" : "nav-item"
+            }
+            onClick={() => setActiveFilter("search")}
+          >
+            <span>🔍</span>
+            <span>Search</span>
           </button>
 
           {/* My Games */}
@@ -272,12 +275,17 @@ function App() {
         ========================= */}
 
         {activeFilter === "dashboard" && <Dashboard games={games} />}
+        
+        {activeFilter === "search" && (
+            <SearchPage onGameAdded={loadGames} />
+            )}
 
         {/* =========================
             GAME PAGES
         ========================= */}
 
-        {activeFilter !== "dashboard" && (
+        {activeFilter !== "dashboard" && 
+           activeFilter !== "search" && (
           <>
             {selectedGame ? (
               <GameDetails
@@ -288,9 +296,7 @@ function App() {
             ) : (
               <>
                 {/* Game Search */}
-                <GameSearch onGameAdded={loadGames} />
-
-                <AddGameForm onGameAdded={loadGames} />
+                
 
                 <section className="games-section">
                   <div className="section-header">
@@ -314,16 +320,6 @@ function App() {
                         {filteredGames.length === 1 ? "game" : "games"}
                       </p>
                     </div>
-
-                    {/* Search */}
-
-                    <input
-                      className="game-search"
-                      type="text"
-                      placeholder="🔎 Search games..."
-                      value={search}
-                      onChange={(event) => setSearch(event.target.value)}
-                    />
 
                     {/* Sort */}
 

@@ -953,9 +953,13 @@ select {
 ========================= */
 
 .game-search-section {
-  margin-bottom: 40px;
+  width: 100%;
+  margin: 0 auto;
+  padding: 0;
+  background: transparent;
+  border: none;
+  box-shadow: none;
 }
-
 .game-search-section h2 {
   margin-bottom: 16px;
 }
@@ -1787,5 +1791,383 @@ select {
 
   .upload-screenshot-button {
     width: 100%;
+  }
+}
+/* =========================
+   SEARCH PAGE
+========================= */
+
+.search-page {
+  width: 100%;
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 40px 30px 80px;
+}
+
+.search-page-hero {
+  text-align: center;
+  margin-bottom: 45px;
+}
+
+.search-page-icon {
+  font-size: 42px;
+  margin-bottom: 10px;
+}
+
+.search-page-hero h2 {
+  margin: 0;
+  font-size: 38px;
+  font-weight: 700;
+}
+
+.search-page-hero p {
+  margin-top: 12px;
+  color: #9aa6bd;
+  font-size: 18px;
+}
+
+/* Search area */
+
+.search-section {
+  width: 100%;
+  max-width: 900px;
+  margin: 0 auto;
+}
+
+.game-search {
+  width: 100%;
+}
+
+.game-search-intro {
+  text-align: center;
+  margin-bottom: 22px;
+}
+
+.game-search-intro .search-label {
+  display: block;
+  font-size: 22px;
+  font-weight: 600;
+  margin-bottom: 8px;
+}
+
+.game-search-intro p {
+  margin: 0;
+  color: #9aa6bd;
+  font-size: 16px;
+}
+
+/* Search bar */
+
+.game-search-bar {
+  display: flex;
+  gap: 12px;
+  width: 100%;
+  align-items: stretch;
+}
+
+.search-input-wrapper {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+
+  background: #111a2d;
+  border: 1px solid #2b3852;
+  border-radius: 12px;
+
+  padding: 0 18px;
+  min-height: 60px;
+}
+
+.search-input-wrapper span {
+  font-size: 20px;
+}
+
+.search-input-wrapper input {
+  flex: 1;
+  border: none;
+  outline: none;
+  background: transparent;
+  color: #fff;
+  font-size: 17px;
+}
+
+.search-input-wrapper input::placeholder {
+  color: #7f8ba3;
+}
+
+.game-search-bar button {
+  border: none;
+  border-radius: 12px;
+  padding: 0 28px;
+
+  background: #6366f1;
+  color: white;
+
+  font-size: 17px;
+  font-weight: 600;
+
+  cursor: pointer;
+  transition: 0.2s;
+}
+
+.game-search-bar button:hover {
+  background: #7477f5;
+}
+
+.game-search-bar button:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+/* Messages */
+
+.game-message {
+  margin: 18px 0;
+  padding: 12px 16px;
+  border-radius: 10px;
+  text-align: center;
+}
+
+.game-message.success {
+  background: rgba(34, 197, 94, 0.12);
+  color: #6ee7a0;
+}
+
+.game-message.error {
+  background: rgba(239, 68, 68, 0.12);
+  color: #f87171;
+}
+
+/* Search results */
+
+.search-results-section {
+  margin-top: 40px;
+}
+
+.search-results-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 18px;
+}
+
+.search-results-header h3 {
+  margin: 0;
+  font-size: 22px;
+}
+
+.search-results-header span {
+  color: #8995ad;
+}
+
+/* Result cards */
+
+.search-results {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 18px;
+}
+
+.search-game-card {
+  display: flex;
+  min-height: 190px;
+
+  background: #192337;
+  border: 1px solid #293650;
+  border-radius: 14px;
+
+  overflow: hidden;
+  transition: transform 0.2s, border-color 0.2s;
+}
+
+.search-game-card:hover {
+  transform: translateY(-2px);
+  border-color: #6366f1;
+}
+
+.search-game-cover {
+  width: 135px;
+  min-width: 135px;
+}
+
+.search-game-cover img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.search-no-cover {
+  width: 100%;
+  height: 100%;
+  min-height: 190px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  background: #111a2d;
+  font-size: 40px;
+}
+
+.search-game-info {
+  padding: 18px;
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+}
+
+.search-game-info h3 {
+  margin: 0 0 12px;
+  font-size: 19px;
+}
+
+.search-game-meta {
+  display: flex;
+  gap: 12px;
+  color: #9aa6bd;
+  font-size: 14px;
+}
+
+.search-game-genres {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  margin-top: 12px;
+}
+
+.search-game-genres span {
+  padding: 4px 8px;
+  border-radius: 6px;
+  background: #242f47;
+  color: #aeb9ce;
+  font-size: 12px;
+}
+
+.add-search-game-button {
+  margin-top: auto;
+
+  border: none;
+  border-radius: 8px;
+  padding: 9px 12px;
+
+  background: #6366f1;
+  color: white;
+
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.add-search-game-button:hover {
+  background: #7477f5;
+}
+
+/* Empty search */
+
+.search-empty {
+  text-align: center;
+  padding: 50px 20px;
+  color: #9aa6bd;
+}
+
+.search-empty span {
+  font-size: 42px;
+}
+
+.search-empty h3 {
+  color: white;
+  margin: 12px 0 6px;
+}
+
+/* OR divider */
+
+.search-divider {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+
+  max-width: 900px;
+  margin: 55px auto;
+  color: #8d99b0;
+  font-size: 18px;
+}
+
+.search-divider::before,
+.search-divider::after {
+  content: "";
+  flex: 1;
+  height: 1px;
+  background: #293650;
+}
+
+.search-divider span {
+  flex-shrink: 0;
+}
+
+/* Manual add */
+
+.manual-add-section {
+  width: 100%;
+  max-width: 900px;
+  margin: 0 auto;
+}
+
+.manual-add-header {
+  text-align: center;
+  margin-bottom: 22px;
+}
+
+.manual-add-header > span {
+  display: block;
+  font-size: 32px;
+  margin-bottom: 8px;
+}
+
+.manual-add-header h3 {
+  margin: 0;
+  font-size: 24px;
+}
+
+.manual-add-header p {
+  margin: 8px 0 0;
+  color: #9aa6bd;
+}
+
+/* Mobile */
+
+@media (max-width: 800px) {
+  .search-results {
+    grid-template-columns: 1fr;
+  }
+
+  .game-search-bar {
+    flex-direction: column;
+  }
+
+  .game-search-bar button {
+    min-height: 55px;
+  }
+}
+
+@media (max-width: 500px) {
+  .search-page {
+    padding: 30px 15px 60px;
+  }
+
+  .search-page-hero h2 {
+    font-size: 30px;
+  }
+
+  .search-game-card {
+    flex-direction: column;
+  }
+
+  .search-game-cover {
+    width: 100%;
+    height: 220px;
+  }
+
+  .search-no-cover {
+    min-height: 220px;
   }
 }
