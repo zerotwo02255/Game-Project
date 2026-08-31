@@ -161,7 +161,6 @@ export const createGame = async (req: Request, res: Response) => {
     if (existingGame.rows.length > 0) {
       return res.status(409).json({
         message: "Game already exists",
-        game: existingGame.rows[0],
       });
     }
 

@@ -2171,3 +2171,199 @@ select {
     min-height: 220px;
   }
 }
+
+/* =========================
+   SCREENSHOT GALLERY
+========================= */
+
+.screenshot-image {
+  cursor: pointer;
+  transition: transform 0.2s ease,
+    opacity 0.2s ease;
+}
+
+.screenshot-image:hover {
+  transform: scale(1.02);
+  opacity: 0.9;
+}
+
+
+/* =========================
+   SCREENSHOT MODAL
+========================= */
+
+.screenshot-modal {
+  position: fixed;
+  inset: 0;
+  z-index: 9999;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  padding: 40px;
+
+  background: rgba(0, 0, 0, 0.88);
+}
+
+
+.screenshot-modal img {
+  max-width: 90vw;
+  max-height: 90vh;
+
+  object-fit: contain;
+
+  border-radius: 12px;
+
+  box-shadow:
+    0 20px 60px rgba(0, 0, 0, 0.6);
+}
+
+
+/* Close button */
+
+.screenshot-modal-close {
+  position: absolute;
+
+  top: 25px;
+  right: 30px;
+
+  width: 45px;
+  height: 45px;
+
+  border: none;
+  border-radius: 50%;
+
+  background: rgba(255, 255, 255, 0.12);
+
+  color: white;
+
+  font-size: 22px;
+
+  cursor: pointer;
+
+  transition: background 0.2s ease,
+    transform 0.2s ease;
+}
+
+
+.screenshot-modal-close:hover {
+  background: rgba(255, 255, 255, 0.22);
+
+  transform: scale(1.05);
+}
+
+/* =========================
+   UPCOMING GAME CARD
+========================= */
+
+.upcoming-game-card {
+  overflow: hidden;
+  background: #192337;
+  border: 1px solid #293750;
+  border-radius: 16px;
+  transition:
+    transform 0.2s ease,
+    border-color 0.2s ease,
+    box-shadow 0.2s ease;
+}
+
+.upcoming-game-card:hover {
+  transform: translateY(-4px);
+  border-color: #6366f1;
+  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.25);
+}
+
+.upcoming-game-cover {
+  position: relative;
+  height: 260px;
+  overflow: hidden;
+}
+
+.upcoming-game-cover img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.upcoming-no-cover {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: #111a2d;
+  font-size: 50px;
+}
+
+.upcoming-release-badge {
+  position: absolute;
+  top: 12px;
+  left: 12px;
+  padding: 7px 10px;
+  border-radius: 8px;
+  background: rgba(15, 23, 42, 0.9);
+  color: #c7d2fe;
+  font-size: 12px;
+  font-weight: 600;
+}
+
+.upcoming-game-info {
+  padding: 20px;
+}
+
+.upcoming-game-info h3 {
+  margin: 0 0 18px;
+  font-size: 21px;
+}
+
+.upcoming-release-date {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+  margin-bottom: 12px;
+}
+
+.upcoming-release-date span {
+  color: #8995ad;
+  font-size: 12px;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.upcoming-release-date strong {
+  color: #f1f5f9;
+  font-size: 15px;
+}
+
+.upcoming-countdown {
+  margin-bottom: 12px;
+  padding: 10px;
+  border-radius: 8px;
+  background: #202c44;
+  color: #a5b4fc;
+  font-weight: 600;
+  text-align: center;
+}
+
+.upcoming-rating {
+  margin-bottom: 18px;
+  color: #fbbf24;
+  font-weight: 600;
+}
+
+.upcoming-details-button {
+  width: 100%;
+  padding: 11px;
+  border: none;
+  border-radius: 9px;
+  background: #6366f1;
+  color: white;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background 0.2s ease;
+}
+
+.upcoming-details-button:hover {
+  background: #7477f5;
+}

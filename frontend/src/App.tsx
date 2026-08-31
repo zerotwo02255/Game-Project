@@ -6,6 +6,7 @@ import Dashboard from "./components/Dashboard";
 import "./App.css";
 import GameDetails from "./components/GameDetails";
 import SearchPage from "./components/SearchPage";
+import UpcomingGameCard from "./components/UpcomingGameCard";
 
 type Filter =
   | "dashboard"
@@ -78,7 +79,7 @@ function App() {
         activeFilter === "upcoming" ||
         game.status === activeFilter;
 
-      return matchesUpcoming && matchesStatus 
+      return matchesUpcoming && matchesStatus;
     })
     .sort((a, b) => {
       // Upcoming games should be sorted by release date
@@ -275,17 +276,14 @@ function App() {
         ========================= */}
 
         {activeFilter === "dashboard" && <Dashboard games={games} />}
-        
-        {activeFilter === "search" && (
-            <SearchPage onGameAdded={loadGames} />
-            )}
+
+        {activeFilter === "search" && <SearchPage onGameAdded={loadGames} />}
 
         {/* =========================
             GAME PAGES
         ========================= */}
 
-        {activeFilter !== "dashboard" && 
-           activeFilter !== "search" && (
+        {activeFilter !== "dashboard" && activeFilter !== "search" && (
           <>
             {selectedGame ? (
               <GameDetails
@@ -296,8 +294,6 @@ function App() {
             ) : (
               <>
                 {/* Game Search */}
-                
-
                 <section className="games-section">
                   <div className="section-header">
                     <div>
@@ -312,12 +308,15 @@ function App() {
                                 ? "Completed"
                                 : activeFilter === "dropped"
                                   ? "Dropped"
-                                  : "Upcoming"}
+                                  : "📅 Upcoming Games"}
                       </h2>
 
                       <p>
-                        {filteredGames.length}{" "}
-                        {filteredGames.length === 1 ? "game" : "games"}
+                        {activeFilter === "upcoming"
+                          ? "Games coming to your gaming journey soon."
+                          : `${filteredGames.length} ${
+                              filteredGames.length === 1 ? "game" : "games"
+                            }`}
                       </p>
                     </div>
 
@@ -360,15 +359,23 @@ function App() {
                     </div>
                   ) : (
                     <div className="game-grid">
-                      {filteredGames.map((game) => (
-                        <GameCard
-                          key={game.id}
-                          game={game}
-                          onDelete={handleDelete}
-                          onGameUpdated={loadGames}
-                          onViewDetails={setSelectedGame}
-                        />
-                      ))}
+                      {filteredGames.map((game) =>
+                        activeFilter === "upcoming" ? (
+                          <UpcomingGameCard
+                            key={game.id}
+                            game={game}
+                            onViewDetails={setSelectedGame}
+                          />
+                        ) : (
+                          <GameCard
+                            key={game.id}
+                            game={game}
+                            onDelete={handleDelete}
+                            onGameUpdated={loadGames}
+                            onViewDetails={setSelectedGame}
+                          />
+                        ),
+                      )}
                     </div>
                   )}
                 </section>
@@ -381,4 +388,4 @@ function App() {
   );
 }
 
-export default App;
+export default App
