@@ -7,6 +7,7 @@ import "./App.css";
 import GameDetails from "./components/GameDetails";
 import SearchPage from "./components/SearchPage";
 import UpcomingGameCard from "./components/UpcomingGameCard";
+import Sidebar from "./components/Sidebar";
 
 type Filter =
   | "dashboard"
@@ -135,126 +136,15 @@ function App() {
 
   return (
     <div className="app-layout">
+      <Sidebar
+        activeFilter={activeFilter}
+        setActiveFilter={setActiveFilter}
+        getCount={getCount}
+        totalGames={games.length}
+      />
       {/* =========================
           SIDEBAR
       ========================= */}
-
-      <aside className="sidebar">
-        <div className="sidebar-logo">
-          <span>🎮</span>
-          <span>My Journey</span>
-        </div>
-
-        <nav className="sidebar-nav">
-          {/* Dashboard */}
-
-          <button
-            className={
-              activeFilter === "dashboard" ? "nav-item active" : "nav-item"
-            }
-            onClick={() => setActiveFilter("dashboard")}
-          >
-            <span>🏠</span>
-            <span>Dashboard</span>
-            <span className="nav-count">{getCount("dashboard")}</span>
-          </button>
-
-          <button
-            className={
-              activeFilter === "search" ? "nav-item active" : "nav-item"
-            }
-            onClick={() => setActiveFilter("search")}
-          >
-            <span>🔍</span>
-            <span>Search</span>
-          </button>
-
-          {/* My Games */}
-
-          <button
-            className={activeFilter === "all" ? "nav-item active" : "nav-item"}
-            onClick={() => setActiveFilter("all")}
-          >
-            <span>🎮</span>
-            <span>My Games</span>
-            <span className="nav-count">{getCount("all")}</span>
-          </button>
-
-          {/* Bucket List */}
-
-          <button
-            className={
-              activeFilter === "bucket_list" ? "nav-item active" : "nav-item"
-            }
-            onClick={() => setActiveFilter("bucket_list")}
-          >
-            <span>📋</span>
-            <span>Bucket List</span>
-            <span className="nav-count">{getCount("bucket_list")}</span>
-          </button>
-
-          {/* Playing */}
-
-          <button
-            className={
-              activeFilter === "playing" ? "nav-item active" : "nav-item"
-            }
-            onClick={() => setActiveFilter("playing")}
-          >
-            <span>▶</span>
-            <span>Playing</span>
-            <span className="nav-count">{getCount("playing")}</span>
-          </button>
-
-          {/* Completed */}
-
-          <button
-            className={
-              activeFilter === "completed" ? "nav-item active" : "nav-item"
-            }
-            onClick={() => setActiveFilter("completed")}
-          >
-            <span>✓</span>
-            <span>Completed</span>
-            <span className="nav-count">{getCount("completed")}</span>
-          </button>
-
-          {/* Dropped */}
-
-          <button
-            className={
-              activeFilter === "dropped" ? "nav-item active" : "nav-item"
-            }
-            onClick={() => setActiveFilter("dropped")}
-          >
-            <span>✕</span>
-            <span>Dropped</span>
-            <span className="nav-count">{getCount("dropped")}</span>
-          </button>
-
-          {/* Upcoming */}
-
-          <button
-            className={
-              activeFilter === "upcoming" ? "nav-item active" : "nav-item"
-            }
-            onClick={() => setActiveFilter("upcoming")}
-          >
-            <span>📅</span>
-            <span>Upcoming</span>
-            <span className="nav-count">{getCount("upcoming")}</span>
-          </button>
-        </nav>
-
-        {/* Sidebar bottom */}
-
-        <div className="sidebar-bottom">
-          <div className="sidebar-stat">
-            <span>Total Games</span>
-            <strong>{games.length}</strong>
-          </div>
-        </div>
-      </aside>
 
       {/* =========================
           MAIN CONTENT
@@ -388,4 +278,4 @@ function App() {
   );
 }
 
-export default App
+export default App;

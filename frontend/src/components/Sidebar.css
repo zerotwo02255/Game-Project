@@ -1,0 +1,342 @@
+/* =========================================================
+   SIDEBAR
+   ========================================================= */
+
+.sidebar {
+  position: fixed;
+  top: 0;
+  left: 0;
+
+  width: 240px;
+  height: 100vh;
+
+  display: flex;
+  flex-direction: column;
+
+  box-sizing: border-box;
+
+  padding: 24px 14px;
+
+  background: #111827;
+
+  border-right: 1px solid #293548;
+}
+
+
+/* =========================================================
+   SIDEBAR LOGO
+   ========================================================= */
+
+.sidebar-logo {
+  display: flex;
+  align-items: center;
+
+  gap: 10px;
+
+  padding: 8px 12px 28px;
+
+  color: #f3f4f6;
+
+  font-family: 'Raleway', sans-serif;
+  font-size: 21px;
+  font-weight: 800;
+
+  letter-spacing: -0.6px;
+}
+
+.sidebar-logo span:first-child {
+  display: inline-flex;
+
+  align-items: center;
+  justify-content: center;
+}
+
+
+/* =========================================================
+   NAVIGATION
+   ========================================================= */
+
+.sidebar-nav {
+  display: flex;
+  flex-direction: column;
+
+  gap: 4px;
+}
+
+
+/* =========================================================
+   NAV ITEM
+   ========================================================= */
+
+.nav-item {
+  position: relative;
+  overflow: hidden;
+
+  display: flex;
+  align-items: center;
+
+  width: 100%;
+
+  padding: 11px 12px;
+
+  border: 1px solid transparent;
+  border-radius: 9px;
+
+  background: transparent;
+
+  color: #9ca3af;
+
+  font-family: 'Raleway', sans-serif;
+  font-size: 16px;
+  font-weight: 600;
+
+  letter-spacing: -0.2px;
+
+  cursor: pointer;
+  text-align: left;
+
+  transition:
+    background 0.2s ease,
+    color 0.2s ease,
+    border-color 0.2s ease,
+    box-shadow 0.2s ease;
+}
+
+
+/* =========================================================
+   NAV HOVER
+   ========================================================= */
+
+.nav-item:hover {
+  background: rgba(34, 197, 94, 0.06);
+
+  box-shadow:
+    0 4px 18px rgba(34, 197, 94, 0.06);
+}
+
+
+/* Active item */
+
+.nav-item.active {
+  background: #1f2937;
+
+  border-color: #343f55;
+
+  color: #ffffff;
+}
+
+
+/* Don't change active background on hover */
+
+.nav-item.active:hover {
+  background: #1f2937;
+}
+
+
+/* =========================================================
+   ACTIVE BACKGROUND
+   ========================================================= */
+
+.nav-active-bg {
+  position: absolute;
+
+  inset: 0;
+
+  z-index: 0;
+
+  border-radius: inherit;
+
+  background: rgba(99, 102, 241, 0.14);
+
+  border: 1px solid rgba(99, 102, 241, 0.25);
+}
+
+
+/* =========================================================
+   NAV CONTENT
+   ========================================================= */
+
+.nav-item > span {
+  position: relative;
+
+  z-index: 1;
+}
+
+
+/* =========================================================
+   ICON
+   ========================================================= */
+
+.nav-icon {
+  display: inline-flex;
+
+  align-items: center;
+  justify-content: center;
+
+  width: 22px;
+
+  flex-shrink: 0;
+
+  transform-origin: center;
+}
+
+
+/* =========================================================
+   LABEL
+   ========================================================= */
+
+.nav-label {
+  position: relative;
+
+  z-index: 1;
+
+  font-family: 'Raleway', sans-serif;
+  font-weight: 600;
+
+  color: #9ca3af;
+
+  transition:
+    color 0.2s ease,
+    letter-spacing 0.2s ease;
+}
+
+
+/* =========================================================
+   HOVER GRADIENT
+   ========================================================= */
+
+.nav-label-hover {
+  background: linear-gradient(
+    90deg,
+    #6b7280,
+    #15803d,
+    #4ade80
+  );
+
+  -webkit-background-clip: text;
+  background-clip: text;
+
+  -webkit-text-fill-color: transparent;
+
+  color: transparent;
+}
+
+
+/* =========================================================
+   ACTIVE LABEL
+   ========================================================= */
+
+.nav-item.active .nav-label {
+  color: #f8fafc;
+
+  font-weight: 700;
+}
+
+
+/* =========================================================
+   COUNT
+   ========================================================= */
+
+.nav-count {
+  position: relative;
+
+  z-index: 1;
+
+  margin-left: auto;
+
+  color: #7f8aa3;
+
+  font-family: 'Raleway', sans-serif;
+  font-size: 12px;
+  font-weight: 600;
+
+  transition:
+    color 0.2s ease,
+    transform 0.2s ease;
+}
+
+
+/* Hover count */
+
+.nav-item:hover .nav-count {
+  color: #4ade80;
+
+  transform: translateX(-2px);
+}
+
+
+/* Active count */
+
+.nav-item.active .nav-count {
+  color: #c7d2fe;
+}
+
+
+/* =========================================================
+   SIDEBAR BOTTOM
+   ========================================================= */
+
+.sidebar-bottom {
+  margin-top: auto;
+}
+
+
+.sidebar-stat {
+  display: flex;
+
+  align-items: center;
+  justify-content: space-between;
+
+  padding: 14px 10px 4px;
+
+  border-top: 1px solid #293548;
+}
+
+
+.sidebar-stat span {
+  color: #7f8aa3;
+
+  font-family: 'Raleway', sans-serif;
+  font-size: 12px;
+  font-weight: 500;
+}
+
+
+.sidebar-stat strong {
+  color: #f3f4f6;
+
+  font-family: 'Raleway', sans-serif;
+  font-size: 15px;
+  font-weight: 800;
+}
+
+
+/* =========================================================
+   MOBILE
+   ========================================================= */
+
+@media (max-width: 650px) {
+  .sidebar {
+    position: static;
+
+    width: 100%;
+    height: auto;
+
+    border-right: none;
+    border-bottom: 1px solid #293548;
+  }
+
+  .sidebar-logo {
+    padding-bottom: 18px;
+  }
+
+  .sidebar-nav {
+    display: grid;
+
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .sidebar-bottom {
+    display: none;
+  }
+}

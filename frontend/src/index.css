@@ -1,111 +1,1011 @@
+@import url('https://fonts.googleapis.com/css2?family=Raleway:wght@400;500;600;700;800&display=swap');
+
+/* =========================================================
+   ROOT
+   ========================================================= */
+
 :root {
-  --text: #6b6375;
-  --text-h: #08060d;
-  --bg: #fff;
-  --border: #e5e4e7;
-  --code-bg: #f4f3ec;
-  --accent: #aa3bff;
-  --accent-bg: rgba(170, 59, 255, 0.1);
-  --accent-border: rgba(170, 59, 255, 0.5);
-  --social-bg: rgba(244, 243, 236, 0.5);
+  --text: #9ca3af;
+  --text-h: #f3f4f6;
+
+  --bg: #0f172a;
+  --border: #29364d;
+
+  --accent: #6366f1;
+  --accent-hover: #818cf8;
+
+  --accent-bg: rgba(99, 102, 241, 0.12);
+  --accent-border: rgba(99, 102, 241, 0.4);
+
   --shadow:
-    rgba(0, 0, 0, 0.1) 0 10px 15px -3px, rgba(0, 0, 0, 0.05) 0 4px 6px -2px;
+    rgba(0, 0, 0, 0.35) 0 10px 30px -10px;
 
-  --sans: system-ui, 'Segoe UI', Roboto, sans-serif;
-  --heading: system-ui, 'Segoe UI', Roboto, sans-serif;
-  --mono: ui-monospace, Consolas, monospace;
+  /* Fonts */
+  --font-main: 'Raleway', sans-serif;
+  --font-heading: 'Raleway', sans-serif;
+  --font-mono: ui-monospace, Consolas, monospace;
 
-  font: 18px/145% var(--sans);
-  letter-spacing: 0.18px;
-  color-scheme: light dark;
+  /* Gradient */
+  --gradient: linear-gradient(
+    90deg,
+    #a855f7 0%,
+    #6366f1 45%,
+    #06b6d4 100%
+  );
+
+  /* Global */
+  font-family: var(--font-main);
+  font-size: 16px;
+  line-height: 1.5;
+  font-weight: 400;
+
   color: var(--text);
   background: var(--bg);
+
+  color-scheme: dark;
+
   font-synthesis: none;
   text-rendering: optimizeLegibility;
+
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-
-  @media (max-width: 1024px) {
-    font-size: 16px;
-  }
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --text: #9ca3af;
-    --text-h: #f3f4f6;
-    --bg: #16171d;
-    --border: #2e303a;
-    --code-bg: #1f2028;
-    --accent: #c084fc;
-    --accent-bg: rgba(192, 132, 252, 0.15);
-    --accent-border: rgba(192, 132, 252, 0.5);
-    --social-bg: rgba(47, 48, 58, 0.5);
-    --shadow:
-      rgba(0, 0, 0, 0.4) 0 10px 15px -3px, rgba(0, 0, 0, 0.25) 0 4px 6px -2px;
-  }
 
-  #social .button-icon {
-    filter: invert(1) brightness(2);
-  }
-}
+/* =========================================================
+   RESET
+   ========================================================= */
 
-#root {
-  width: 1126px;
-  max-width: 100%;
-  margin: 0 auto;
-  text-align: center;
-  border-inline: 1px solid var(--border);
-  min-height: 100svh;
-  display: flex;
-  flex-direction: column;
+* {
   box-sizing: border-box;
+}
+
+html {
+  margin: 0;
+  padding: 0;
+  background: var(--bg);
 }
 
 body {
   margin: 0;
+  padding: 0;
+
+  min-width: 320px;
+
+  font-family: var(--font-main);
+
+  background: var(--bg);
+  color: var(--text);
 }
 
+button,
+input,
+textarea,
+select {
+  font-family: var(--font-main);
+}
+
+
+/* =========================================================
+   ROOT
+   ========================================================= */
+
+#root {
+  width: 100%;
+  max-width: 1126px;
+
+  min-height: 100svh;
+
+  margin: 0 auto;
+
+  display: flex;
+  flex-direction: column;
+
+  background: var(--bg);
+
+  border-inline: 1px solid var(--border);
+}
+
+
+/* =========================================================
+   GRADIENT TEXT
+   ========================================================= */
+
+.gradient-text {
+  background: var(--gradient);
+
+  -webkit-background-clip: text;
+  background-clip: text;
+
+  -webkit-text-fill-color: transparent;
+
+  color: transparent;
+}
+
+
+/* =========================================================
+   HEADINGS
+   ========================================================= */
+
 h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  margin-top: 0;
+
+  font-family: var(--font-heading);
+
+  color: var(--text-h);
+
+  font-weight: 700;
+
+  letter-spacing: -0.5px;
+}
+
+
+/* =========================================================
+   H1
+   ========================================================= */
+
+h1 {
+  margin: 32px 0 16px;
+
+  font-size: 42px;
+  line-height: 1.1;
+
+  font-weight: 800;
+
+  letter-spacing: -1.3px;
+
+  background: var(--gradient);
+
+  -webkit-background-clip: text;
+  background-clip: text;
+
+  -webkit-text-fill-color: transparent;
+
+  color: transparent;
+}
+
+
+/* =========================================================
+   H2
+   ========================================================= */
+
 h2 {
-  font-family: var(--heading);
-  font-weight: 500;
+  margin: 0 0 12px;
+
+  font-size: 30px;
+  line-height: 1.2;
+
+  font-weight: 800;
+
+  letter-spacing: -0.8px;
+
+  background: var(--gradient);
+
+  -webkit-background-clip: text;
+  background-clip: text;
+
+  -webkit-text-fill-color: transparent;
+
+  color: transparent;
+}
+
+
+/* =========================================================
+   H3
+   ========================================================= */
+
+h3 {
+  margin: 0 0 10px;
+
+  font-size: 22px;
+  line-height: 1.25;
+
+  font-weight: 700;
+
+  letter-spacing: -0.4px;
+
   color: var(--text-h);
 }
 
-h1 {
-  font-size: 56px;
-  letter-spacing: -1.68px;
-  margin: 32px 0;
-  @media (max-width: 1024px) {
-    font-size: 36px;
-    margin: 20px 0;
-  }
-}
-h2 {
-  font-size: 24px;
-  line-height: 118%;
-  letter-spacing: -0.24px;
+
+/* =========================================================
+   H4
+   ========================================================= */
+
+h4 {
   margin: 0 0 8px;
-  @media (max-width: 1024px) {
+
+  font-size: 18px;
+  line-height: 1.3;
+
+  font-weight: 700;
+
+  color: var(--text-h);
+}
+
+
+/* =========================================================
+   PARAGRAPHS
+   ========================================================= */
+
+p {
+  margin: 0;
+
+  font-family: var(--font-main);
+
+  font-size: 15px;
+  line-height: 1.6;
+
+  font-weight: 400;
+
+  color: var(--text);
+}
+
+
+/* =========================================================
+   BOLD TEXT
+   ========================================================= */
+
+strong,
+b {
+  font-family: var(--font-main);
+
+  font-weight: 700;
+
+  color: var(--text-h);
+}
+
+
+/* =========================================================
+   LINKS
+   ========================================================= */
+
+a {
+  font-family: var(--font-main);
+
+  color: inherit;
+
+  text-decoration: none;
+
+  transition:
+    color 0.2s ease,
+    opacity 0.2s ease;
+}
+
+a:hover {
+  color: var(--text-h);
+}
+
+
+/* =========================================================
+   SIDEBAR
+   ========================================================= */
+
+.sidebar-item {
+  font-family: var(--font-main);
+
+  font-size: 16px;
+
+  font-weight: 600;
+
+  letter-spacing: -0.2px;
+
+  color: #9ca3af;
+
+  transition:
+    color 0.2s ease,
+    background 0.2s ease;
+}
+
+
+/* Active sidebar item */
+
+.sidebar-item.active {
+  color: #f8fafc;
+
+  font-weight: 700;
+}
+
+
+/* Sidebar count */
+
+.sidebar-count {
+  font-family: var(--font-main);
+
+  font-size: 12px;
+
+  font-weight: 600;
+
+  letter-spacing: 0;
+
+  color: #7f8aa3;
+}
+
+
+/* Active count */
+
+.sidebar-item.active .sidebar-count {
+  color: #dbeafe;
+}
+
+
+/* =========================================================
+   SIDEBAR BRAND
+   ========================================================= */
+
+.sidebar-title {
+  font-family: var(--font-heading);
+
+  font-size: 21px;
+
+  font-weight: 800;
+
+  letter-spacing: -0.6px;
+
+  background: var(--gradient);
+
+  -webkit-background-clip: text;
+  background-clip: text;
+
+  -webkit-text-fill-color: transparent;
+
+  color: transparent;
+}
+
+
+/* =========================================================
+   SIDEBAR ICON
+   ========================================================= */
+
+.sidebar-icon {
+  font-size: 20px;
+
+  line-height: 1;
+
+  flex-shrink: 0;
+}
+
+
+/* =========================================================
+   SIDEBAR FOOTER
+   ========================================================= */
+
+.sidebar-total-label {
+  font-family: var(--font-main);
+
+  font-size: 12px;
+
+  font-weight: 500;
+
+  color: #7f8aa3;
+
+  letter-spacing: 0.1px;
+}
+
+.sidebar-total-number {
+  font-family: var(--font-main);
+
+  font-size: 15px;
+
+  font-weight: 800;
+
+  color: #f3f4f6;
+}
+
+
+/* =========================================================
+   BUTTONS
+   ========================================================= */
+
+button {
+  font-family: var(--font-main);
+
+  font-size: 15px;
+
+  font-weight: 700;
+
+  letter-spacing: -0.1px;
+
+  cursor: pointer;
+
+  transition:
+    background 0.2s ease,
+    transform 0.15s ease,
+    opacity 0.2s ease;
+}
+
+button:active {
+  transform: scale(0.98);
+}
+
+
+/* =========================================================
+   INPUTS
+   ========================================================= */
+
+input,
+textarea,
+select {
+  font-family: var(--font-main);
+
+  font-size: 15px;
+
+  font-weight: 500;
+
+  color: var(--text-h);
+}
+
+input::placeholder,
+textarea::placeholder {
+  font-family: var(--font-main);
+
+  font-size: 15px;
+
+  font-weight: 400;
+
+  color: #6b7280;
+}
+
+
+/* =========================================================
+   LABELS
+   ========================================================= */
+
+label {
+  font-family: var(--font-main);
+
+  font-size: 14px;
+
+  font-weight: 600;
+
+  color: var(--text);
+}
+
+
+/* =========================================================
+   SMALL TEXT
+   ========================================================= */
+
+small {
+  font-family: var(--font-main);
+
+  font-size: 12px;
+
+  font-weight: 500;
+
+  color: var(--text);
+}
+
+
+/* =========================================================
+   CARDS
+   ========================================================= */
+
+.card-title {
+  font-family: var(--font-heading);
+
+  font-size: 19px;
+
+  line-height: 1.3;
+
+  font-weight: 700;
+
+  letter-spacing: -0.3px;
+
+  color: var(--text-h);
+}
+
+.card-description {
+  font-family: var(--font-main);
+
+  font-size: 14px;
+
+  line-height: 1.55;
+
+  font-weight: 400;
+
+  color: var(--text);
+}
+
+
+/* =========================================================
+   STATUS
+   ========================================================= */
+
+.status {
+  font-family: var(--font-main);
+
+  font-size: 12px;
+
+  font-weight: 700;
+
+  letter-spacing: 0.2px;
+
+  text-transform: uppercase;
+}
+
+
+/* =========================================================
+   PAGE TITLE
+   ========================================================= */
+
+.page-title {
+  font-family: var(--font-heading);
+
+  font-size: 42px;
+
+  line-height: 1.1;
+
+  font-weight: 800;
+
+  letter-spacing: -1.3px;
+
+  background: var(--gradient);
+
+  -webkit-background-clip: text;
+  background-clip: text;
+
+  -webkit-text-fill-color: transparent;
+
+  color: transparent;
+}
+
+
+/* =========================================================
+   PAGE SUBTITLE
+   ========================================================= */
+
+.page-subtitle {
+  font-family: var(--font-main);
+
+  font-size: 16px;
+
+  line-height: 1.5;
+
+  font-weight: 400;
+
+  color: var(--text);
+
+  letter-spacing: 0;
+}
+
+
+/* =========================================================
+   SECTION TITLE
+   ========================================================= */
+
+.section-title {
+  font-family: var(--font-heading);
+
+  font-size: 30px;
+
+  line-height: 1.2;
+
+  font-weight: 800;
+
+  letter-spacing: -0.8px;
+
+  background: var(--gradient);
+
+  -webkit-background-clip: text;
+  background-clip: text;
+
+  -webkit-text-fill-color: transparent;
+
+  color: transparent;
+}
+
+
+/* =========================================================
+   COUNTERS
+   ========================================================= */
+
+.counter {
+  font-family: var(--font-main);
+
+  font-size: 12px;
+
+  font-weight: 700;
+
+  color: var(--text);
+}
+
+
+/* =========================================================
+   CODE
+   ========================================================= */
+
+code {
+  font-family: var(--font-mono);
+
+  font-size: 14px;
+
+  line-height: 1.35;
+
+  padding: 4px 8px;
+
+  border-radius: 4px;
+
+  color: var(--text-h);
+
+  background: #1e293b;
+}
+
+
+/* =========================================================
+   RESPONSIVE
+   ========================================================= */
+
+@media (max-width: 1024px) {
+  h1,
+  .page-title {
+    font-size: 36px;
+
+    letter-spacing: -1px;
+
+    margin: 24px 0 14px;
+  }
+
+  h2,
+  .section-title {
+    font-size: 26px;
+  }
+
+  h3 {
     font-size: 20px;
   }
 }
+
+
+@media (max-width: 600px) {
+  body {
+    font-size: 15px;
+  }
+
+  h1,
+  .page-title {
+    font-size: 30px;
+
+    letter-spacing: -0.7px;
+  }
+
+  h2,
+  .section-title {
+    font-size: 23px;
+  }
+
+  h3 {
+    font-size: 19px;
+  }
+
+  p {
+    font-size: 14px;
+  }
+
+  .sidebar-item {
+    font-size: 14px;
+  }
+}
+
+/* =========================================================
+   MY GAME JOURNEY - FINAL TYPOGRAPHY OVERRIDE
+   ========================================================= */
+
+/* EVERYTHING */
+* {
+  font-family: 'Raleway', sans-serif !important;
+}
+
+
+/* =========================================================
+   BRAND
+   ========================================================= */
+
+.sidebar-title,
+.logo,
+.brand,
+.brand-title {
+  font-family: 'Raleway', sans-serif !important;
+  font-size: 21px !important;
+  font-weight: 800 !important;
+  letter-spacing: -0.6px !important;
+
+  color: #f3f4f6;
+}
+
+
+/* =========================================================
+   MAIN PAGE TITLE
+   ========================================================= */
+
+h1,
+.page-title {
+  font-family: 'Raleway', sans-serif !important;
+
+  font-size: 42px !important;
+  line-height: 1.1 !important;
+
+  font-weight: 800 !important;
+
+  letter-spacing: -1.5px !important;
+
+  background: linear-gradient(
+    90deg,
+    #a855f7 0%,
+    #6366f1 50%,
+    #06b6d4 100%
+  ) !important;
+
+  -webkit-background-clip: text !important;
+  background-clip: text !important;
+
+  -webkit-text-fill-color: transparent !important;
+
+  color: transparent !important;
+}
+
+
+/* =========================================================
+   ALL SECTION HEADINGS
+   ========================================================= */
+
+h2,
+.section-title {
+  font-family: 'Raleway', sans-serif !important;
+
+  font-size: 30px !important;
+
+  font-weight: 800 !important;
+
+  letter-spacing: -0.8px !important;
+
+  background: linear-gradient(
+    90deg,
+    #a855f7,
+    #6366f1,
+    #06b6d4
+  ) !important;
+
+  -webkit-background-clip: text !important;
+  background-clip: text !important;
+
+  -webkit-text-fill-color: transparent !important;
+
+  color: transparent !important;
+}
+
+
+/* =========================================================
+   H3 / CARD HEADINGS
+   ========================================================= */
+
+h3,
+h4,
+h5,
+h6 {
+  font-family: 'Raleway', sans-serif !important;
+
+  font-weight: 700 !important;
+
+  color: #f3f4f6 !important;
+
+  letter-spacing: -0.4px !important;
+}
+
+
+/* =========================================================
+   SIDEBAR NAVIGATION
+   ========================================================= */
+
+.sidebar-item {
+  font-family: 'Raleway', sans-serif !important;
+
+  font-size: 16px !important;
+
+  font-weight: 600 !important;
+
+  letter-spacing: -0.25px !important;
+
+  color: #9ca3af !important;
+}
+
+
+/* Active sidebar item */
+
+.sidebar-item.active,
+.sidebar-item.active span {
+  font-family: 'Raleway', sans-serif !important;
+
+  font-weight: 700 !important;
+
+  color: #f8fafc !important;
+}
+
+
+/* =========================================================
+   SIDEBAR COUNTS
+   ========================================================= */
+
+.sidebar-count {
+  font-family: 'Raleway', sans-serif !important;
+
+  font-size: 12px !important;
+
+  font-weight: 600 !important;
+
+  color: #7f8aa3 !important;
+
+  letter-spacing: 0 !important;
+}
+
+
+/* Active count */
+
+.sidebar-item.active .sidebar-count {
+  color: #c7d2fe !important;
+}
+
+
+/* =========================================================
+   PARAGRAPHS
+   ========================================================= */
+
 p {
-  margin: 0;
+  font-family: 'Raleway', sans-serif !important;
+
+  font-size: 15px !important;
+
+  font-weight: 400 !important;
+
+  line-height: 1.6 !important;
+
+  color: #9ca3af !important;
 }
 
-code,
+
+/* =========================================================
+   CARD TITLES
+   ========================================================= */
+
+.card-title {
+  font-family: 'Raleway', sans-serif !important;
+
+  font-size: 19px !important;
+
+  font-weight: 700 !important;
+
+  letter-spacing: -0.35px !important;
+
+  color: #f3f4f6 !important;
+}
+
+
+/* =========================================================
+   CARD DESCRIPTION
+   ========================================================= */
+
+.card-description {
+  font-family: 'Raleway', sans-serif !important;
+
+  font-size: 14px !important;
+
+  font-weight: 400 !important;
+
+  color: #9ca3af !important;
+}
+
+
+/* =========================================================
+   BUTTONS
+   ========================================================= */
+
+button {
+  font-family: 'Raleway', sans-serif !important;
+
+  font-size: 15px !important;
+
+  font-weight: 700 !important;
+
+  letter-spacing: -0.1px !important;
+}
+
+
+/* =========================================================
+   INPUTS
+   ========================================================= */
+
+input,
+textarea,
+select {
+  font-family: 'Raleway', sans-serif !important;
+
+  font-size: 15px !important;
+
+  font-weight: 500 !important;
+}
+
+
+input::placeholder,
+textarea::placeholder {
+  font-family: 'Raleway', sans-serif !important;
+
+  font-size: 15px !important;
+
+  font-weight: 400 !important;
+
+  color: #6b7280 !important;
+}
+
+
+/* =========================================================
+   LABELS
+   ========================================================= */
+
+label {
+  font-family: 'Raleway', sans-serif !important;
+
+  font-size: 14px !important;
+
+  font-weight: 600 !important;
+
+  color: #9ca3af !important;
+}
+
+
+/* =========================================================
+   STATUS
+   ========================================================= */
+
+.status {
+  font-family: 'Raleway', sans-serif !important;
+
+  font-size: 12px !important;
+
+  font-weight: 700 !important;
+
+  letter-spacing: 0.2px !important;
+
+  text-transform: uppercase;
+}
+
+
+/* =========================================================
+   DASHBOARD STAT NUMBERS
+   ========================================================= */
+
 .counter {
-  font-family: var(--mono);
-  display: inline-flex;
-  border-radius: 4px;
-  color: var(--text-h);
+  font-family: 'Raleway', sans-serif !important;
+
+  font-weight: 800 !important;
 }
 
-code {
-  font-size: 15px;
-  line-height: 135%;
-  padding: 4px 8px;
-  background: var(--code-bg);
+
+/* =========================================================
+   TOTAL GAMES
+   ========================================================= */
+
+.sidebar-total-label {
+  font-family: 'Raleway', sans-serif !important;
+
+  font-size: 12px !important;
+
+  font-weight: 500 !important;
+
+  color: #7f8aa3 !important;
+}
+
+
+.sidebar-total-number {
+  font-family: 'Raleway', sans-serif !important;
+
+  font-size: 15px !important;
+
+  font-weight: 800 !important;
+
+  color: #f3f4f6 !important;
 }

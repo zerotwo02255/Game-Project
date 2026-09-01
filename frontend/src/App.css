@@ -24,111 +24,8 @@ select {
   min-height: 100vh;
 }
 
-/* =========================
-   SIDEBAR
-========================= */
 
-.sidebar {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 240px;
-  height: 100vh;
-  display: flex;
-  flex-direction: column;
-  padding: 24px 14px;
-  border-right: 1px solid #293548;
-  background: #111827;
-}
 
-/* Logo */
-
-.sidebar-logo {
-  display: flex;
-  align-items: center;
-  gap: 10px;
-  padding: 8px 12px 28px;
-  color: #ffffff;
-  font-size: 20px;
-  font-weight: 700;
-}
-
-.sidebar-logo span:first-child {
-  font-size: 25px;
-}
-
-/* Navigation */
-
-.sidebar-nav {
-  display: flex;
-  flex-direction: column;
-  gap: 6px;
-}
-
-.nav-item {
-  display: flex;
-  align-items: center;
-  gap: 12px;
-  width: 100%;
-  padding: 11px 12px;
-  border: 1px solid transparent;
-  border-radius: 9px;
-  background: transparent;
-  color: #9ca8b8;
-  cursor: pointer;
-  text-align: left;
-  transition:
-    background 0.2s ease,
-    color 0.2s ease,
-    border-color 0.2s ease;
-}
-
-.nav-item:hover {
-  background: #1a2233;
-  color: #ffffff;
-}
-
-.nav-item.active {
-  border-color: #343f55;
-  background: #1f2937;
-  color: #ffffff;
-}
-
-.nav-item span:first-child {
-  width: 22px;
-  text-align: center;
-}
-
-.nav-count {
-  margin-left: auto;
-  color: #748198;
-  font-size: 12px;
-}
-
-.nav-item.active .nav-count {
-  color: #aeb8c8;
-}
-
-/* Sidebar bottom */
-
-.sidebar-bottom {
-  margin-top: auto;
-  padding: 14px 10px 4px;
-  border-top: 1px solid #293548;
-}
-
-.sidebar-stat {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  color: #8f9bad;
-  font-size: 13px;
-}
-
-.sidebar-stat strong {
-  color: #ffffff;
-  font-size: 16px;
-}
 
 /* =========================
    MAIN CONTENT
@@ -139,6 +36,7 @@ select {
   min-height: 100vh;
   margin-left: 240px;
   padding: 36px 40px 60px;
+  box-sizing: border-box;
 }
 
 /* =========================
@@ -285,27 +183,6 @@ select {
   box-shadow: 0 12px 30px rgba(0, 0, 0, 0.3);
 }
 
-/* =========================
-   GAME CARD
-========================= */
-
-.game-card {
-  min-width: 0;
-  overflow: hidden;
-  border: 1px solid #293548;
-  border-radius: 14px;
-  background: #182235;
-  transition:
-    transform 0.2s ease,
-    border-color 0.2s ease,
-    box-shadow 0.2s ease;
-}
-
-.game-card:hover {
-  transform: translateY(-4px);
-  border-color: #6366f1;
-  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.3);
-}
 
 /* =========================
    GAME COVER
@@ -549,137 +426,33 @@ select {
   }
 }
 
-/* =========================
-   SMALL TABLET
-========================= */
 
-@media (max-width: 900px) {
-  .sidebar {
-    width: 210px;
-  }
 
-  .main-content {
-    width: calc(100% - 210px);
-    margin-left: 210px;
-    padding: 30px 24px 50px;
-  }
-
-  .game-grid {
-    grid-template-columns: repeat(2, minmax(0, 1fr));
-  }
-}
-
-/* =========================
-   MOBILE
-========================= */
-
+/* MOBILE */
 @media (max-width: 650px) {
   .app-layout {
     display: block;
   }
 
-  .sidebar {
-    position: static;
-    width: 100%;
-    height: auto;
-    border-right: none;
-    border-bottom: 1px solid #293548;
-  }
-
-  .sidebar-logo {
-    padding-bottom: 18px;
-  }
-
-  .sidebar-nav {
-    display: grid;
-    grid-template-columns: repeat(2, 1fr);
-  }
-
-  .sidebar-bottom {
-    display: none;
-  }
-
   .main-content {
     width: 100%;
     margin-left: 0;
-    padding: 24px 16px 40px;
-  }
-
-  .top-header h1 {
-    font-size: 30px;
-  }
-
-  .add-game-form {
-    flex-direction: column;
-    align-items: stretch;
-  }
-
-  .add-game-form input,
-  .add-game-form select,
-  .add-game-form button {
-    width: 100%;
-  }
-
-  .game-grid {
-    grid-template-columns: 1fr;
+    padding: 24px 18px 40px;
   }
 }
 
 /* =========================
-   DASHBOARD
-========================= */
-
-.dashboard {
-  width: 100%;
-}
-
-/* =========================
-   DASHBOARD STAT CARDS
+   DASHBOARD STATS
 ========================= */
 
 .dashboard-stats {
   display: grid;
-  grid-template-columns: repeat(4, 1fr);
+
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+
   gap: 16px;
+
   margin-bottom: 24px;
-}
-
-.stat-card {
-  display: flex;
-  align-items: center;
-  gap: 14px;
-  padding: 20px;
-  border: 1px solid #293548;
-  border-radius: 14px;
-  background: #182235;
-  transition: 0.2s ease;
-}
-
-.stat-card:hover {
-  transform: translateY(-2px);
-  border-color: #3b4659;
-}
-
-.stat-icon {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  width: 42px;
-  height: 42px;
-  border-radius: 10px;
-  background: #242f43;
-  font-size: 20px;
-}
-
-.stat-card p {
-  margin: 0 0 5px;
-  color: #8f9bad;
-  font-size: 13px;
-}
-
-.stat-card strong {
-  color: #ffffff;
-  font-size: 24px;
 }
 
 /* =========================
@@ -959,6 +732,7 @@ select {
   background: transparent;
   border: none;
   box-shadow: none;
+  margin-bottom: 40px;
 }
 .game-search-section h2 {
   margin-bottom: 16px;
@@ -968,6 +742,7 @@ select {
   display: flex;
   gap: 10px;
   margin-bottom: 24px;
+   flex-direction: column;
 }
 
 .game-search-bar input {
@@ -1059,9 +834,7 @@ select {
     grid-template-columns: 1fr;
   }
 
-  .game-search-bar {
-    flex-direction: column;
-  }
+ 
 
   .game-search-bar input {
     width: 100%;
@@ -1072,13 +845,6 @@ select {
    GAME SEARCH
 ========================= */
 
-.game-search-section {
-  margin-bottom: 40px;
-}
-
-.game-search-section h2 {
-  margin-bottom: 16px;
-}
 
 .game-search-bar {
   display: flex;
@@ -1093,6 +859,7 @@ select {
   border-radius: 8px;
   background: #111827;
   color: #f9fafb;
+   flex-direction: column;
 }
 
 .game-search-bar button {
@@ -1175,9 +942,7 @@ select {
     grid-template-columns: 1fr;
   }
 
-  .game-search-bar {
-    flex-direction: column;
-  }
+
 
   .game-search-bar input {
     width: 100%;
@@ -2367,3 +2132,4 @@ select {
 .upcoming-details-button:hover {
   background: #7477f5;
 }
+
