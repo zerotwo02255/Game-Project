@@ -37,13 +37,15 @@ textarea {
 
 .main-content {
   width: calc(100% - 240px);
+
   min-height: 100vh;
+
   margin-left: 240px;
+
   padding: 36px 40px 60px;
+
   box-sizing: border-box;
 }
-
-
 /* =========================================================
    HEADER
    ========================================================= */

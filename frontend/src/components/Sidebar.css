@@ -4,8 +4,10 @@
 
 .sidebar {
   position: fixed;
+
   top: 0;
   left: 0;
+  bottom: 0;
 
   width: 240px;
   height: 100vh;
@@ -13,13 +15,34 @@
   display: flex;
   flex-direction: column;
 
+  padding: 26px 16px 20px;
+
   box-sizing: border-box;
 
-  padding: 24px 14px;
+  background:
+    linear-gradient(
+      180deg,
+      rgba(2, 2, 7, 0.68),
+      rgba(2, 2, 7, 0.58)
+    ),
+    url("/images/sidebar.jpg");
 
-  background: #111827;
+  background-size: cover;
+  background-position: center center;
+  background-repeat: no-repeat;
 
-  border-right: 1px solid #293548;
+  /* TEAL OUTLINE */
+   border: 1px solid rgba(45, 190, 170, 0.55);
+
+  border-radius: 0;
+
+  /* TEAL GLOW */
+box-shadow:
+  12px 0 35px rgba(0, 0, 0, 0.75),
+  25px 0 60px rgba(0, 0, 0, 0.45);
+  overflow: hidden;
+
+  z-index: 100;
 }
 
 
@@ -31,17 +54,19 @@
   display: flex;
   align-items: center;
 
-  gap: 10px;
+  gap: 9px;
 
-  padding: 8px 12px 28px;
+  padding: 6px 10px 28px;
 
-  color: #f3f4f6;
+  color: #f5f5f7;
 
-  font-family: 'Raleway', sans-serif;
-  font-size: 21px;
+  font-family: "Raleway", sans-serif;
+
+  font-size: 20px;
+
   font-weight: 800;
 
-  letter-spacing: -0.6px;
+  letter-spacing: -0.5px;
 }
 
 .sidebar-logo span:first-child {
@@ -49,6 +74,8 @@
 
   align-items: center;
   justify-content: center;
+
+  font-size: 20px;
 }
 
 
@@ -58,9 +85,12 @@
 
 .sidebar-nav {
   display: flex;
+
   flex-direction: column;
 
-  gap: 4px;
+  gap: 3px;
+
+  flex: 0 0 auto;
 }
 
 
@@ -70,29 +100,37 @@
 
 .nav-item {
   position: relative;
+
   overflow: hidden;
 
   display: flex;
+
   align-items: center;
 
   width: 100%;
 
-  padding: 11px 12px;
+  min-height: 45px;
+
+  padding: 9px 10px;
 
   border: 1px solid transparent;
+
   border-radius: 9px;
 
   background: transparent;
 
-  color: #9ca3af;
+  color: #a9acbb;
 
-  font-family: 'Raleway', sans-serif;
-  font-size: 16px;
+  font-family: "Raleway", sans-serif;
+
+  font-size: 14px;
+
   font-weight: 600;
 
-  letter-spacing: -0.2px;
+  letter-spacing: -0.1px;
 
   cursor: pointer;
+
   text-align: left;
 
   transition:
@@ -108,28 +146,35 @@
    ========================================================= */
 
 .nav-item:hover {
-  background: rgba(34, 197, 94, 0.06);
+  background: rgba(45, 190, 170, 0.07);
 
   box-shadow:
-    0 4px 18px rgba(34, 197, 94, 0.06);
+    0 3px 14px rgba(45, 190, 170, 0.07);
 }
 
 
-/* Active item */
+/* =========================================================
+   ACTIVE ITEM
+   ========================================================= */
 
 .nav-item.active {
-  background: #1f2937;
+  background: rgba(35, 55, 70, 0.72);
 
-  border-color: #343f55;
+  border-color: rgba(45, 190, 170, 0.55);
 
   color: #ffffff;
+
+  box-shadow:
+    0 4px 18px rgba(20, 100, 90, 0.18);
 }
 
 
-/* Don't change active background on hover */
+/* =========================================================
+   ACTIVE HOVER
+   ========================================================= */
 
 .nav-item.active:hover {
-  background: #1f2937;
+  background: rgba(35, 55, 70, 0.72);
 }
 
 
@@ -146,9 +191,11 @@
 
   border-radius: inherit;
 
-  background: rgba(99, 102, 241, 0.14);
+  background: rgba(45, 190, 170, 0.08);
 
-  border: 1px solid rgba(99, 102, 241, 0.25);
+  border: 1px solid rgba(45, 190, 170, 0.16);
+
+  pointer-events: none;
 }
 
 
@@ -171,9 +218,12 @@
   display: inline-flex;
 
   align-items: center;
+
   justify-content: center;
 
-  width: 22px;
+  width: 25px;
+
+  margin-right: 3px;
 
   flex-shrink: 0;
 
@@ -190,10 +240,11 @@
 
   z-index: 1;
 
-  font-family: 'Raleway', sans-serif;
+  font-family: "Raleway", sans-serif;
+
   font-weight: 600;
 
-  color: #9ca3af;
+  color: #a9acbb;
 
   transition:
     color 0.2s ease,
@@ -208,12 +259,13 @@
 .nav-label-hover {
   background: linear-gradient(
     90deg,
-    #6b7280,
-    #15803d,
+    #a6a8b5,
+    #2dd4bf,
     #4ade80
   );
 
   -webkit-background-clip: text;
+
   background-clip: text;
 
   -webkit-text-fill-color: transparent;
@@ -227,7 +279,7 @@
    ========================================================= */
 
 .nav-item.active .nav-label {
-  color: #f8fafc;
+  color: #ffffff;
 
   font-weight: 700;
 }
@@ -244,10 +296,12 @@
 
   margin-left: auto;
 
-  color: #7f8aa3;
+  color: #858aa0;
 
-  font-family: 'Raleway', sans-serif;
+  font-family: "Raleway", sans-serif;
+
   font-size: 12px;
+
   font-weight: 600;
 
   transition:
@@ -256,7 +310,9 @@
 }
 
 
-/* Hover count */
+/* =========================================================
+   HOVER COUNT
+   ========================================================= */
 
 .nav-item:hover .nav-count {
   color: #4ade80;
@@ -265,10 +321,12 @@
 }
 
 
-/* Active count */
+/* =========================================================
+   ACTIVE COUNT
+   ========================================================= */
 
 .nav-item.active .nav-count {
-  color: #c7d2fe;
+  color: #9ff5df;
 }
 
 
@@ -278,35 +336,54 @@
 
 .sidebar-bottom {
   margin-top: auto;
+
+  padding-top: 18px;
 }
 
+
+/* =========================================================
+   SIDEBAR STAT
+   ========================================================= */
 
 .sidebar-stat {
   display: flex;
 
   align-items: center;
+
   justify-content: space-between;
 
-  padding: 14px 10px 4px;
+  padding: 15px 10px 4px;
 
-  border-top: 1px solid #293548;
+  border-top: 1px solid rgba(45, 190, 170, 0.28);
 }
 
 
-.sidebar-stat span {
-  color: #7f8aa3;
+/* =========================================================
+   STAT LABEL
+   ========================================================= */
 
-  font-family: 'Raleway', sans-serif;
+.sidebar-stat span {
+  color: #858aa0;
+
+  font-family: "Raleway", sans-serif;
+
   font-size: 12px;
+
   font-weight: 500;
 }
 
 
+/* =========================================================
+   STAT VALUE
+   ========================================================= */
+
 .sidebar-stat strong {
   color: #f3f4f6;
 
-  font-family: 'Raleway', sans-serif;
+  font-family: "Raleway", sans-serif;
+
   font-size: 15px;
+
   font-weight: 800;
 }
 
@@ -320,10 +397,20 @@
     position: static;
 
     width: 100%;
+
     height: auto;
 
-    border-right: none;
-    border-bottom: 1px solid #293548;
+    min-height: auto;
+
+    padding: 18px 14px;
+
+    border: 0;
+
+    border-bottom: 1px solid rgba(45, 190, 170, 0.3);
+
+    border-radius: 0;
+
+    box-shadow: none;
   }
 
   .sidebar-logo {
@@ -334,6 +421,8 @@
     display: grid;
 
     grid-template-columns: repeat(2, 1fr);
+
+    gap: 4px;
   }
 
   .sidebar-bottom {
