@@ -1,4 +1,5 @@
 import type { Game } from "../api/gameApi";
+import "./Dashboard.css";
 
 interface DashboardProps {
   games: Game[];

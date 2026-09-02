@@ -1,5 +1,6 @@
 import GameSearch from "./GameSearch";
 import AddGameForm from "./AddGameForm";
+import "./SearchPage.css";
 
 interface SearchPageProps {
   onGameAdded: () => void;
