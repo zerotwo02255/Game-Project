@@ -1,9 +1,12 @@
 import type { Game } from "../api/gameApi";
 import "./Dashboard.css";
+import GameStatCard from "./GameStatCard";
+
 
 interface DashboardProps {
   games: Game[];
 }
+
 
 function Dashboard({ games }: DashboardProps) {
   const totalGames = games.length;
@@ -46,6 +49,13 @@ function Dashboard({ games }: DashboardProps) {
   const currentlyPlaying = games.filter(
     (game) => game.status === "playing"
   );
+  const completedGamesList = games.filter(
+  (game) => game.status === "completed"
+);
+
+const bucketListGamesList = games.filter(
+  (game) => game.status === "bucket_list"
+);
 
   return (
     <div className="dashboard">
@@ -54,42 +64,41 @@ function Dashboard({ games }: DashboardProps) {
           STAT CARDS
       ========================= */}
 
-      <div className="dashboard-stats">
+    <div className="dashboard-stats">
 
-        <div className="stat-card">
-          <span className="stat-icon">🎮</span>
-          <div>
-            <p>Total Games</p>
-            <strong>{totalGames}</strong>
-          </div>
-        </div>
+  <GameStatCard
+    games={games}
+    icon="🎮"
+    label="Total Games"
+    count={totalGames}
+    subtitle="Your Collection"
+  />
 
-        <div className="stat-card">
-          <span className="stat-icon">▶</span>
-          <div>
-            <p>Playing</p>
-            <strong>{playingGames}</strong>
-          </div>
-        </div>
+  <GameStatCard
+    games={currentlyPlaying}
+    icon="▶"
+    label="Playing"
+    count={playingGames}
+    subtitle="Currently Playing"
+  />
 
-        <div className="stat-card">
-          <span className="stat-icon">✓</span>
-          <div>
-            <p>Completed</p>
-            <strong>{completedGames}</strong>
-          </div>
-        </div>
+  <GameStatCard
+    games={completedGamesList}
+    icon="✓"
+    label="Completed"
+    count={completedGames}
+    subtitle="Finished Games"
+  />
 
-        <div className="stat-card">
-          <span className="stat-icon">📋</span>
-          <div>
-            <p>Bucket List</p>
-            <strong>{bucketListGames}</strong>
-          </div>
-        </div>
+  <GameStatCard
+    games={bucketListGamesList}
+    icon="📋"
+    label="Bucket List"
+    count={bucketListGames}
+    subtitle="Want to Play"
+  />
 
-      </div>
-
+</div>
 
       {/* =========================
           DASHBOARD CONTENT
