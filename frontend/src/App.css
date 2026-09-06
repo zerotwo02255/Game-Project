@@ -36,14 +36,64 @@ textarea {
    ========================================================= */
 
 .main-content {
-  width: calc(100% - 240px);
-  min-height: 100vh;
-  margin-left: 240px;
+  position: relative;
 
-  padding: 36px 24px 60px;
+  width: calc(100% - 240px);
+  min-width: 0;
+  min-height: 100vh;
+
+  margin-left: 240px;
+  padding: 36px 40px 60px;
 
   box-sizing: border-box;
+
+  overflow-x: hidden;
+  overflow-y: visible;
+
+  background: transparent;
 }
+
+
+/* =========================================================
+   MAIN CONTENT WALLPAPER
+   ========================================================= */
+
+.main-content::before {
+  content: "";
+
+  position: fixed;
+
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 240px;
+
+  z-index: 0;
+
+  background-image:
+    linear-gradient(
+      rgba(5, 18, 18, 0.38),
+      rgba(5, 18, 18, 0.72)
+    ),
+    url("/images/dashboard3.jpg");
+
+  background-size: cover;
+  background-position: center center;
+  background-repeat: no-repeat;
+
+  pointer-events: none;
+}
+
+
+/* =========================================================
+   CONTENT ABOVE WALLPAPER
+   ========================================================= */
+
+.main-content > * {
+  position: relative;
+  z-index: 1;
+}
+
 /* =========================================================
    HEADER
    ========================================================= */
