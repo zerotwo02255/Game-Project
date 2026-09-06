@@ -4,27 +4,23 @@
 
 .search-page {
   position: relative;
-
   width: 100%;
   max-width: 1200px;
-
   margin: 0 auto;
-
-  padding: 40px 30px 80px;
-
+  padding: 35px 30px 80px;
   box-sizing: border-box;
+  overflow-x: hidden;
 }
 
 
 /* =========================================================
-   SEARCH PAGE WALLPAPER
+   WALLPAPER
    ========================================================= */
 
 .search-page::before {
   content: "";
 
   position: fixed;
-
   top: 0;
   right: 0;
   bottom: 0;
@@ -34,15 +30,13 @@
 
   background-image:
     linear-gradient(
-      rgba(5, 18, 18, 0.38),
+      rgba(5, 18, 18, 0.32),
       rgba(5, 18, 18, 0.72)
     ),
     url("/images/dashboard3.jpg");
 
   background-size: cover;
-
   background-position: center center;
-
   background-repeat: no-repeat;
 
   pointer-events: none;
@@ -55,28 +49,25 @@
 
 .search-page > * {
   position: relative;
-
   z-index: 1;
 }
 
 
 /* =========================================================
-   SEARCH HERO
+   HERO
    ========================================================= */
 
 .search-page-hero {
-  margin-bottom: 45px;
-
+  margin-bottom: 42px;
   text-align: center;
 }
 
 .search-page-icon {
-  margin-bottom: 10px;
-
-  font-size: 42px;
-
-  filter:
-    drop-shadow(0 0 12px rgba(45, 190, 170, 0.22));
+  margin-bottom: 8px;
+  font-size: 40px;
+  filter: drop-shadow(
+    0 0 12px rgba(45, 190, 170, 0.22)
+  );
 }
 
 .search-page-hero h2 {
@@ -85,9 +76,7 @@
   color: #f5fffd;
 
   font-size: 38px;
-
   font-weight: 700;
-
   letter-spacing: -0.6px;
 
   text-shadow:
@@ -95,11 +84,11 @@
 }
 
 .search-page-hero p {
-  margin-top: 12px;
+  margin: 10px 0 0;
 
   color: rgba(190, 210, 215, 0.68);
 
-  font-size: 18px;
+  font-size: 17px;
 }
 
 
@@ -109,9 +98,7 @@
 
 .search-section {
   width: 100%;
-
   max-width: 1100px;
-
   margin: 0 auto;
 }
 
@@ -122,29 +109,25 @@
 
 .game-search-section {
   width: 100%;
-
   max-width: 1100px;
 
-  margin: 0 auto 40px;
-
-  padding: 30px;
+  margin: 0 auto 38px;
+  padding: 28px;
 
   box-sizing: border-box;
 
-  border: 1px solid rgba(65, 125, 130, 0.25);
-
+  border: 1px solid rgba(45, 190, 170, 0.20);
   border-radius: 16px;
 
   background:
     linear-gradient(
       135deg,
-      rgba(8, 30, 36, 0.82),
-      rgba(5, 19, 25, 0.76)
+      rgba(7, 30, 35, 0.78),
+      rgba(4, 19, 24, 0.70)
     );
 
-  backdrop-filter: blur(14px);
-
-  -webkit-backdrop-filter: blur(14px);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
 
   box-shadow:
     0 14px 40px rgba(0, 0, 0, 0.34),
@@ -157,20 +140,18 @@
    ========================================================= */
 
 .game-search-intro {
-  margin-bottom: 24px;
-
+  margin-bottom: 23px;
   text-align: center;
 }
 
 .game-search-intro .search-label {
   display: block;
 
-  margin-bottom: 8px;
+  margin-bottom: 7px;
 
   color: #f4fffd;
 
   font-size: 24px;
-
   font-weight: 700;
 }
 
@@ -179,8 +160,7 @@
 
   color: rgba(175, 200, 205, 0.65);
 
-  font-size: 16px;
-
+  font-size: 15px;
   line-height: 1.5;
 }
 
@@ -191,40 +171,37 @@
 
 .game-search-bar {
   display: flex;
-
   align-items: stretch;
 
   width: 100%;
+  max-width: 100%;
 
   gap: 12px;
+  margin-bottom: 22px;
 
-  margin-bottom: 24px;
+  box-sizing: border-box;
 }
 
 
 /* =========================================================
-   SEARCH INPUT
+   INPUT
    ========================================================= */
 
 .search-input-wrapper {
   display: flex;
-
   align-items: center;
 
   flex: 1;
-
   min-width: 0;
 
-  height: 64px;
+  height: 62px;
 
   gap: 12px;
-
   padding: 0 20px;
 
   box-sizing: border-box;
 
   border: 1px solid rgba(75, 125, 135, 0.28);
-
   border-radius: 13px;
 
   background:
@@ -235,13 +212,11 @@
     );
 
   backdrop-filter: blur(10px);
-
   -webkit-backdrop-filter: blur(10px);
 
   transition:
     border-color 0.25s ease,
-    box-shadow 0.25s ease,
-    background 0.25s ease;
+    box-shadow 0.25s ease;
 }
 
 .search-input-wrapper:focus-within {
@@ -254,9 +229,7 @@
 
 .search-input-wrapper span {
   flex-shrink: 0;
-
   font-size: 22px;
-
   opacity: 0.72;
 }
 
@@ -264,11 +237,9 @@
   flex: 1;
 
   width: 100%;
-
   min-width: 0;
 
   border: none;
-
   outline: none;
 
   background: transparent;
@@ -276,7 +247,6 @@
   color: #f2fffd;
 
   font-family: inherit;
-
   font-size: 17px;
 }
 
@@ -292,12 +262,11 @@
 .game-search-bar button {
   flex-shrink: 0;
 
-  height: 64px;
+  height: 62px;
 
   padding: 0 34px;
 
   border: 1px solid rgba(45, 190, 170, 0.28);
-
   border-radius: 13px;
 
   background:
@@ -310,31 +279,20 @@
   color: #ffffff;
 
   font-family: inherit;
-
-  font-size: 17px;
-
+  font-size: 16px;
   font-weight: 700;
 
   cursor: pointer;
 
   box-shadow:
-    0 8px 24px rgba(0, 0, 0, 0.28),
-    0 0 18px rgba(45, 190, 170, 0.08);
+    0 8px 24px rgba(0, 0, 0, 0.28);
 
   transition:
-    background 0.2s ease,
     transform 0.2s ease,
     box-shadow 0.2s ease;
 }
 
 .game-search-bar button:hover {
-  background:
-    linear-gradient(
-      135deg,
-      rgba(55, 205, 185, 0.96),
-      rgba(45, 185, 160, 0.90)
-    );
-
   transform: translateY(-2px);
 
   box-shadow:
@@ -348,22 +306,18 @@
 
 .game-search-bar button:disabled {
   opacity: 0.55;
-
   cursor: not-allowed;
-
   transform: none;
-
   box-shadow: none;
 }
 
 
 /* =========================================================
-   SEARCH MESSAGE
+   MESSAGE
    ========================================================= */
 
 .game-message {
   margin: 18px 0;
-
   padding: 12px 16px;
 
   border-radius: 10px;
@@ -371,44 +325,36 @@
   text-align: center;
 
   backdrop-filter: blur(8px);
-
   -webkit-backdrop-filter: blur(8px);
 }
 
 .game-message.success {
   background: rgba(34, 197, 94, 0.10);
-
   border: 1px solid rgba(34, 197, 94, 0.16);
-
   color: #6ee7a0;
 }
 
 .game-message.error {
   background: rgba(239, 68, 68, 0.10);
-
   border: 1px solid rgba(239, 68, 68, 0.16);
-
   color: #f87171;
 }
 
 
 /* =========================================================
-   SEARCH RESULTS
+   RESULTS
    ========================================================= */
 
 .search-results-section {
   width: 100%;
-
   max-width: 1100px;
 
-  margin: 40px auto 0;
+  margin: 38px auto 0;
 }
 
 .search-results-header {
   display: flex;
-
   align-items: center;
-
   justify-content: space-between;
 
   margin-bottom: 20px;
@@ -420,19 +366,17 @@
   color: #f5fffd;
 
   font-size: 24px;
-
   font-weight: 700;
 }
 
 .search-results-header span {
   color: rgba(170, 195, 200, 0.60);
-
-  font-size: 15px;
+  font-size: 14px;
 }
 
 
 /* =========================================================
-   SEARCH RESULT GRID
+   RESULT GRID
    ========================================================= */
 
 .search-results {
@@ -448,12 +392,11 @@
 
 
 /* =========================================================
-   SEARCH GAME CARD
+   RESULT CARD
    ========================================================= */
 
 .search-game-card {
   display: flex;
-
   flex-direction: column;
 
   min-width: 0;
@@ -461,7 +404,6 @@
   overflow: hidden;
 
   border: 1px solid rgba(65, 120, 130, 0.23);
-
   border-radius: 16px;
 
   background:
@@ -472,7 +414,6 @@
     );
 
   backdrop-filter: blur(10px);
-
   -webkit-backdrop-filter: blur(10px);
 
   box-shadow:
@@ -496,12 +437,11 @@
 
 
 /* =========================================================
-   GAME COVER
+   RESULT COVER
    ========================================================= */
 
 .search-game-cover {
   width: 100%;
-
   height: 360px;
 
   overflow: hidden;
@@ -513,13 +453,11 @@
   display: block;
 
   width: 100%;
-
   height: 100%;
 
   object-fit: cover;
 
-  transition:
-    transform 0.35s ease;
+  transition: transform 0.35s ease;
 }
 
 .search-game-card:hover .search-game-cover img {
@@ -528,15 +466,11 @@
 
 .search-no-cover {
   display: flex;
-
   align-items: center;
-
   justify-content: center;
 
   width: 100%;
-
   height: 100%;
-
   min-height: 360px;
 
   background:
@@ -551,16 +485,14 @@
 
 
 /* =========================================================
-   GAME INFO
+   RESULT INFO
    ========================================================= */
 
 .search-game-info {
   display: flex;
-
   flex-direction: column;
 
   flex: 1;
-
   min-width: 0;
 
   padding: 20px;
@@ -576,28 +508,23 @@
   color: #f5fffd;
 
   font-size: 20px;
-
   font-weight: 700;
-
   line-height: 1.3;
 
   text-overflow: ellipsis;
 
   -webkit-box-orient: vertical;
-
   -webkit-line-clamp: 2;
-
   line-clamp: 2;
 }
 
 
 /* =========================================================
-   GAME META
+   META
    ========================================================= */
 
 .search-game-meta {
   display: flex;
-
   flex-direction: column;
 
   gap: 8px;
@@ -616,7 +543,6 @@
 
 .search-game-genres {
   display: flex;
-
   flex-wrap: wrap;
 
   gap: 7px;
@@ -628,7 +554,6 @@
   padding: 6px 9px;
 
   border: 1px solid rgba(70, 125, 135, 0.16);
-
   border-radius: 7px;
 
   background: rgba(20, 43, 50, 0.70);
@@ -640,7 +565,7 @@
 
 
 /* =========================================================
-   ADD BUTTON
+   ADD SEARCH GAME
    ========================================================= */
 
 .add-search-game-button {
@@ -651,7 +576,6 @@
   padding: 11px 14px;
 
   border: 1px solid rgba(45, 190, 170, 0.24);
-
   border-radius: 9px;
 
   background:
@@ -664,27 +588,17 @@
   color: #ffffff;
 
   font-family: inherit;
-
   font-size: 14px;
-
   font-weight: 700;
 
   cursor: pointer;
 
   transition:
-    background 0.2s ease,
     transform 0.2s ease,
     box-shadow 0.2s ease;
 }
 
 .add-search-game-button:hover {
-  background:
-    linear-gradient(
-      135deg,
-      rgba(55, 205, 185, 0.94),
-      rgba(45, 185, 160, 0.88)
-    );
-
   transform: translateY(-1px);
 
   box-shadow:
@@ -693,7 +607,7 @@
 
 
 /* =========================================================
-   EMPTY STATE
+   EMPTY
    ========================================================= */
 
 .search-empty {
@@ -708,7 +622,9 @@
   font-size: 42px;
 
   filter:
-    drop-shadow(0 0 10px rgba(45, 190, 170, 0.15));
+    drop-shadow(
+      0 0 10px rgba(45, 190, 170, 0.15)
+    );
 }
 
 .search-empty h3 {
@@ -724,16 +640,14 @@
 
 .search-divider {
   display: flex;
-
   align-items: center;
 
   gap: 20px;
 
   width: 100%;
-
   max-width: 1100px;
 
-  margin: 55px auto;
+  margin: 48px auto;
 
   color: rgba(170, 195, 200, 0.58);
 
@@ -776,7 +690,6 @@
 
 .manual-add-section {
   width: 100%;
-
   max-width: 1100px;
 
   margin: 0 auto;
@@ -802,7 +715,6 @@
   color: #f5fffd;
 
   font-size: 24px;
-
   font-weight: 700;
 }
 
@@ -810,15 +722,48 @@
   margin: 8px 0 0;
 
   color: rgba(170, 195, 200, 0.62);
+
+  font-size: 15px;
 }
 
 
 /* =========================================================
-   MANUAL ADD FORM GLASS
+   MANUAL ADD FORM
    ========================================================= */
 
 .manual-add-section > * {
   position: relative;
+  z-index: 1;
+}
+
+
+/* =========================================================
+   IMPORTANT:
+   REMOVE OLD PURPLE FORM BACKGROUND
+   ========================================================= */
+
+.manual-add-section .add-game-form {
+  width: 100% !important;
+  max-width: 100% !important;
+
+  box-sizing: border-box;
+
+  border: 1px solid rgba(45, 190, 170, 0.20) !important;
+  border-radius: 16px !important;
+
+  background:
+    linear-gradient(
+      135deg,
+      rgba(7, 30, 35, 0.82),
+      rgba(4, 19, 24, 0.76)
+    ) !important;
+
+  box-shadow:
+    0 14px 40px rgba(0, 0, 0, 0.34),
+    inset 0 1px 0 rgba(255, 255, 255, 0.025) !important;
+
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
 }
 
 
@@ -858,7 +803,10 @@
   }
 
   .search-page {
-    padding: 30px 18px 60px;
+    width: 100%;
+    max-width: 100%;
+
+    padding: 28px 16px 60px;
   }
 
   .search-page-hero h2 {
@@ -866,7 +814,7 @@
   }
 
   .search-page-hero p {
-    font-size: 15px;
+    font-size: 14px;
   }
 
   .game-search-section {
@@ -902,7 +850,7 @@
   }
 
   .search-divider {
-    margin: 42px auto;
+    margin: 40px auto;
   }
 }
 
@@ -910,8 +858,8 @@
 @media (max-width: 450px) {
 
   .search-page {
-    padding-left: 14px;
-    padding-right: 14px;
+    padding-left: 12px;
+    padding-right: 12px;
   }
 
   .game-search-section {
