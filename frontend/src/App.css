@@ -1,1164 +1,1956 @@
 /* =========================================================
+
    GLOBAL
-   ========================================================= */
+
+   \========================================================= */
 
 * {
+
   box-sizing: border-box;
+
 }
 
 body {
+
   margin: 0;
+
   font-family: 'Raleway', sans-serif;
+
   background: #0f172a;
+
   color: #f8fafc;
+
 }
 
 button,
+
 input,
+
 select,
+
 textarea {
+
   font: inherit;
+
 }
 
 
+
 /* =========================================================
+
    MAIN LAYOUT
-   ========================================================= */
+
+   \========================================================= */
 
 .app-layout {
+
   display: flex;
+
   min-height: 100vh;
+
 }
 
 
+
 /* =========================================================
+
    MAIN CONTENT
-   ========================================================= */
+
+   \========================================================= */
 
 .main-content {
+
   position: relative;
 
   width: calc(100% - 240px);
-  min-width: 0;
+
   min-height: 100vh;
 
   margin-left: 240px;
-  padding: 36px 40px 60px;
+
+  padding: 36px 24px 60px;
 
   box-sizing: border-box;
 
-  overflow-x: hidden;
-  overflow-y: visible;
+  overflow: hidden;
 
-  background: transparent;
 }
 
-
 /* =========================================================
+
    MAIN CONTENT WALLPAPER
-   ========================================================= */
+
+   \========================================================= */
 
 .main-content::before {
+
   content: "";
 
   position: fixed;
 
   top: 0;
+
   right: 0;
+
   bottom: 0;
+
   left: 240px;
 
   z-index: 0;
 
   background-image:
+
     linear-gradient(
+
       rgba(5, 18, 18, 0.38),
+
       rgba(5, 18, 18, 0.72)
+
     ),
+
     url("/images/dashboard3.jpg");
 
   background-size: cover;
+
   background-position: center center;
+
   background-repeat: no-repeat;
 
   pointer-events: none;
+
 }
 
 
+
 /* =========================================================
+
    CONTENT ABOVE WALLPAPER
-   ========================================================= */
+
+   \========================================================= */
 
 .main-content > * {
+
   position: relative;
+
   z-index: 1;
+
 }
 
 /* =========================================================
+
    HEADER
-   ========================================================= */
+
+   \========================================================= */
 
 .top-header {
+
   display: flex;
+
   align-items: center;
+
   justify-content: space-between;
+
   margin-bottom: 30px;
+
 }
 
 .top-header h1 {
+
   margin: 0 0 8px;
+
   font-size: 36px;
+
   line-height: 1.2;
+
 }
 
 .top-header p {
+
   margin: 0;
+
   color: #8f9bad;
+
   font-size: 15px;
+
 }
 
 
+
 /* =========================================================
+
    ADD GAME FORM
-   ========================================================= */
+
+   \========================================================= */
 
 .add-game-form {
+
   display: flex;
+
   align-items: center;
+
   flex-wrap: wrap;
+
   gap: 12px;
+
   margin-bottom: 42px;
+
   padding: 22px;
+
   border: 1px solid #293548;
+
   border-radius: 14px;
+
   background: #182235;
+
   box-shadow: 0 8px 25px rgba(0, 0, 0, 0.2);
+
 }
 
 .add-game-form h2 {
+
   width: 100%;
+
   margin: 0 0 8px;
+
   font-size: 21px;
+
   font-weight: 600;
+
 }
 
 .add-game-form input,
+
 .add-game-form select {
+
   min-height: 42px;
+
   padding: 9px 13px;
+
   border: 1px solid #3b4659;
+
   border-radius: 8px;
+
   outline: none;
+
   background: #0f172a;
+
   color: #f8fafc;
+
 }
 
 .add-game-form input:first-of-type {
+
   flex: 1;
+
   min-width: 220px;
+
 }
 
 .add-game-form input:focus,
+
 .add-game-form select:focus {
+
   border-color: #6366f1;
+
   box-shadow: 0 0 0 2px rgba(99, 102, 241, 0.15);
+
 }
 
 .add-game-form input::placeholder {
+
   color: #78849a;
+
 }
 
 .add-game-form button {
+
   min-height: 42px;
+
   padding: 9px 18px;
+
   border: none;
+
   border-radius: 8px;
+
   background: #6366f1;
+
   color: #ffffff;
+
   cursor: pointer;
+
   font-weight: 600;
+
 }
 
 .add-game-form button:hover {
+
   background: #5558e8;
+
 }
 
 
+
 /* =========================================================
+
    GAMES SECTION
+
+   \========================================================= */
+
+
+
+
+
+.section-header {
+
+  display: flex;
+
+  align-items: center;
+
+  justify-content: space-between;
+
+  margin-bottom: 20px;
+
+}
+
+.section-header h2 {
+
+  margin: 0 0 5px;
+
+  font-size: 24px;
+
+}
+
+.section-header p {
+
+  margin: 0;
+
+  color: #7f8ba1;
+
+  font-size: 13px;
+
+}
+
+
+
+
+
+.game-details-card {
+
+  display: grid;
+
+  grid-template-columns: 280px 1fr;
+
+  gap: 32px;
+
+  padding: 28px;
+
+  border: 1px solid #2d3748;
+
+  border-radius: 16px;
+
+  background: #1a2233;
+
+}
+
+.game-details-cover {
+
+  width: 280px;
+
+}
+
+.game-details-cover img {
+
+  display: block;
+
+  width: 280px;
+
+  height: 400px;
+
+  object-fit: cover;
+
+  border-radius: 12px;
+
+}
+
+.game-details-info {
+
+  min-width: 0;
+
+}
+
+.game-details-info h1 {
+
+  margin: 0 0 16px;
+
+  font-size: 32px;
+
+}
+
+.game-details-meta {
+
+  display: flex;
+
+  flex-wrap: wrap;
+
+  align-items: center;
+
+  gap: 12px;
+
+  margin-bottom: 28px;
+
+  color: #aab4c4;
+
+}
+
+.details-progress {
+
+  margin-bottom: 28px;
+
+}
+
+.details-title-row {
+
+  display: flex;
+
+  align-items: center;
+
+  justify-content: space-between;
+
+  gap: 20px;
+
+}
+
+.details-title-row h1 {
+
+  margin: 0;
+
+}
+
+.details-edit-button {
+
+  flex-shrink: 0;
+
+  padding: 10px 16px;
+
+  border: 1px solid #6366f1;
+
+  border-radius: 9px;
+
+  background: #6366f1;
+
+  color: #ffffff;
+
+  font-size: 14px;
+
+  font-weight: 600;
+
+  cursor: pointer;
+
+}
+
+.details-edit-button:hover {
+
+  background: #5558e8;
+
+}
+
+.details-description {
+
+  margin-top: 28px;
+
+}
+
+.details-description h3 {
+
+  margin-bottom: 12px;
+
+  text-align: left;
+
+}
+
+.details-description p {
+
+  margin: 0;
+
+  color: #9ca8b8;
+
+  font-size: 16px;
+
+  line-height: 1.7;
+
+  text-align: left;
+
+}
+
+.details-notes {
+
+  margin-top: 28px;
+
+}
+
+.details-notes h3 {
+
+  margin-bottom: 12px;
+
+}
+
+.details-notes p {
+
+  margin: 0;
+
+  color: #9ca8b8;
+
+  line-height: 1.7;
+
+}
+
+
+
+/* =========================================================
+
+   DETAILS RESPONSIVE
+
+   \========================================================= */
+
+/* =========================================================
+   MY GAMES GRID
+========================================================= */
+
+.game-grid {
+  display: grid;
+  grid-template-columns: repeat(6, minmax(0, 1fr));
+  gap: 16px;
+  width: 100%;
+}
+
+@media (max-width: 700px) {
+
+  .game-details-card {
+
+    grid-template-columns: 1fr;
+
+  }
+
+  .game-details-cover {
+
+    width: 220px;
+
+  }
+
+  .game-details-cover img {
+
+    width: 220px;
+
+    height: 310px;
+
+  }
+
+}
+
+
+
+/* =========================================================
+
+   EDIT GAME FORM
+
+   \========================================================= */
+
+.edit-game-form {
+
+  width: 100%;
+
+  max-width: 720px;
+
+  margin: 30px auto;
+
+  padding: 32px;
+
+  box-sizing: border-box;
+
+  background: #182235;
+
+  border: 1px solid #293548;
+
+  border-radius: 16px;
+
+}
+
+.edit-form-wrapper {
+
+  display: flex;
+
+  align-items: flex-start;
+
+  justify-content: center;
+
+  width: 100%;
+
+}
+
+.edit-form-header {
+
+  margin-bottom: 30px;
+
+  text-align: center;
+
+}
+
+.edit-form-header > div {
+
+  display: flex;
+
+  flex-direction: column;
+
+  align-items: center;
+
+}
+
+.edit-form-icon {
+
+  margin-bottom: 8px;
+
+  font-size: 36px;
+
+}
+
+.edit-form-header h2 {
+
+  margin: 0;
+
+  color: #f8fafc;
+
+  font-size: 30px;
+
+}
+
+.edit-form-header p {
+
+  margin: 8px 0 0;
+
+  color: #9ca8b8;
+
+  font-size: 15px;
+
+}
+
+
+
+/* =========================================================
+
+   FORM FIELDS
+
+   \========================================================= */
+
+.form-field {
+
+  margin-bottom: 22px;
+
+}
+
+.form-field label,
+
+.slider-header label {
+
+  display: block;
+
+  margin-bottom: 8px;
+
+  color: #e5e7eb;
+
+  font-size: 14px;
+
+  font-weight: 600;
+
+}
+
+.form-field input,
+
+.form-field select,
+
+.form-field textarea {
+
+  width: 100%;
+
+  box-sizing: border-box;
+
+  padding: 13px 15px;
+
+  border: 1px solid #344155;
+
+  border-radius: 9px;
+
+  background: #0f172a;
+
+  color: #f8fafc;
+
+  font-family: inherit;
+
+  font-size: 15px;
+
+  outline: none;
+
+}
+
+.form-field input:focus,
+
+.form-field select:focus,
+
+.form-field textarea:focus {
+
+  border-color: #6366f1;
+
+  box-shadow: 0 0 0 2px rgba(99, 102, 241, 0.15);
+
+}
+
+.form-field textarea {
+
+  resize: vertical;
+
+  min-height: 120px;
+
+}
+
+
+
+/* =========================================================
+
+   SLIDERS
+
+   \========================================================= */
+
+.slider-field {
+
+  margin-bottom: 28px;
+
+}
+
+.slider-header {
+
+  display: flex;
+
+  align-items: center;
+
+  justify-content: space-between;
+
+  margin-bottom: 12px;
+
+}
+
+.slider-header label {
+
+  margin: 0;
+
+}
+
+.slider-header strong {
+
+  color: #a5b4fc;
+
+  font-size: 16px;
+
+}
+
+.game-slider {
+
+  width: 100%;
+
+  height: 7px;
+
+  appearance: none;
+
+  -webkit-appearance: none;
+
+  border-radius: 10px;
+
+  background: #303c51;
+
+  outline: none;
+
+  cursor: pointer;
+
+}
+
+.game-slider::-webkit-slider-thumb {
+
+  width: 20px;
+
+  height: 20px;
+
+  appearance: none;
+
+  -webkit-appearance: none;
+
+  border: 3px solid #ffffff;
+
+  border-radius: 50%;
+
+  background: #6366f1;
+
+  cursor: pointer;
+
+}
+
+.game-slider::-moz-range-thumb {
+
+  width: 17px;
+
+  height: 17px;
+
+  border: 3px solid #ffffff;
+
+  border-radius: 50%;
+
+  background: #6366f1;
+
+  cursor: pointer;
+
+}
+
+.slider-labels {
+
+  display: flex;
+
+  justify-content: space-between;
+
+  margin-top: 7px;
+
+  color: #718096;
+
+  font-size: 12px;
+
+}
+
+
+
+/* =========================================================
+
+   EDIT FORM BUTTONS
+
+   \========================================================= */
+
+.edit-form-actions {
+
+  display: flex;
+
+  justify-content: flex-end;
+
+  gap: 12px;
+
+  margin-top: 30px;
+
+  padding-top: 24px;
+
+  border-top: 1px solid #293548;
+
+}
+
+.edit-form-actions button {
+
+  padding: 12px 20px;
+
+  border-radius: 9px;
+
+  font-size: 14px;
+
+  font-weight: 600;
+
+  cursor: pointer;
+
+}
+
+.cancel-button {
+
+  border: 1px solid #3b4659;
+
+  background: #303b4f;
+
+  color: #ffffff;
+
+}
+
+.cancel-button:hover {
+
+  background: #3d4a61;
+
+}
+
+.save-button {
+
+  border: 1px solid #6366f1;
+
+  background: #6366f1;
+
+  color: #ffffff;
+
+}
+
+.save-button:hover {
+
+  background: #5558e8;
+
+}
+
+.edit-form-actions button:disabled {
+
+  opacity: 0.6;
+
+  cursor: not-allowed;
+
+}
+
+
+
+/* =========================================================
+
+   GAME SCREENSHOTS
+
+   \========================================================= */
+
+.game-screenshots {
+
+  margin-top: 32px;
+
+  padding: 28px;
+
+  background: #182235;
+
+  border: 1px solid #27344d;
+
+  border-radius: 18px;
+
+}
+
+.screenshots-header {
+
+  display: flex;
+
+  align-items: center;
+
+  justify-content: space-between;
+
+  gap: 20px;
+
+  margin-bottom: 24px;
+
+}
+
+.screenshots-header h2 {
+
+  margin: 0 0 6px;
+
+  font-size: 28px;
+
+}
+
+.screenshots-header p {
+
+  margin: 0;
+
+  color: #94a0b5;
+
+  font-size: 16px;
+
+}
+
+.upload-screenshot-button {
+
+  display: inline-flex;
+
+  align-items: center;
+
+  justify-content: center;
+
+  padding: 12px 20px;
+
+  background: #6366f1;
+
+  color: #ffffff;
+
+  border-radius: 10px;
+
+  font-size: 16px;
+
+  font-weight: 600;
+
+  cursor: pointer;
+
+  transition: 0.2s ease;
+
+  white-space: nowrap;
+
+}
+
+.upload-screenshot-button:hover {
+
+  transform: translateY(-2px);
+
+  background: #5558e8;
+
+}
+
+.screenshots-empty {
+
+  padding: 50px 20px;
+
+  border: 1px dashed #34415a;
+
+  border-radius: 14px;
+
+  background: #111a2c;
+
+  text-align: center;
+
+}
+
+.screenshots-empty span {
+
+  display: block;
+
+  margin-bottom: 12px;
+
+  font-size: 42px;
+
+}
+
+.screenshots-empty h3 {
+
+  margin: 0 0 8px;
+
+  font-size: 21px;
+
+}
+
+.screenshots-empty p {
+
+  margin: 0;
+
+  color: #8f9bb0;
+
+}
+
+.screenshots-grid {
+
+  display: grid;
+
+  grid-template-columns: repeat(3, 1fr);
+
+  gap: 18px;
+
+}
+
+.screenshot-card {
+
+  position: relative;
+
+  overflow: hidden;
+
+  background: #101827;
+
+  border: 1px solid #2a3851;
+
+  border-radius: 14px;
+
+}
+
+.screenshot-card img {
+
+  display: block;
+
+  width: 100%;
+
+  height: 220px;
+
+  object-fit: cover;
+
+}
+
+.delete-screenshot-button {
+
+  width: 100%;
+
+  padding: 11px;
+
+  border: none;
+
+  background: #111827;
+
+  color: #ff5b5b;
+
+  font-size: 14px;
+
+  font-weight: 600;
+
+  cursor: pointer;
+
+  transition: 0.2s ease;
+
+}
+
+.delete-screenshot-button:hover {
+
+  background: #2a1a20;
+
+  color: #ff7777;
+
+}
+
+.screenshot-image {
+
+  cursor: pointer;
+
+  transition:
+
+    transform 0.2s ease,
+
+    opacity 0.2s ease;
+
+}
+
+.screenshot-image:hover {
+
+  transform: scale(1.02);
+
+  opacity: 0.9;
+
+}
+
+
+
+/* =========================================================
+
+   SCREENSHOT RESPONSIVE
+
+   \========================================================= */
+
+@media (max-width: 900px) {
+
+  .screenshots-grid {
+
+    grid-template-columns: repeat(2, 1fr);
+
+  }
+
+}
+
+@media (max-width: 600px) {
+
+  .screenshots-header {
+
+    flex-direction: column;
+
+    align-items: flex-start;
+
+  }
+
+  .screenshots-grid {
+
+    grid-template-columns: 1fr;
+
+  }
+
+  .upload-screenshot-button {
+
+    width: 100%;
+
+  }
+
+}
+
+
+
+/* =========================================================
+
+   SCREENSHOT MODAL
+
+   \========================================================= */
+
+.screenshot-modal {
+
+  position: fixed;
+
+  inset: 0;
+
+  z-index: 9999;
+
+  display: flex;
+
+  align-items: center;
+
+  justify-content: center;
+
+  padding: 40px;
+
+  background: rgba(0, 0, 0, 0.88);
+
+}
+
+.screenshot-modal img {
+
+  max-width: 90vw;
+
+  max-height: 90vh;
+
+  object-fit: contain;
+
+  border-radius: 12px;
+
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.6);
+
+}
+
+.screenshot-modal-close {
+
+  position: absolute;
+
+  top: 25px;
+
+  right: 30px;
+
+  width: 45px;
+
+  height: 45px;
+
+  border: none;
+
+  border-radius: 50%;
+
+  background: rgba(255, 255, 255, 0.12);
+
+  color: #ffffff;
+
+  font-size: 22px;
+
+  cursor: pointer;
+
+  transition:
+
+*background*  0.2s ease,
+
+    transform 0.2s ease;
+
+}
+
+.screenshot-modal-close:hover {
+
+  background: rgba(255, 255, 255, 0.22);
+
+  transform: scale(1.05);
+
+}
+
+
+
+/* =========================================================
+
+   UPCOMING GAME CARD
+
+   \========================================================= */
+
+.upcoming-game-card {
+
+  overflow: hidden;
+
+  background: #192337;
+
+  border: 1px solid #293750;
+
+  border-radius: 16px;
+
+  transition:
+
+    transform 0.2s ease,
+
+    border-color 0.2s ease,
+
+    box-shadow 0.2s ease;
+
+}
+
+.upcoming-game-card:hover {
+
+  transform: translateY(-4px);
+
+  border-color: #6366f1;
+
+  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.25);
+
+}
+
+.upcoming-game-cover {
+
+  position: relative;
+
+  height: 260px;
+
+  overflow: hidden;
+
+}
+
+.upcoming-game-cover img {
+
+  width: 100%;
+
+  height: 100%;
+
+  object-fit: cover;
+
+}
+
+.upcoming-no-cover {
+
+  display: flex;
+
+  align-items: center;
+
+  justify-content: center;
+
+  width: 100%;
+
+  height: 100%;
+
+  background: #111a2d;
+
+  font-size: 50px;
+
+}
+
+.upcoming-release-badge {
+
+  position: absolute;
+
+  top: 12px;
+
+  left: 12px;
+
+  padding: 7px 10px;
+
+  border-radius: 8px;
+
+  background: rgba(15, 23, 42, 0.9);
+
+  color: #c7d2fe;
+
+  font-size: 12px;
+
+  font-weight: 600;
+
+}
+
+.upcoming-game-info {
+
+  padding: 20px;
+
+}
+
+.upcoming-game-info h3 {
+
+  margin: 0 0 18px;
+
+  font-size: 21px;
+
+}
+
+.upcoming-release-date {
+
+  display: flex;
+
+  flex-direction: column;
+
+  gap: 5px;
+
+  margin-bottom: 12px;
+
+}
+
+.upcoming-release-date span {
+
+  color: #8995ad;
+
+  font-size: 12px;
+
+  text-transform: uppercase;
+
+  letter-spacing: 0.5px;
+
+}
+
+.upcoming-release-date strong {
+
+  color: #f1f5f9;
+
+  font-size: 15px;
+
+}
+
+.upcoming-countdown {
+
+  margin-bottom: 12px;
+
+  padding: 10px;
+
+  border-radius: 8px;
+
+  background: #202c44;
+
+  color: #a5b4fc;
+
+  font-weight: 600;
+
+  text-align: center;
+
+}
+
+.upcoming-rating {
+
+  margin-bottom: 18px;
+
+  color: #fbbf24;
+
+  font-weight: 600;
+
+}
+
+.upcoming-details-button {
+
+  width: 100%;
+
+  padding: 11px;
+
+  border: none;
+
+  border-radius: 9px;
+
+  background: #6366f1;
+
+  color: #ffffff;
+
+  font-weight: 600;
+
+  cursor: pointer;
+
+  transition: *background* 0.2s ease;
+
+}
+
+.upcoming-details-button:hover {
+
+  background: #7477f5;
+
+}
+
+
+
+/* =========================================================
+
+   MOBILE MAIN LAYOUT
+
+   \========================================================= */
+
+@media (max-width: 650px) {
+
+  .app-layout {
+
+    display: block;
+
+  }
+
+  .main-content {
+
+    width: 100%;
+
+    margin-left: 0;
+
+    padding: 24px 18px 40px;
+
+  }
+
+}
+
+/* =========================================================
+
+   MY GAMES
+
+\========================================================= */
+
+.games-section {
+
+  width: 100%;
+
+  max-width: none;
+
+  margin: 0;
+
+}
+
+/* =========================================================
+
+   MY GAMES HEADER
+
+\========================================================= */
+
+.my-games-header {
+
+  display: flex;
+
+  align-items: flex-end;
+
+  justify-content: space-between;
+
+  gap: 30px;
+
+  margin-bottom: 20px;
+
+}
+
+.my-games-heading {
+
+  min-width: 0;
+
+}
+
+.my-games-heading h2 {
+
+  margin: 0 0 6px;
+
+  font-size: 32px;
+
+  font-weight: 750;
+
+  line-height: 1.15;
+
+  letter-spacing: -0.7px;
+
+  background: linear-gradient(
+
+    90deg,
+
+    #a855f7,
+
+    #6366f1,
+
+    #22d3ee
+
+  );
+
+  -webkit-background-clip: text;
+
+  background-clip: text;
+
+  -webkit-text-fill-color: transparent;
+
+}
+
+.my-games-heading p {
+
+  margin: 0;
+
+  color: rgba(180, 210, 215, 0.65);
+
+  font-size: 14px;
+
+}
+
+
+
+/* =========================================================
+
+   SORT
+
+\========================================================= */
+
+.game-sort {
+
+  flex-shrink: 0;
+
+  width: 150px;
+
+  height: 40px;
+
+  padding: 0 13px;
+
+  border: 1px solid rgba(100, 150, 165, 0.35);
+
+  border-radius: 8px;
+
+  outline: none;
+
+  background: rgba(7, 25, 30, 0.82);
+
+  color: #e8f7f5;
+
+  cursor: pointer;
+
+  font-family: inherit;
+
+  font-size: 13px;
+
+  font-weight: 600;
+
+  backdrop-filter: blur(8px);
+
+}
+
+.game-sort:hover {
+
+  border-color: rgba(45, 190, 170, 0.55);
+
+}
+
+.game-sort:focus {
+
+  border-color: rgba(45, 190, 170, 0.75);
+
+  box-shadow:
+
+    0 0 0 2px rgba(45, 190, 170, 0.10);
+
+}
+
+
+
+/* =========================================================
+
+   GENRE FILTERS
+
+\========================================================= */
+
+.genre-filters {
+
+  display: flex;
+
+  align-items: center;
+
+  gap: 8px;
+
+  width: 100%;
+
+  margin-bottom: 24px;
+
+  overflow-x: auto;
+
+  padding: 2px 2px 8px;
+
+  scrollbar-width: thin;
+
+  scrollbar-color:
+
+    rgba(45, 190, 170, 0.35)
+
+    transparent;
+
+}
+
+.genre-filters::-webkit-scrollbar {
+
+  height: 5px;
+
+}
+
+.genre-filters::-webkit-scrollbar-track {
+
+  background: transparent;
+
+}
+
+.genre-filters::-webkit-scrollbar-thumb {
+
+  border-radius: 10px;
+
+  background: rgba(45, 190, 170, 0.3);
+
+}
+
+
+
+/* =========================================================
+
+   GENRE BUTTON
+
+\========================================================= */
+
+.genre-filter {
+
+  flex-shrink: 0;
+
+  display: inline-flex;
+
+  align-items: center;
+
+  justify-content: center;
+
+  gap: 7px;
+
+  height: 40px;
+
+  padding: 0 15px;
+
+  border: 1px solid rgba(80, 130, 145, 0.35);
+
+  border-radius: 10px;
+
+  background:
+
+    linear-gradient(
+
+      145deg,
+
+      rgba(8, 29, 35, 0.88),
+
+      rgba(5, 20, 25, 0.78)
+
+    );
+
+  color: rgba(225, 242, 240, 0.78);
+
+  cursor: pointer;
+
+  font-family: inherit;
+
+  font-size: 13px;
+
+  font-weight: 600;
+
+  white-space: nowrap;
+
+  transition:
+
+    transform 0.2s ease,
+
+    border-color 0.2s ease,
+
+*background* 0.2s ease,
+
+    color 0.2s ease,
+
+    box-shadow 0.2s ease;
+
+}
+
+.genre-filter span {
+
+  font-size: 15px;
+
+  line-height: 1;
+
+}
+
+.genre-filter:hover {
+
+  transform: translateY(-2px);
+
+  border-color: rgba(45, 190, 170, 0.55);
+
+  background:
+
+    linear-gradient(
+
+      145deg,
+
+      rgba(12, 45, 47, 0.95),
+
+      rgba(6, 28, 32, 0.9)
+
+    );
+
+  color: #eafffb;
+
+  box-shadow:
+
+    0 6px 18px rgba(0, 0, 0, 0.25);
+
+}
+
+
+
+/* =========================================================
+
+   ACTIVE GENRE
+
+\========================================================= */
+
+.genre-filter.active {
+
+  border-color: rgba(45, 220, 195, 0.85);
+
+  background:
+
+    linear-gradient(
+
+      145deg,
+
+      rgba(18, 72, 72, 0.95),
+
+      rgba(7, 38, 42, 0.92)
+
+    );
+
+  color: #eafffb;
+
+  box-shadow:
+
+    0 0 18px rgba(45, 190, 170, 0.10),
+
+    inset 0 1px 0 rgba(255, 255, 255, 0.05);
+
+}
+
+
+
+/* =========================================================
+
+   MORE
+
+\========================================================= */
+
+.genre-more {
+
+  margin-left: auto;
+
+  color: rgba(180, 220, 218, 0.7);
+
+  border-color: rgba(45, 190, 170, 0.22);
+
+}
+
+
+
+
+
+
+/* =========================================================
+
+   EMPTY STATE
+
+\========================================================= */
+
+.empty-state {
+
+  padding: 80px 20px;
+
+  border: 1px solid rgba(70, 110, 120, 0.22);
+
+  border-radius: 16px;
+
+  background: rgba(7, 24, 29, 0.55);
+
+  color: rgba(180, 210, 210, 0.6);
+
+  text-align: center;
+
+}
+
+.empty-state > div {
+
+  margin-bottom: 12px;
+
+  font-size: 48px;
+
+}
+
+.empty-state h3 {
+
+  margin: 0 0 6px;
+
+  color: #f5fffd;
+
+  font-size: 20px;
+
+}
+
+.empty-state p {
+
+  margin: 0;
+
+  font-size: 13px;
+
+}
+
+
+
+/* =========================================================
+
+   RESPONSIVE
+
+\========================================================= */
+
+
+
+
+
+@media (max-width: 1450px) {
+  
+}
+@media (max-width: 1200px) {
+  
+}
+@media (max-width: 950px) {
+  
+}
+@media (max-width: 700px) {
+  
+}
+@media (max-width: 500px) {
+  
+}
+/* =========================================================
+   FINAL MY GAMES LAYOUT
    ========================================================= */
 
 .games-section {
   width: 100%;
-}
-
-.section-header {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  margin-bottom: 20px;
-}
-
-.section-header h2 {
-  margin: 0 0 5px;
-  font-size: 24px;
-}
-
-.section-header p {
-  margin: 0;
-  color: #7f8ba1;
-  font-size: 13px;
+  max-width: none;
 }
 
 
-/* =========================================================
-   GAME GRID
-   ========================================================= */
 
-.game-grid {
-  display: grid;
-  grid-template-columns: repeat(3, minmax(0, 1fr));
-  gap: 28px;
-  width: 100%;
+@media (max-width: 1450px) {
+  
 }
-
-.game-card {
-  min-width: 0;
-  overflow: hidden;
-  border: 1px solid #293548;
-  border-radius: 14px;
-  background: #182235;
-  transition:
-    transform 0.2s ease,
-    border-color 0.2s ease,
-    box-shadow 0.2s ease;
+@media (max-width: 1200px) {
+  
 }
-
-.game-card:hover {
-  transform: translateY(-4px);
-  border-color: #6366f1;
-  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.3);
+@media (max-width: 950px) {
+  
+}
+@media (max-width: 700px) {
+  
+}
+@media (max-width: 500px) {
+  
 }
 
 
 /* =========================================================
-   GAME COVER
-   ========================================================= */
+   MY GAMES GRID — RESPONSIVE
+========================================================= */
 
-.game-cover-container {
-  position: relative;
-  width: 100%;
+@media (max-width: 1450px) {
+  .game-grid {
+    grid-template-columns: repeat(5, minmax(0, 1fr));
+  }
 }
-
-.game-cover {
-  display: block;
-  width: 100%;
-  height: 360px;
-  object-fit: cover;
-}
-
-.game-card:hover .game-cover {
-  transform: scale(1.03);
-}
-
-.no-cover {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  height: 280px;
-  background: #242f43;
-  color: #7f8ba1;
-}
-
-.no-cover span {
-  margin-bottom: 6px;
-  font-size: 42px;
-}
-
-.no-cover p {
-  margin: 0;
-  font-size: 14px;
-}
-
-
-/* =========================================================
-   STATUS BADGE
-   ========================================================= */
-
-.status-badge {
-  position: absolute;
-  top: 12px;
-  left: 12px;
-  padding: 6px 11px;
-  border: 1px solid transparent;
-  border-radius: 999px;
-  background: rgba(15, 23, 42, 0.92);
-  color: #ffffff;
-  font-size: 12px;
-  font-weight: 600;
-  text-transform: capitalize;
-}
-
-.status-playing {
-  border-color: #6366f1;
-}
-
-.status-completed {
-  border-color: #22c55e;
-}
-
-.status-bucket_list {
-  border-color: #f59e0b;
-}
-
-.status-dropped {
-  border-color: #ef4444;
-}
-
-
-/* =========================================================
-   GAME INFO
-   ========================================================= */
-
-.game-info {
-  min-width: 0;
-  padding: 22px;
-}
-
-.game-title {
-  margin: 0 0 14px;
-  font-size: 22px;
-  line-height: 1.3;
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
-}
-
-
-/* =========================================================
-   RATING
-   ========================================================= */
-
-.game-rating {
-  display: flex;
-  align-items: center;
-  gap: 6px;
-  margin-bottom: 16px;
-  font-size: 14px;
-}
-
-.game-rating span:first-child {
-  color: #fbbf24;
-  font-size: 16px;
-}
-
-.game-rating strong {
-  color: #e5e7eb;
-}
-
-.not-rated {
-  color: #7f8ba1;
-}
-
-
-/* =========================================================
-   PROGRESS
-   ========================================================= */
-
-.progress-section {
-  margin-bottom: 16px;
-}
-
-.progress-label {
-  display: flex;
-  justify-content: space-between;
-  margin-bottom: 7px;
-  color: #8f9bad;
-  font-size: 12px;
-}
-
-.progress-label strong {
-  color: #e5e7eb;
-}
-
-.progress-bar {
-  width: 100%;
-  height: 6px;
-  overflow: hidden;
-  border-radius: 999px;
-  background: #303b4f;
-}
-
-.progress-fill {
-  height: 100%;
-  border-radius: 999px;
-  background: #6366f1;
-}
-
-
-/* =========================================================
-   DESCRIPTION
-   ========================================================= */
-
-.game-description {
-  display: -webkit-box;
-  margin: 0 0 16px;
-  overflow: hidden;
-  color: #8f9bad;
-  font-size: 13px;
-  line-height: 1.45;
-  -webkit-box-orient: vertical;
-  -webkit-line-clamp: 2;
-  line-clamp: 2;
-}
-
-
-/* =========================================================
-   GAME ACTIONS
-   ========================================================= */
-
-.game-actions {
-  display: flex;
-  gap: 10px;
-  width: 100%;
-}
-
-.game-actions button {
-  flex: 1;
-  min-width: 0;
-  padding: 10px 6px;
-  border-radius: 9px;
-  cursor: pointer;
-  font-size: 14px;
-  font-weight: 600;
-  white-space: nowrap;
-  text-align: center;
-}
-
-.details-button {
-  border: 1px solid #596579;
-  background: #303b4f;
-  color: #ffffff;
-}
-
-.details-button:hover {
-  background: #3d4a61;
-}
-
-.edit-button {
-  border: 1px solid #3b4659;
-  background: #303b4f;
-  color: #ffffff;
-}
-
-.edit-button:hover {
-  background: #3d4a61;
-}
-
-.delete-button {
-  border: 1px solid #ef4444 !important;
-  background: transparent;
-  color: #ef4444;
-}
-
-.delete-button:hover {
-  background: #ef4444;
-  color: #ffffff;
-}
-
-
-/* =========================================================
-   GAME GRID RESPONSIVE
-   ========================================================= */
 
 @media (max-width: 1200px) {
+  .game-grid {
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+  }
+}
+
+@media (max-width: 950px) {
+  .game-grid {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+}
+
+@media (max-width: 700px) {
   .game-grid {
     grid-template-columns: repeat(2, minmax(0, 1fr));
   }
 }
 
-
-
-/* =========================================================
-   GAME DETAILS
-   ========================================================= */
-
-.game-details {
-  width: 100%;
-}
-
-.back-button {
-  margin-bottom: 24px;
-  padding: 10px 16px;
-  border: 1px solid #374151;
-  border-radius: 8px;
-  background: #1f2937;
-  color: #f9fafb;
-  cursor: pointer;
-}
-
-.back-button:hover {
-  background: #303b4f;
-}
-
-.game-details-card {
-  display: grid;
-  grid-template-columns: 280px 1fr;
-  gap: 32px;
-  padding: 28px;
-  border: 1px solid #2d3748;
-  border-radius: 16px;
-  background: #1a2233;
-}
-
-.game-details-cover {
-  width: 280px;
-}
-
-.game-details-cover img {
-  display: block;
-  width: 280px;
-  height: 400px;
-  object-fit: cover;
-  border-radius: 12px;
-}
-
-.game-details-info {
-  min-width: 0;
-}
-
-.game-details-info h1 {
-  margin: 0 0 16px;
-  font-size: 32px;
-}
-
-.game-details-meta {
-  display: flex;
-  flex-wrap: wrap;
-  align-items: center;
-  gap: 12px;
-  margin-bottom: 28px;
-  color: #aab4c4;
-}
-
-.details-progress {
-  margin-bottom: 28px;
-}
-
-.details-title-row {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 20px;
-}
-
-.details-title-row h1 {
-  margin: 0;
-}
-
-.details-edit-button {
-  flex-shrink: 0;
-  padding: 10px 16px;
-  border: 1px solid #6366f1;
-  border-radius: 9px;
-  background: #6366f1;
-  color: #ffffff;
-  font-size: 14px;
-  font-weight: 600;
-  cursor: pointer;
-}
-
-.details-edit-button:hover {
-  background: #5558e8;
-}
-
-.details-description {
-  margin-top: 28px;
-}
-
-.details-description h3 {
-  margin-bottom: 12px;
-  text-align: left;
-}
-
-.details-description p {
-  margin: 0;
-  color: #9ca8b8;
-  font-size: 16px;
-  line-height: 1.7;
-  text-align: left;
-}
-
-.details-notes {
-  margin-top: 28px;
-}
-
-.details-notes h3 {
-  margin-bottom: 12px;
-}
-
-.details-notes p {
-  margin: 0;
-  color: #9ca8b8;
-  line-height: 1.7;
-}
-
-
-/* =========================================================
-   DETAILS RESPONSIVE
-   ========================================================= */
-
-@media (max-width: 700px) {
-  .game-details-card {
+@media (max-width: 500px) {
+  .game-grid {
     grid-template-columns: 1fr;
   }
-
-  .game-details-cover {
-    width: 220px;
-  }
-
-  .game-details-cover img {
-    width: 220px;
-    height: 310px;
-  }
 }
-
-
-/* =========================================================
-   EDIT GAME FORM
-   ========================================================= */
-
-.edit-game-form {
-  width: 100%;
-  max-width: 720px;
-  margin: 30px auto;
-  padding: 32px;
-  box-sizing: border-box;
-  background: #182235;
-  border: 1px solid #293548;
-  border-radius: 16px;
-}
-
-.edit-form-wrapper {
-  display: flex;
-  align-items: flex-start;
-  justify-content: center;
-  width: 100%;
-}
-
-.edit-form-header {
-  margin-bottom: 30px;
-  text-align: center;
-}
-
-.edit-form-header > div {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-}
-
-.edit-form-icon {
-  margin-bottom: 8px;
-  font-size: 36px;
-}
-
-.edit-form-header h2 {
-  margin: 0;
-  color: #f8fafc;
-  font-size: 30px;
-}
-
-.edit-form-header p {
-  margin: 8px 0 0;
-  color: #9ca8b8;
-  font-size: 15px;
-}
-
-
-/* =========================================================
-   FORM FIELDS
-   ========================================================= */
-
-.form-field {
-  margin-bottom: 22px;
-}
-
-.form-field label,
-.slider-header label {
-  display: block;
-  margin-bottom: 8px;
-  color: #e5e7eb;
-  font-size: 14px;
-  font-weight: 600;
-}
-
-.form-field input,
-.form-field select,
-.form-field textarea {
-  width: 100%;
-  box-sizing: border-box;
-  padding: 13px 15px;
-  border: 1px solid #344155;
-  border-radius: 9px;
-  background: #0f172a;
-  color: #f8fafc;
-  font-family: inherit;
-  font-size: 15px;
-  outline: none;
-}
-
-.form-field input:focus,
-.form-field select:focus,
-.form-field textarea:focus {
-  border-color: #6366f1;
-  box-shadow: 0 0 0 2px rgba(99, 102, 241, 0.15);
-}
-
-.form-field textarea {
-  resize: vertical;
-  min-height: 120px;
-}
-
-
-/* =========================================================
-   SLIDERS
-   ========================================================= */
-
-.slider-field {
-  margin-bottom: 28px;
-}
-
-.slider-header {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  margin-bottom: 12px;
-}
-
-.slider-header label {
-  margin: 0;
-}
-
-.slider-header strong {
-  color: #a5b4fc;
-  font-size: 16px;
-}
-
-.game-slider {
-  width: 100%;
-  height: 7px;
-  appearance: none;
-  -webkit-appearance: none;
-  border-radius: 10px;
-  background: #303c51;
-  outline: none;
-  cursor: pointer;
-}
-
-.game-slider::-webkit-slider-thumb {
-  width: 20px;
-  height: 20px;
-  appearance: none;
-  -webkit-appearance: none;
-  border: 3px solid #ffffff;
-  border-radius: 50%;
-  background: #6366f1;
-  cursor: pointer;
-}
-
-.game-slider::-moz-range-thumb {
-  width: 17px;
-  height: 17px;
-  border: 3px solid #ffffff;
-  border-radius: 50%;
-  background: #6366f1;
-  cursor: pointer;
-}
-
-.slider-labels {
-  display: flex;
-  justify-content: space-between;
-  margin-top: 7px;
-  color: #718096;
-  font-size: 12px;
-}
-
-
-/* =========================================================
-   EDIT FORM BUTTONS
-   ========================================================= */
-
-.edit-form-actions {
-  display: flex;
-  justify-content: flex-end;
-  gap: 12px;
-  margin-top: 30px;
-  padding-top: 24px;
-  border-top: 1px solid #293548;
-}
-
-.edit-form-actions button {
-  padding: 12px 20px;
-  border-radius: 9px;
-  font-size: 14px;
-  font-weight: 600;
-  cursor: pointer;
-}
-
-.cancel-button {
-  border: 1px solid #3b4659;
-  background: #303b4f;
-  color: #ffffff;
-}
-
-.cancel-button:hover {
-  background: #3d4a61;
-}
-
-.save-button {
-  border: 1px solid #6366f1;
-  background: #6366f1;
-  color: #ffffff;
-}
-
-.save-button:hover {
-  background: #5558e8;
-}
-
-.edit-form-actions button:disabled {
-  opacity: 0.6;
-  cursor: not-allowed;
-}
-
-
-/* =========================================================
-   GAME SCREENSHOTS
-   ========================================================= */
-
-.game-screenshots {
-  margin-top: 32px;
-  padding: 28px;
-  background: #182235;
-  border: 1px solid #27344d;
-  border-radius: 18px;
-}
-
-.screenshots-header {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 20px;
-  margin-bottom: 24px;
-}
-
-.screenshots-header h2 {
-  margin: 0 0 6px;
-  font-size: 28px;
-}
-
-.screenshots-header p {
-  margin: 0;
-  color: #94a0b5;
-  font-size: 16px;
-}
-
-.upload-screenshot-button {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  padding: 12px 20px;
-  background: #6366f1;
-  color: #ffffff;
-  border-radius: 10px;
-  font-size: 16px;
-  font-weight: 600;
-  cursor: pointer;
-  transition: 0.2s ease;
-  white-space: nowrap;
-}
-
-.upload-screenshot-button:hover {
-  transform: translateY(-2px);
-  background: #5558e8;
-}
-
-.screenshots-empty {
-  padding: 50px 20px;
-  border: 1px dashed #34415a;
-  border-radius: 14px;
-  background: #111a2c;
-  text-align: center;
-}
-
-.screenshots-empty span {
-  display: block;
-  margin-bottom: 12px;
-  font-size: 42px;
-}
-
-.screenshots-empty h3 {
-  margin: 0 0 8px;
-  font-size: 21px;
-}
-
-.screenshots-empty p {
-  margin: 0;
-  color: #8f9bb0;
-}
-
-.screenshots-grid {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 18px;
-}
-
-.screenshot-card {
-  position: relative;
-  overflow: hidden;
-  background: #101827;
-  border: 1px solid #2a3851;
-  border-radius: 14px;
-}
-
-.screenshot-card img {
-  display: block;
-  width: 100%;
-  height: 220px;
-  object-fit: cover;
-}
-
-.delete-screenshot-button {
-  width: 100%;
-  padding: 11px;
-  border: none;
-  background: #111827;
-  color: #ff5b5b;
-  font-size: 14px;
-  font-weight: 600;
-  cursor: pointer;
-  transition: 0.2s ease;
-}
-
-.delete-screenshot-button:hover {
-  background: #2a1a20;
-  color: #ff7777;
-}
-
-.screenshot-image {
-  cursor: pointer;
-  transition:
-    transform 0.2s ease,
-    opacity 0.2s ease;
-}
-
-.screenshot-image:hover {
-  transform: scale(1.02);
-  opacity: 0.9;
-}
-
-
-/* =========================================================
-   SCREENSHOT RESPONSIVE
-   ========================================================= */
-
-@media (max-width: 900px) {
-  .screenshots-grid {
-    grid-template-columns: repeat(2, 1fr);
-  }
-}
-
-@media (max-width: 600px) {
-  .screenshots-header {
-    flex-direction: column;
-    align-items: flex-start;
-  }
-
-  .screenshots-grid {
-    grid-template-columns: 1fr;
-  }
-
-  .upload-screenshot-button {
-    width: 100%;
-  }
-}
-
-
-/* =========================================================
-   SCREENSHOT MODAL
-   ========================================================= */
-
-.screenshot-modal {
-  position: fixed;
-  inset: 0;
-  z-index: 9999;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  padding: 40px;
-  background: rgba(0, 0, 0, 0.88);
-}
-
-.screenshot-modal img {
-  max-width: 90vw;
-  max-height: 90vh;
-  object-fit: contain;
-  border-radius: 12px;
-  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.6);
-}
-
-.screenshot-modal-close {
-  position: absolute;
-  top: 25px;
-  right: 30px;
-  width: 45px;
-  height: 45px;
-  border: none;
-  border-radius: 50%;
-  background: rgba(255, 255, 255, 0.12);
-  color: #ffffff;
-  font-size: 22px;
-  cursor: pointer;
-  transition:
-    background  0.2s ease,
-    transform 0.2s ease;
-}
-
-.screenshot-modal-close:hover {
-  background: rgba(255, 255, 255, 0.22);
-  transform: scale(1.05);
-}
-
-
-/* =========================================================
-   UPCOMING GAME CARD
-   ========================================================= */
-
-.upcoming-game-card {
-  overflow: hidden;
-  background: #192337;
-  border: 1px solid #293750;
-  border-radius: 16px;
-  transition:
-    transform 0.2s ease,
-    border-color 0.2s ease,
-    box-shadow 0.2s ease;
-}
-
-.upcoming-game-card:hover {
-  transform: translateY(-4px);
-  border-color: #6366f1;
-  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.25);
-}
-
-.upcoming-game-cover {
-  position: relative;
-  height: 260px;
-  overflow: hidden;
-}
-
-.upcoming-game-cover img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-}
-
-.upcoming-no-cover {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  width: 100%;
-  height: 100%;
-  background: #111a2d;
-  font-size: 50px;
-}
-
-.upcoming-release-badge {
-  position: absolute;
-  top: 12px;
-  left: 12px;
-  padding: 7px 10px;
-  border-radius: 8px;
-  background: rgba(15, 23, 42, 0.9);
-  color: #c7d2fe;
-  font-size: 12px;
-  font-weight: 600;
-}
-
-.upcoming-game-info {
-  padding: 20px;
-}
-
-.upcoming-game-info h3 {
-  margin: 0 0 18px;
-  font-size: 21px;
-}
-
-.upcoming-release-date {
-  display: flex;
-  flex-direction: column;
-  gap: 5px;
-  margin-bottom: 12px;
-}
-
-.upcoming-release-date span {
-  color: #8995ad;
-  font-size: 12px;
-  text-transform: uppercase;
-  letter-spacing: 0.5px;
-}
-
-.upcoming-release-date strong {
-  color: #f1f5f9;
-  font-size: 15px;
-}
-
-.upcoming-countdown {
-  margin-bottom: 12px;
-  padding: 10px;
-  border-radius: 8px;
-  background: #202c44;
-  color: #a5b4fc;
-  font-weight: 600;
-  text-align: center;
-}
-
-.upcoming-rating {
-  margin-bottom: 18px;
-  color: #fbbf24;
-  font-weight: 600;
-}
-
-.upcoming-details-button {
-  width: 100%;
-  padding: 11px;
-  border: none;
-  border-radius: 9px;
-  background: #6366f1;
-  color: #ffffff;
-  font-weight: 600;
-  cursor: pointer;
-  transition: background 0.2s ease;
-}
-
-.upcoming-details-button:hover {
-  background: #7477f5;
-}
-
-
-/* =========================================================
-   MOBILE MAIN LAYOUT
-   ========================================================= */
-
-@media (max-width: 650px) {
-  .app-layout {
-    display: block;
-  }
-
-  .main-content {
-    width: 100%;
-    margin-left: 0;
-    padding: 24px 18px 40px;
-  }
-}
-

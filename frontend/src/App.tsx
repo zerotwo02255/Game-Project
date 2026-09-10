@@ -42,7 +42,9 @@ function App() {
           return null;
         }
 
-        return data.find((game) => game.id === currentSelectedGame.id) ?? null;
+        return (
+          data.find((game) => game.id === currentSelectedGame.id) ?? null
+        );
       });
     } catch (error) {
       console.error(error);
@@ -65,6 +67,7 @@ function App() {
       alert("Failed to delete game");
     }
   };
+
   const filteredGames = games
     .filter((game) => {
       const matchesUpcoming =
@@ -83,7 +86,6 @@ function App() {
       return matchesUpcoming && matchesStatus;
     })
     .sort((a, b) => {
-      // Upcoming games should be sorted by release date
       if (activeFilter === "upcoming") {
         return (
           new Date(a.release_date!).getTime() -
@@ -101,12 +103,14 @@ function App() {
 
       if (sortBy === "oldest") {
         return (
-          new Date(a.created_at).getTime() - new Date(b.created_at).getTime()
+          new Date(a.created_at).getTime() -
+          new Date(b.created_at).getTime()
         );
       }
 
       return (
-        new Date(b.created_at).getTime() - new Date(a.created_at).getTime()
+        new Date(b.created_at).getTime() -
+        new Date(a.created_at).getTime()
       );
     });
 
@@ -142,36 +146,37 @@ function App() {
         getCount={getCount}
         totalGames={games.length}
       />
-      {/* =========================
-          SIDEBAR
-      ========================= */}
-
-      {/* =========================
-          MAIN CONTENT
-      ========================= */}
 
       <main className="main-content">
-        {/* Header */}
+
+        {/* =====================================================
+            HEADER
+        ===================================================== */}
 
         <header className="top-header">
           <div>
             <h1>My Game Journey</h1>
-
             <p>Keep track of your gaming journey.</p>
           </div>
         </header>
 
-        {/* =========================
+        {/* =====================================================
             DASHBOARD
-        ========================= */}
+        ===================================================== */}
 
         {activeFilter === "dashboard" && <Dashboard games={games} />}
 
-        {activeFilter === "search" && <SearchPage onGameAdded={loadGames} />}
+        {/* =====================================================
+            SEARCH
+        ===================================================== */}
 
-        {/* =========================
+        {activeFilter === "search" && (
+          <SearchPage onGameAdded={loadGames} />
+        )}
+
+        {/* =====================================================
             GAME PAGES
-        ========================= */}
+        ===================================================== */}
 
         {activeFilter !== "dashboard" && activeFilter !== "search" && (
           <>
@@ -182,94 +187,171 @@ function App() {
                 onGameUpdated={loadGames}
               />
             ) : (
-              <>
-                {/* Game Search */}
-                <section className="games-section">
-                  <div className="section-header">
-                    <div>
-                      <h2>
-                        {activeFilter === "all"
-                          ? "My Games"
-                          : activeFilter === "bucket_list"
-                            ? "Bucket List"
-                            : activeFilter === "playing"
-                              ? "Playing"
-                              : activeFilter === "completed"
-                                ? "Completed"
-                                : activeFilter === "dropped"
-                                  ? "Dropped"
-                                  : "📅 Upcoming Games"}
-                      </h2>
+              <section className="games-section">
 
-                      <p>
-                        {activeFilter === "upcoming"
-                          ? "Games coming to your gaming journey soon."
-                          : `${filteredGames.length} ${
-                              filteredGames.length === 1 ? "game" : "games"
-                            }`}
-                      </p>
-                    </div>
+                {/* =================================================
+                    MY GAMES HEADER
+                ================================================= */}
 
-                    {/* Sort */}
+                <div className="my-games-header">
 
-                    <select
-                      className="game-sort"
-                      value={sortBy}
-                      onChange={(event) =>
-                        setSortBy(
-                          event.target.value as
-                            | "newest"
-                            | "oldest"
-                            | "rating"
-                            | "progress",
-                        )
-                      }
-                    >
-                      <option value="newest">Newest</option>
+                  <div className="my-games-heading">
+                    <h2>
+                      {activeFilter === "all"
+                        ? "My Games"
+                        : activeFilter === "bucket_list"
+                          ? "Bucket List"
+                          : activeFilter === "playing"
+                            ? "Playing"
+                            : activeFilter === "completed"
+                              ? "Completed"
+                              : activeFilter === "dropped"
+                                ? "Dropped"
+                                : "Upcoming Games"}
+                    </h2>
 
-                      <option value="oldest">Oldest</option>
-
-                      <option value="rating">Highest Rating</option>
-
-                      <option value="progress">Highest Progress</option>
-                    </select>
+                    <p>
+                      {activeFilter === "upcoming"
+                        ? "Games coming to your gaming journey soon."
+                        : `${filteredGames.length} ${
+                            filteredGames.length === 1
+                              ? "game"
+                              : "games"
+                          }`}
+                    </p>
                   </div>
 
-                  {/* =========================
-                  EMPTY STATE
-              ========================= */}
+                  {/* SORT */}
 
-                  {filteredGames.length === 0 ? (
-                    <div className="empty-state">
-                      <div>🎮</div>
+                  <select
+                    className="game-sort"
+                    value={sortBy}
+                    onChange={(event) =>
+                      setSortBy(
+                        event.target.value as
+                          | "newest"
+                          | "oldest"
+                          | "rating"
+                          | "progress",
+                      )
+                    }
+                  >
+                    <option value="newest">Newest</option>
+                    <option value="oldest">Oldest</option>
+                    <option value="rating">Highest Rating</option>
+                    <option value="progress">
+                      Highest Progress
+                    </option>
+                  </select>
+                </div>
 
-                      <h3>No games here</h3>
+                {/* =================================================
+                    GENRE FILTER BAR
+                ================================================= */}
 
-                      <p>Add a game to start building your collection.</p>
-                    </div>
-                  ) : (
-                    <div className="game-grid">
-                      {filteredGames.map((game) =>
-                        activeFilter === "upcoming" ? (
-                          <UpcomingGameCard
-                            key={game.id}
-                            game={game}
-                            onViewDetails={setSelectedGame}
-                          />
-                        ) : (
-                          <GameCard
-                            key={game.id}
-                            game={game}
-                            onDelete={handleDelete}
-                            onGameUpdated={loadGames}
-                            onViewDetails={setSelectedGame}
-                          />
-                        ),
-                      )}
-                    </div>
-                  )}
-                </section>
-              </>
+                {activeFilter !== "upcoming" && (
+                  <div className="genre-filters">
+
+                    <button className="genre-filter active">
+                      <span>▦</span>
+                      All Genres
+                    </button>
+
+                    <button className="genre-filter">
+                      <span>👻</span>
+                      Horror
+                    </button>
+
+                    <button className="genre-filter">
+                      <span>⚔️</span>
+                      Action
+                    </button>
+
+                    <button className="genre-filter">
+                      <span>💀</span>
+                      Soulslike
+                    </button>
+
+                    <button className="genre-filter">
+                      <span>🧙</span>
+                      RPG
+                    </button>
+
+                    <button className="genre-filter">
+                      <span>🎯</span>
+                      Shooter
+                    </button>
+
+                    <button className="genre-filter">
+                      <span>🗺️</span>
+                      Adventure
+                    </button>
+
+                    <button className="genre-filter">
+                      <span>🥷</span>
+                      Stealth
+                    </button>
+
+                    <button className="genre-filter">
+                      <span>🌲</span>
+                      Survival
+                    </button>
+
+                    <button className="genre-filter">
+                      <span>🏁</span>
+                      Racing
+                    </button>
+
+                    <button className="genre-filter genre-more">
+                      More
+                      <span>⌄</span>
+                    </button>
+
+                  </div>
+                )}
+
+                {/* =================================================
+                    EMPTY STATE
+                ================================================= */}
+
+                {filteredGames.length === 0 ? (
+                  <div className="empty-state">
+                    <div>🎮</div>
+
+                    <h3>No games here</h3>
+
+                    <p>
+                      Add a game to start building your collection.
+                    </p>
+                  </div>
+                ) : (
+
+                  /* =================================================
+                     GAME GRID
+                  ================================================= */
+
+                  <div className="game-grid">
+                    {filteredGames.map((game) =>
+                      activeFilter === "upcoming" ? (
+                        <UpcomingGameCard
+                          key={game.id}
+                          game={game}
+                          onViewDetails={setSelectedGame}
+                        />
+                      ) : (
+                        <GameCard
+                          key={game.id}
+                          game={game}
+                          onDelete={handleDelete}
+                          onGameUpdated={loadGames}
+                          onViewDetails={setSelectedGame}
+                        />
+                      ),
+                    )}
+                  </div>
+                )}
+
+              </section>
             )}
           </>
         )}

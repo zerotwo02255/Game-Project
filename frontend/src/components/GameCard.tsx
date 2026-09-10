@@ -1,6 +1,7 @@
 import { useState } from "react";
 import type { Game } from "../api/gameApi";
 import EditGameForm from "./EditGameForm";
+import "./GameCard.css";
 
 interface GameCardProps {
   game: Game;
