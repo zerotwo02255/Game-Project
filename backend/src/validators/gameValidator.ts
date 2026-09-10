@@ -30,4 +30,6 @@ export const gameSchema = z.object({
     .max(100),
 
   notes: z.string().nullable().optional(),
+
+  genres: z.array(z.string()).default([]),
 });

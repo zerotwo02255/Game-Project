@@ -24,9 +24,7 @@ function GameSearch({ onGameAdded }: GameSearchProps) {
   const [loading, setLoading] = useState(false);
 
   const [message, setMessage] = useState("");
-  const [messageType, setMessageType] = useState<
-    "success" | "error" | ""
-  >("");
+  const [messageType, setMessageType] = useState<"success" | "error" | "">("");
 
   const searchGames = async () => {
     if (!query.trim()) {
@@ -80,22 +78,19 @@ function GameSearch({ onGameAdded }: GameSearchProps) {
         rating: fullGame.rating || null,
         progress: 0,
         notes: null,
+        genres:
+          fullGame.genres?.map(
+            (genre: { id: number; name: string }) => genre.name,
+          ) || [],
       });
-
       setMessage(`${fullGame.name} added to your games!`);
       setMessageType("success");
 
       onGameAdded();
     } catch (error: any) {
-      console.error(
-        "Add RAWG game error:",
-        error.response?.data || error,
-      );
+      console.error("Add RAWG game error:", error.response?.data || error);
 
-      setMessage(
-        error.response?.data?.message ||
-          "Failed to add game.",
-      );
+      setMessage(error.response?.data?.message || "Failed to add game.");
 
       setMessageType("error");
     }
@@ -106,14 +101,9 @@ function GameSearch({ onGameAdded }: GameSearchProps) {
       {/* Search Box */}
 
       <div className="game-search-intro">
-        <span className="search-label">
-          Search the game database
-        </span>
+        <span className="search-label">Search the game database</span>
 
-        <p>
-          Search for a game and add it directly to your
-          collection.
-        </p>
+        <p>Search for a game and add it directly to your collection.</p>
       </div>
 
       <div className="game-search-bar">
@@ -124,9 +114,7 @@ function GameSearch({ onGameAdded }: GameSearchProps) {
             type="text"
             placeholder="Search for a game..."
             value={query}
-            onChange={(event) =>
-              setQuery(event.target.value)
-            }
+            onChange={(event) => setQuery(event.target.value)}
             onKeyDown={(event) => {
               if (event.key === "Enter") {
                 searchGames();
@@ -135,11 +123,7 @@ function GameSearch({ onGameAdded }: GameSearchProps) {
           />
         </div>
 
-        <button
-          type="button"
-          onClick={searchGames}
-          disabled={loading}
-        >
+        <button type="button" onClick={searchGames} disabled={loading}>
           {loading ? "Searching..." : "Search"}
         </button>
       </div>
@@ -147,9 +131,7 @@ function GameSearch({ onGameAdded }: GameSearchProps) {
       {/* Message */}
 
       {message && (
-        <div className={`game-message ${messageType}`}>
-          {message}
-        </div>
+        <div className={`game-message ${messageType}`}>{message}</div>
       )}
 
       {/* Results */}
@@ -159,17 +141,12 @@ function GameSearch({ onGameAdded }: GameSearchProps) {
           <div className="search-results-header">
             <h3>Search Results</h3>
 
-            <span>
-              {results.length} games found
-            </span>
+            <span>{results.length} games found</span>
           </div>
 
           <div className="search-results">
             {results.map((game) => (
-              <div
-                className="search-game-card"
-                key={game.id}
-              >
+              <div className="search-game-card" key={game.id}>
                 {/* Cover */}
 
                 <div className="search-game-cover">
@@ -179,9 +156,7 @@ function GameSearch({ onGameAdded }: GameSearchProps) {
                       alt={`${game.name} cover`}
                     />
                   ) : (
-                    <div className="search-no-cover">
-                      🎮
-                    </div>
+                    <div className="search-no-cover">🎮</div>
                   )}
                 </div>
 
@@ -191,38 +166,23 @@ function GameSearch({ onGameAdded }: GameSearchProps) {
                   <h3>{game.name}</h3>
 
                   <div className="search-game-meta">
-                    {game.released && (
-                      <span>
-                        📅 {game.released}
-                      </span>
-                    )}
+                    {game.released && <span>📅 {game.released}</span>}
 
-                    <span>
-                      ⭐{" "}
-                      {game.rating
-                        ? game.rating
-                        : "Not rated"}
-                    </span>
+                    <span>⭐ {game.rating ? game.rating : "Not rated"}</span>
                   </div>
 
                   {game.genres.length > 0 && (
                     <div className="search-game-genres">
-                      {game.genres
-                        .slice(0, 3)
-                        .map((genre) => (
-                          <span key={genre.id}>
-                            {genre.name}
-                          </span>
-                        ))}
+                      {game.genres.slice(0, 3).map((genre) => (
+                        <span key={genre.id}>{genre.name}</span>
+                      ))}
                     </div>
                   )}
 
                   <button
                     type="button"
                     className="add-search-game-button"
-                    onClick={() =>
-                      handleAddGame(game)
-                    }
+                    onClick={() => handleAddGame(game)}
                   >
                     + Add to My Games
                   </button>
@@ -235,18 +195,13 @@ function GameSearch({ onGameAdded }: GameSearchProps) {
 
       {/* Empty state */}
 
-      {!loading &&
-        results.length === 0 &&
-        query.trim() !== "" &&
-        !message && (
-          <div className="search-empty">
-            <span>🎮</span>
-            <h3>No games found</h3>
-            <p>
-              Try searching with a different game name.
-            </p>
-          </div>
-        )}
+      {!loading && results.length === 0 && query.trim() !== "" && !message && (
+        <div className="search-empty">
+          <span>🎮</span>
+          <h3>No games found</h3>
+          <p>Try searching with a different game name.</p>
+        </div>
+      )}
     </div>
   );
 }

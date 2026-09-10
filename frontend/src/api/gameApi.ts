@@ -8,6 +8,7 @@ export interface Game {
   description: string | null;
   release_date: string | null;
   cover_url: string | null;
+  genres:string[];
   status: "bucket_list" | "playing" | "completed" | "dropped";
   rating: number | null;
   progress: number;

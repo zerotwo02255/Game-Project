@@ -27,6 +27,8 @@ function App() {
   const [activeFilter, setActiveFilter] = useState<Filter>("dashboard");
   const [selectedGame, setSelectedGame] = useState<Game | null>(null);
 
+  const [activeGenre, setActiveGenre] = useState("All Genres");
+
   const [sortBy, setSortBy] = useState<
     "newest" | "oldest" | "rating" | "progress"
   >("newest");
@@ -83,7 +85,14 @@ function App() {
         activeFilter === "upcoming" ||
         game.status === activeFilter;
 
-      return matchesUpcoming && matchesStatus;
+      const matchesGenre =
+        activeGenre === "All Genres" ||
+        game.genres.some(
+          (genre) =>
+            genre.toLowerCase() === activeGenre.toLowerCase(),
+        );
+
+      return matchesUpcoming && matchesStatus && matchesGenre;
     })
     .sort((a, b) => {
       if (activeFilter === "upcoming") {
@@ -148,7 +157,6 @@ function App() {
       />
 
       <main className="main-content">
-
         {/* =====================================================
             HEADER
         ===================================================== */}
@@ -188,13 +196,11 @@ function App() {
               />
             ) : (
               <section className="games-section">
-
                 {/* =================================================
                     MY GAMES HEADER
                 ================================================= */}
 
                 <div className="my-games-header">
-
                   <div className="my-games-heading">
                     <h2>
                       {activeFilter === "all"
@@ -251,62 +257,113 @@ function App() {
 
                 {activeFilter !== "upcoming" && (
                   <div className="genre-filters">
-
-                    <button className="genre-filter active">
+                    <button
+                      className={`genre-filter ${
+                        activeGenre === "All Genres" ? "active" : ""
+                      }`}
+                      onClick={() => setActiveGenre("All Genres")}
+                    >
                       <span>▦</span>
                       All Genres
                     </button>
 
-                    <button className="genre-filter">
+                    <button
+                      className={`genre-filter ${
+                        activeGenre === "Horror" ? "active" : ""
+                      }`}
+                      onClick={() => setActiveGenre("Horror")}
+                    >
                       <span>👻</span>
                       Horror
                     </button>
 
-                    <button className="genre-filter">
+                    <button
+                      className={`genre-filter ${
+                        activeGenre === "Action" ? "active" : ""
+                      }`}
+                      onClick={() => setActiveGenre("Action")}
+                    >
                       <span>⚔️</span>
                       Action
                     </button>
 
-                    <button className="genre-filter">
+                    <button
+                      className={`genre-filter ${
+                        activeGenre === "Soulslike" ? "active" : ""
+                      }`}
+                      onClick={() => setActiveGenre("Soulslike")}
+                    >
                       <span>💀</span>
                       Soulslike
                     </button>
 
-                    <button className="genre-filter">
+                    <button
+                      className={`genre-filter ${
+                        activeGenre === "RPG" ? "active" : ""
+                      }`}
+                      onClick={() => setActiveGenre("RPG")}
+                    >
                       <span>🧙</span>
                       RPG
                     </button>
 
-                    <button className="genre-filter">
+                    <button
+                      className={`genre-filter ${
+                        activeGenre === "Shooter" ? "active" : ""
+                      }`}
+                      onClick={() => setActiveGenre("Shooter")}
+                    >
                       <span>🎯</span>
                       Shooter
                     </button>
 
-                    <button className="genre-filter">
+                    <button
+                      className={`genre-filter ${
+                        activeGenre === "Adventure" ? "active" : ""
+                      }`}
+                      onClick={() => setActiveGenre("Adventure")}
+                    >
                       <span>🗺️</span>
                       Adventure
                     </button>
 
-                    <button className="genre-filter">
+                    <button
+                      className={`genre-filter ${
+                        activeGenre === "Stealth" ? "active" : ""
+                      }`}
+                      onClick={() => setActiveGenre("Stealth")}
+                    >
                       <span>🥷</span>
                       Stealth
                     </button>
 
-                    <button className="genre-filter">
+                    <button
+                      className={`genre-filter ${
+                        activeGenre === "Survival" ? "active" : ""
+                      }`}
+                      onClick={() => setActiveGenre("Survival")}
+                    >
                       <span>🌲</span>
                       Survival
                     </button>
 
-                    <button className="genre-filter">
+                    <button
+                      className={`genre-filter ${
+                        activeGenre === "Racing" ? "active" : ""
+                      }`}
+                      onClick={() => setActiveGenre("Racing")}
+                    >
                       <span>🏁</span>
                       Racing
                     </button>
 
-                    <button className="genre-filter genre-more">
+                    <button
+                      className="genre-filter genre-more"
+                      type="button"
+                    >
                       More
                       <span>⌄</span>
                     </button>
-
                   </div>
                 )}
 
@@ -325,7 +382,6 @@ function App() {
                     </p>
                   </div>
                 ) : (
-
                   /* =================================================
                      GAME GRID
                   ================================================= */
@@ -350,7 +406,6 @@ function App() {
                     )}
                   </div>
                 )}
-
               </section>
             )}
           </>

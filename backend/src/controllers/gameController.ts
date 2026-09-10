@@ -150,6 +150,7 @@ export const createGame = async (req: Request, res: Response) => {
       rating,
       progress,
       notes,
+      genres,
     } = validation.data;
 
     // Check if the game already exists
@@ -166,8 +167,8 @@ export const createGame = async (req: Request, res: Response) => {
 
     const result = await pool.query(
       `INSERT INTO games
-        (title, description, release_date, cover_url, status, rating, progress, notes)
-       VALUES ($1, $2, $3, $4, $5, $6, $7, $8)
+        (title, description, release_date, cover_url, status, rating, progress, notes,genres)
+       VALUES ($1, $2, $3, $4, $5, $6, $7, $8,$9)
        RETURNING *`,
       [
         title,
@@ -178,6 +179,7 @@ export const createGame = async (req: Request, res: Response) => {
         rating,
         progress,
         notes,
+        genres,
       ],
     );
 
@@ -211,6 +213,7 @@ export const updateGame = async (req: Request, res: Response) => {
       rating,
       progress,
       notes,
+      genres,
     } = validation.data;
 
     const result = await pool.query(
@@ -223,8 +226,9 @@ export const updateGame = async (req: Request, res: Response) => {
            rating = $6,
            progress = $7,
            notes = $8,
+           genres=$9,
            updated_at = CURRENT_TIMESTAMP
-       WHERE id = $9
+       WHERE id = $10
        RETURNING *`,
       [
         title,
@@ -235,6 +239,7 @@ export const updateGame = async (req: Request, res: Response) => {
         rating,
         progress,
         notes,
+        genres,
         id,
       ],
     );
