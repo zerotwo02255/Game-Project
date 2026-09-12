@@ -1,7 +1,7 @@
 import { Request, Response } from "express";
 import pool from "../db/pool.js";
 import { gameSchema } from "../validators/gameValidator.js";
-
+import { searchRawgGames, getRawgGameById} from "../services/rawgService.js";
 
 export const uploadScreenshot = async (
   req: Request,
@@ -284,6 +284,84 @@ export const deleteGame = async (req: Request, res: Response) => {
 
     res.status(500).json({
       message: "Failed to delete game",
+    });
+  }
+};
+
+export const updateMissingGenres = async (
+  _req: Request,
+  res: Response,
+) => {
+  try {
+    const result = await pool.query(
+      `SELECT id, title
+       FROM games
+       WHERE genres = '{}'
+       ORDER BY id ASC`,
+    );
+
+    let updated = 0;
+    let failed = 0;
+
+    for (const game of result.rows) {
+      try {
+        console.log(`Finding genres for: ${game.title}`);
+
+        const searchResults = await searchRawgGames(game.title);
+
+        if (!searchResults || searchResults.length === 0) {
+          console.log(`No RAWG result: ${game.title}`);
+          failed++;
+          continue;
+        }
+
+        const exactMatch =
+          searchResults.find(
+            (rawgGame: any) =>
+              rawgGame.name.toLowerCase() ===
+              game.title.toLowerCase(),
+          ) || searchResults[0];
+
+        const fullGame = await getRawgGameById(exactMatch.id);
+
+        const genres =
+          fullGame.genres?.map(
+            (genre: { name: string }) => genre.name,
+          ) || [];
+
+        await pool.query(
+          `UPDATE games
+           SET genres = $1
+           WHERE id = $2`,
+          [genres, game.id],
+        );
+
+        console.log(
+          `Updated: ${game.title} → ${genres.join(", ")}`,
+        );
+
+        updated++;
+      } catch (error) {
+        console.error(
+          `Failed to update genres for ${game.title}:`,
+          error,
+        );
+
+        failed++;
+      }
+    }
+
+    res.json({
+      message: "Missing genres update completed",
+      total: result.rows.length,
+      updated,
+      failed,
+    });
+  } catch (error) {
+    console.error("Update missing genres error:", error);
+
+    res.status(500).json({
+      message: "Failed to update missing genres",
     });
   }
 };

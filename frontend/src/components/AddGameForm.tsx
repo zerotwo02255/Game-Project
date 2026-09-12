@@ -27,6 +27,7 @@ function AddGameForm({ onGameAdded }: AddGameFormProps) {
         rating: rating === "" ? null : Number(rating),
         progress: Number(progress),
         notes: null,
+        genres: [],
       });
 
       setTitle("");
