@@ -1,11 +1,32 @@
 import { useState } from "react";
 import { updateGame, type Game } from "../api/gameApi";
+import "./EditGameForm.css";
 
 interface EditGameFormProps {
   game: Game;
   onGameUpdated: () => void;
   onCancel: () => void;
 }
+
+const availableGenres = [
+  "Action",
+  "Adventure",
+  "RPG",
+  "Shooter",
+  "Horror",
+  "Soulslike",
+  "Strategy",
+  "Sports",
+  "Racing",
+  "Fighting",
+  "Platformer",
+  "Puzzle",
+  "Simulation",
+  "Survival",
+  "Stealth",
+  "Arcade",
+  "Indie",
+];
 
 function EditGameForm({
   game,
@@ -19,7 +40,16 @@ function EditGameForm({
     game.rating === null ? 0 : Number(game.rating),
   );
   const [notes, setNotes] = useState(game.notes ?? "");
+  const [genres, setGenres] = useState<string[]>(game.genres ?? []);
   const [saving, setSaving] = useState(false);
+
+  const handleGenreToggle = (genre: string) => {
+    setGenres((currentGenres) =>
+      currentGenres.includes(genre)
+        ? currentGenres.filter((item) => item !== genre)
+        : [...currentGenres, genre],
+    );
+  };
 
   const handleSubmit = async (event: React.FormEvent) => {
     event.preventDefault();
@@ -35,6 +65,7 @@ function EditGameForm({
         status,
         rating,
         progress,
+        genres,
         notes: notes.trim() || null,
       });
 
@@ -180,6 +211,32 @@ function EditGameForm({
           <span>0</span>
           <span>2.5</span>
           <span>5</span>
+        </div>
+
+      </div>
+
+
+      {/* Genres */}
+
+      <div className="form-field">
+
+        <label>
+          Genres
+        </label>
+
+        <div className="edit-genre-options">
+          {availableGenres.map((genre) => (
+            <button
+              key={genre}
+              type="button"
+              className={`edit-genre-button ${
+                genres.includes(genre) ? "selected" : ""
+              }`}
+              onClick={() => handleGenreToggle(genre)}
+            >
+              {genre}
+            </button>
+          ))}
         </div>
 
       </div>

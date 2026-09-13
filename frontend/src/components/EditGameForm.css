@@ -1,0 +1,47 @@
+/* =========================
+   Edit Game Genres
+========================= */
+
+.edit-genre-options {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-top: 8px;
+}
+
+.edit-genre-button {
+  padding: 7px 13px;
+  border: 1px solid rgba(71, 190, 184, 0.35);
+  border-radius: 20px;
+  background: rgba(10, 30, 30, 0.75);
+  color: #b9cccc;
+  font-size: 13px;
+  font-weight: 500;
+  cursor: pointer;
+
+  transition:
+    background 0.2s ease,
+    color 0.2s ease,
+    border-color 0.2s ease,
+    transform 0.2s ease,
+    box-shadow 0.2s ease;
+}
+
+.edit-genre-button:hover {
+  border-color: #47beb8;
+  background: rgba(31, 91, 88, 0.55);
+  color: #ffffff;
+  transform: translateY(-1px);
+}
+
+.edit-genre-button.selected {
+  background: linear-gradient(135deg, #247f7a, #3eb9b2);
+  border-color: #55d1c9;
+  color: #ffffff;
+  box-shadow: 0 4px 12px rgba(40, 180, 170, 0.25);
+}
+
+.edit-genre-button.selected:hover {
+  background: linear-gradient(135deg, #2c918b, #49c9c1);
+  border-color: #64ded6;
+}

@@ -1,0 +1,55 @@
+/* =========================
+   Manual Genre Selector
+========================= */
+
+.manual-genres {
+  margin-top: 10px;
+}
+
+.manual-genres label {
+  display: block;
+  margin-bottom: 10px;
+  font-size: 14px;
+  font-weight: 600;
+  color: #d9eeee;
+}
+
+.manual-genre-options {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.manual-genre-button {
+  padding: 7px 13px;
+  border: 1px solid rgba(71, 190, 184, 0.35);
+  border-radius: 20px;
+  background: rgba(10, 30, 30, 0.75);
+  color: #b9cccc;
+  font-size: 13px;
+  cursor: pointer;
+  transition:
+    background 0.2s ease,
+    color 0.2s ease,
+    border-color 0.2s ease,
+    transform 0.2s ease;
+}
+
+.manual-genre-button:hover {
+  border-color: #47beb8;
+  color: #ffffff;
+  background: rgba(31, 91, 88, 0.55);
+  transform: translateY(-1px);
+}
+
+.manual-genre-button.selected {
+  background: linear-gradient(135deg, #247f7a, #3eb9b2);
+  border-color: #55d1c9;
+  color: #ffffff;
+  box-shadow: 0 4px 12px rgba(40, 180, 170, 0.25);
+}
+
+.manual-genre-button.selected:hover {
+  background: linear-gradient(135deg, #2c918b, #49c9c1);
+  transform: translateY(-1px);
+}

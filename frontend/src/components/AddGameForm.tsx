@@ -1,18 +1,50 @@
 import { useState } from "react";
 import { createGame } from "../api/gameApi";
+import  "./AddGameForm.css";
 
 interface AddGameFormProps {
   onGameAdded: () => void;
 }
 
+const availableGenres = [
+  "Action",
+  "Adventure",
+  "Soulslike",
+  "RPG",
+  "Shooter",
+  "Horror",
+  "Strategy",
+  "Sports",
+  "Racing",
+  "Fighting",
+  "Platformer",
+  "Puzzle",
+  "Simulation",
+  "Survival",
+  "Stealth",
+  "Arcade",
+  "Indie",
+];
+
 function AddGameForm({ onGameAdded }: AddGameFormProps) {
   const [title, setTitle] = useState("");
+
   const [status, setStatus] = useState<
     "bucket_list" | "playing" | "completed" | "dropped"
   >("bucket_list");
 
   const [progress, setProgress] = useState(0);
   const [rating, setRating] = useState("");
+
+  const [genres, setGenres] = useState<string[]>([]);
+
+  const handleGenreToggle = (genre: string) => {
+    setGenres((currentGenres) =>
+      currentGenres.includes(genre)
+        ? currentGenres.filter((item) => item !== genre)
+        : [...currentGenres, genre],
+    );
+  };
 
   const handleSubmit = async (event: React.FormEvent) => {
     event.preventDefault();
@@ -27,30 +59,31 @@ function AddGameForm({ onGameAdded }: AddGameFormProps) {
         rating: rating === "" ? null : Number(rating),
         progress: Number(progress),
         notes: null,
-        genres: [],
+        genres,
       });
 
       setTitle("");
       setStatus("bucket_list");
       setProgress(0);
       setRating("");
+      setGenres([]);
 
       onGameAdded();
     } catch (error: any) {
       console.error(
         "Add game error:",
-        JSON.stringify(error.response?.data, null, 2)
+        JSON.stringify(error.response?.data, null, 2),
       );
 
       alert(
-        error.response?.data?.message || "Failed to add game"
+        error.response?.data?.message || "Failed to add game",
       );
     }
   };
 
   return (
-  <form className="add-game-form" onSubmit={handleSubmit}>
-    <h2>Add Game</h2>
+    <form className="add-game-form" onSubmit={handleSubmit}>
+      <h2>Add Game</h2>
 
       <input
         type="text"
@@ -68,7 +101,7 @@ function AddGameForm({ onGameAdded }: AddGameFormProps) {
               | "bucket_list"
               | "playing"
               | "completed"
-              | "dropped"
+              | "dropped",
           )
         }
       >
@@ -97,6 +130,27 @@ function AddGameForm({ onGameAdded }: AddGameFormProps) {
         value={rating}
         onChange={(event) => setRating(event.target.value)}
       />
+
+      {/* Genres */}
+
+      <div className="manual-genres">
+        <label>Genres</label>
+
+        <div className="manual-genre-options">
+          {availableGenres.map((genre) => (
+            <button
+              key={genre}
+              type="button"
+              className={`manual-genre-button ${
+                genres.includes(genre) ? "selected" : ""
+              }`}
+              onClick={() => handleGenreToggle(genre)}
+            >
+              {genre}
+            </button>
+          ))}
+        </div>
+      </div>
 
       <button type="submit">Add Game</button>
     </form>
