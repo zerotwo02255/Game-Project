@@ -333,23 +333,17 @@ textarea {
 
 
 
-
 .game-details-card {
-
   display: grid;
-
-  grid-template-columns: 280px 1fr;
-
+  grid-template-columns: 280px minmax(0, 1fr);
   gap: 32px;
-
+  width: 100%;
+  max-width: 1200px;
+  box-sizing: border-box;
   padding: 28px;
-
   border: 1px solid #2d3748;
-
   border-radius: 16px;
-
   background: #1a2233;
-
 }
 
 .game-details-cover {
@@ -1953,4 +1947,16 @@ background  0.2s ease,
   .game-grid {
     grid-template-columns: 1fr;
   }
+}
+
+
+.game-details-card {
+  position: relative;
+}
+
+.game-details-card .status-badge {
+  position: absolute;
+  top: 12px;
+  left: 12px;
+  z-index: 5;
 }

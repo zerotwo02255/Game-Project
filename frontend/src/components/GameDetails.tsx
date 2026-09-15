@@ -2,46 +2,47 @@ import { useState } from "react";
 import type { Game } from "../api/gameApi";
 import EditGameForm from "./EditGameForm";
 import GameScreenshots from "./GameScreenshots.tsx";
+import "./GameDetails.css"
+
+
 
 interface GameDetailsProps {
   game: Game;
   onBack: () => void;
-   onGameUpdated: () => void;
+  onGameUpdated: () => void;
 }
 
 function GameDetails({
   game,
   onBack,
   onGameUpdated,
-  }: GameDetailsProps) {
-
-
+}: GameDetailsProps) {
   const [isEditing, setIsEditing] = useState(false);
 
   // Show Edit Form
-if (isEditing) {
-  return (
-    <section className="game-details">
-      <button
-        className="back-button"
-        onClick={() => setIsEditing(false)}
-      >
-        ← Back to Details
-      </button>
+  if (isEditing) {
+    return (
+      <section className="game-details">
+        <button
+          className="back-button"
+          onClick={() => setIsEditing(false)}
+        >
+          ← Back to Details
+        </button>
 
-      <div className="edit-form-wrapper">
-        <EditGameForm
-          game={game}
-          onGameUpdated={() => {
-            setIsEditing(false);
-            onGameUpdated();
-          }}
-          onCancel={() => setIsEditing(false)}
-        />
-      </div>
-    </section>
-  );
-}
+        <div className="edit-form-wrapper">
+          <EditGameForm
+            game={game}
+            onGameUpdated={() => {
+              setIsEditing(false);
+              onGameUpdated();
+            }}
+            onCancel={() => setIsEditing(false)}
+          />
+        </div>
+      </section>
+    );
+  }
 
   return (
     <section className="game-details">
@@ -122,6 +123,28 @@ if (isEditing) {
           </div>
 
 
+          {/* Genres */}
+
+          {game.genres && game.genres.length > 0 && (
+            <div className="details-genres">
+
+              <h3>Genres</h3>
+
+              <div className="details-genre-list">
+                {game.genres.map((genre) => (
+                  <span
+                    key={genre}
+                    className="details-genre-tag"
+                  >
+                    {genre}
+                  </span>
+                ))}
+              </div>
+
+            </div>
+          )}
+
+
           {/* Progress */}
 
           <div className="details-progress">
@@ -178,7 +201,9 @@ if (isEditing) {
         </div>
 
       </div>
-            <GameScreenshots gameId={game.id} /> 
+
+      <GameScreenshots gameId={game.id} />
+
     </section>
   );
 }
